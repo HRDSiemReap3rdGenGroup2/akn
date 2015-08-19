@@ -1,0 +1,287 @@
+body{
+    font-family: 'Khmer OS Siemreap';
+}
+p{
+    font-size: 14px;
+}
+
+.items{
+    width: 100%;
+}
+
+.user .items{
+    margin-bottom: 22px;
+}
+
+.items img{
+    width: 40%;
+    margin-right: 10px;
+    float: left;
+}
+.items p{
+    margin-bottom: 10px;
+}
+
+.news-row{
+    margin-bottom: 10px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+a:hover{
+    text-decoration: none;
+}
+a:hover h5{
+    color: #CD5C5C;
+}
+h5{
+    margin-bottom: 0px;
+}
+
+.advance-search .fs {
+    background: #ea4748 url(../img/search.png) no-repeat center;
+    border: none;
+    margin: 0;
+    height: 31px;
+    width: 43px;
+    float: right;
+    
+}
+.advance-search .ft {
+    background: none;
+    padding: 5px;
+    margin: 4px 0 0 10px;
+    width: 60%;
+    color: #898989;
+}
+
+.advance-search{
+    border: none;
+    background-color: #dbdbdb;
+    margin-bottom: 50px;
+}
+
+
+/*search box*/
+.sb_wrapper{
+	margin:0;
+	padding:0;
+	position: absolute;
+	width:372px;
+	z-index:1000;
+}
+.sb_wrapper input[type="text"],
+ul.sb_dropdown{
+	border:1px solid #fff;
+	background-color: #ddd;
+	font-size:14px;
+	font-family:'Khmer OS Siemreap',"Myriad Pro", "Trebuchet MS", sans-serif;
+	outline:none;
+	padding:6px 5px 6px 20px;
+	width:295px;
+	float:left;
+	margin:3px 0px;
+}
+ul.sb_dropdown{
+	float:left;
+	list-style:none;
+	width:360px;
+	padding:6px 5px;
+}
+ul.sb_dropdown li{
+	font-size:16px;
+	line-height:32px;
+	height:32px;
+	float:left;
+	width:50%;
+}
+ul.sb_dropdown li input[type="checkbox"]{
+	float:left;
+	margin:10px 4px 0 5px;
+}
+ul.sb_dropdown li.sb_filter{
+	width:348px;
+	clear:both;
+	background: #4F9D51;
+	font-size:12px;
+	letter-spacing:1px;
+	color:#fff;
+	height:16px;
+	line-height:16px;
+	padding:6px;
+}
+span.sb_up,
+span.sb_down{
+	position:absolute;
+	top:3px;
+	left:1px;
+	width:14px;
+	height:37px;
+	background-color:#f2f2f2;
+	background-position:center center;
+	background-repeat: no-repeat;
+	border:1px solid #fff;
+}
+span.sb_up{
+	background-image:url(../icons/up.png);
+}
+span.sb_down{
+	background-image:url(../icons/down.png);
+}
+input.sb_search{
+	background:#4F9D51 url(../img/search.png) no-repeat center center;
+	height:38px;
+	width:42px;
+	float:left;
+	border:none;
+	margin:3px 0px;
+	border:1px solid #fff;
+	-moz-box-shadow:1px 1px 3px #555;
+	-webkit-box-shadow:1px 1px 3px #555;
+	-box-shadow:1px 1px 3px #555;
+	outline:none;
+	cursor:pointer;
+}
+input.sb_search:hover{
+	background-color:red;
+}
+
+.box{
+    margin:129px auto 0 auto;
+    height:430px;
+    width:100%;
+    position:relative;
+    -moz-box-shadow:0px 0px 5px #444;
+    -webkit-box-shadow:0px 0px 5px #444;
+    box-shadow:0px 0px 5px #444;
+    background:#1783BF url(click.png) no-repeat 380px 80px;
+}
+.box h2{
+    background-color:#1275AD;
+    border-color:#0E5A85 #0E5A85 #0E5A85;
+    border-style:ridge ridge solid;
+    border-width:1px;
+    color:#FFFFFF;
+    font-size:22px;
+    padding:10px;
+    text-shadow:1px 1px 1px #000000;
+}
+/*end search box*/
+
+
+.languages{
+	display:inline;
+    background-color:#EA4748;
+    padding-left:5px;
+    padding-right:5px;
+}
+.languages *{
+	color: white;
+}
+
+.wrap-news *{
+    font-size: 14px;
+}
+
+.wrap-news h5{
+    font-size: 17px;
+}
+
+.paragraph p{
+    font-family: 'Khmer OS Siemreap';
+    font-size: 14px;
+}
+
+.paragraph h3{
+    margin-top: 20px;
+}
+
+p, h1, h2, h3, h4, h5, h6{
+    color: #444;
+    font-family: 'Khmer OS Siemreap'; 
+}
+.paragraph img{
+    width: 100%;
+}
+
+.user-info li{
+    background-color: white;
+    padding: 5px 10px;
+    border-bottom: 1px solid #DBDBDB;
+    color: black;
+}
+a{
+    color: black;
+}
+
+.user-info span{
+    padding-left: 30px;
+    color:gray;
+}
+ul{
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.login{
+    text-align:right;
+    margin-top: 10px;
+    font-family: 'Khmer OS Siemreap';
+    font-size: 14px;
+}
+.login a:hover{
+    color: #EA4748;
+}
+.all-category li{
+    padding: 7px;
+    border-bottom: 1px solid #4F9D51;
+    font-size: 14px;   
+}
+.all-category li:hover{
+    background-color: #DBDBDB;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+th, td{
+    font-size: 14px;
+    color: black;
+}
+
+h3, h2{
+    margin-bottom: 0px;
+}
+
+.table a:hover{
+    color: #CD5C5C;
+}
+
+.img-responsive,
+.thumbnail > img,
+.thumbnail a > img,
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+/* when the screen-width smaller than 768px */
+@media ( max-width :768px) {
+	.search{
+		margin: -20px 0px 10px 0;
+		width: 300px;
+	}
+	.sb_wrapper input[type="text"]{
+		width: 227px;
+	}
+	ul.sb_dropdown{
+		    width: 288px;
+	}
+	ul.sb_dropdown li.sb_filter {
+		width: 273px;
+	}
+}
+@media (max-width: 479px){
+	.search{
+		margin: -20px 0px 10px 0;
+	}
+}

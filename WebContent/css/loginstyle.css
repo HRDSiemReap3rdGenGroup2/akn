@@ -1,0 +1,183 @@
+/*--login----*/
+
+.form-area:before, .form-area:after, .form-area * {
+  box-sizing: border-box;
+}
+
+/* .form-area{
+  overflow-y: scroll;
+} */
+
+.form-area{
+  font-family: sans-serif;
+}
+
+.form-area a {
+  text-decoration: none;
+  color: #1ab188;
+  -webkit-transition: .5s ease;
+          transition: .5s ease;
+}
+.form-area a:hover {
+  color: #179b77;
+}
+.form {
+  background-color: white;
+  padding: 20px;
+  /*max-width: 600px;*/
+  width: 80%;
+  margin: 10px auto;
+  margin-top:30px;
+  border-radius: 0px;
+  box-shadow: 0 2px 10px 4px rgba(19, 35, 47, 0.3);
+}
+
+.form-area .tab-group {
+  list-style: none;
+  padding: 0;
+  margin:0 0 20px 0;
+}
+.form-area .tab-group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.form-area .tab-group li a {
+  display: block;
+  text-decoration: none;
+  padding: 15px 15px;
+  background: rgba(160, 179, 176, 0.25);
+  color: #a0b3b0;
+  font-size: 14px;
+  float: left;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: .5s ease;
+          transition: .5s ease;
+}
+.form-area .tab-group li a:hover {
+  background-color: darkseagreen;
+  color: #ffffff;
+}
+.form-area .tab-group .active a {
+  background: #4F9D51;
+  color: #ffffff;
+}
+
+.form-area .tab-content > div:last-child {
+  display: none;
+}
+
+.form-area h1 {
+  text-align: center;
+  color: black;
+  font-weight: 300;
+  margin-bottom: 12px;
+}
+
+.form-area label {
+  position: absolute;
+  -webkit-transform: translateY(6px);
+      -ms-transform: translateY(6px);
+          transform: translateY(6px);
+  left: 13px;
+  -webkit-transition: all 0.25s ease;
+          transition: all 0.25s ease;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+  font-size: 14px;
+}
+.form-area label .req {
+  margin: 2px;
+  color: #1ab188;
+}
+
+.form-area label.active {
+  -webkit-transform: translateY(-30px);
+      -ms-transform: translateY(-30px);
+          transform: translateY(-30px);
+  left: 2px;
+  font-size: 14px;
+}
+.form-area label.active .req {
+  opacity: 0;
+}
+
+.form-area label.highlight {
+  color: black;
+}
+
+.form-area #signup input,.form-area  textarea,.form-area  #login input,.form-area  textarea {
+  font-size: 20px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 5px 10px;
+  background: none;
+  background-image: none;
+  border: 1px solid #a0b3b0;
+  color: black;
+  border-radius: 0;
+  -webkit-transition: border-color .25s ease, box-shadow .25s ease;
+          transition: border-color .25s ease, box-shadow .25s ease;
+}
+.form-area input:focus,.form-area  textarea:focus {
+  outline: 0;
+  border-color: #1ab188;
+}
+
+.form-area textarea {
+  border: 2px solid #a0b3b0;
+  resize: vertical;
+}
+
+.form-area .field-wrap {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.form-area .top-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.form-area .top-row > div {
+  float: left;
+  width: 48%;
+  margin-right: 4%;
+}
+.form-area .top-row > div:last-child {
+  margin: 0;
+}
+
+.form-area .button {
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  padding: 15px 0;
+  font-size: 14;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  background: #4F9D51;
+  color: #ffffff;
+  -webkit-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+  -webkit-appearance: none;
+}
+.form-area .button:hover, .button:focus {
+  background: #709D70;
+}
+
+.form-area .button-block {
+  display: block;
+  width: 100%;
+}
+
+.form-area .forgot {
+  margin-top: -20px;
+  text-align: right;
+}
+
+/*--/login--*/
