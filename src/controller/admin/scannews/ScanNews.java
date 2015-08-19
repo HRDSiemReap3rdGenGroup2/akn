@@ -65,7 +65,7 @@ public class ScanNews extends HttpServlet {
 		}
 		
 		try {
-			System.out.println("TEst");
+			System.out.println("Test");
 			boolean status = new ScannedNewsDAO().insertNews(allnewslist);
 			if(status)
 				System.out.println("success!");

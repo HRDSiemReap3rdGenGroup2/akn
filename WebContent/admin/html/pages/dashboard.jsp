@@ -19,6 +19,9 @@
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/materialadmin.css?1425466319" />
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/font-awesome.min.css?1422529194" />
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/material-design-iconic-font.min.css?1421434286" />
+		
+		<link rel="stylesheet" type="text/css" href="../../../dist/sweetalert.css">
+		<script src="../../../dist/sweetalert.min.js"></script>
 		<!-- END STYLESHEETS -->
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -201,16 +204,22 @@
 		<script src="../../assets/js/core/source/AppNavSearch.js"></script>
 		<script src="../../assets/js/core/source/AppVendor.js"></script>
 		<script src="../../assets/js/core/demo/Demo.js"></script>
+		
 		<!-- END JAVASCRIPT -->
 		
 		<script>
 			$(document).ready(function(){
 				$('#dashboard').addClass('active');
+				
 			});
 		   function chooseFile() {
 			   $("#fileInput").click();
 		   }
+		  
 		</script>
 		
+		<jsp:include page="../../include/setting.jsp"></jsp:include>
+		 
+			
 	</body>
 </html>

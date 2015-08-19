@@ -24,15 +24,112 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="headerbar-right">
 					<ul class="header-nav header-nav-options">
-						<li>
-							<!-- Search form -->
+						
+						<!-- <li>
+							Search form
 							<form class="navbar-search" role="search">
 								<div class="form-group">
 									<input type="text" class="form-control" name="headerSearch" placeholder="Enter your keyword">
 								</div>
 								<button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
 							</form>
-						</li>
+						</li> -->
+						
+						<li>
+							<a href="#contact" style="margin-right:37px" data-toggle="modal">
+								<div class="gui-icon"><i class="md md-settings"></i></div>
+							</a>
+							
+							<c:set var="duration" value="${applicationScope.autoscan }"></c:set>
+							
+							<!-- Modal -->
+							  <div class="modal fade" id="contact" role= "dialog">
+							    	<div class="modal-dialog">
+							        	<div class="modal-content">
+							               	<div class="form-horizontal">
+							            		<div class="modal-header">
+							                    	 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+							                		<h4>Auto Scan News</h4>
+							                	</div>
+							                	<div class="modal-body">
+							                    	<div class="form-group">
+							                    		<label for="contact-name" class="col-lg-2 control-label">Duration : </label>
+							                            <div class="col-lg-10">
+							                            	<select id="duration" name="select2" class="form-control">
+																
+																<c:choose>
+																	<c:when test="${duration==null }">
+																		<option value="0">Manually</option>
+																		<option value="5">5 minutes</option>
+																		<option value="60">1 hour</option>
+																		<option value="120">2 hours</option>
+																		<option value="480">8 hours</option>
+																		<option value="1440">1 day</option>
+																	</c:when>
+																	<c:when test="${duration==0 }">
+																		<option value="0">Manually</option>
+																		<option value="5">5 minutes</option>
+																		<option value="60">1 hour</option>
+																		<option value="120">2 hours</option>
+																		<option value="480">8 hours</option>
+																		<option value="1440">1 day</option>
+																	</c:when>
+																	<c:when test="${duration==5 }">
+																		<option value="5">5 minutes</option>
+																		<option value="60">1 hour</option>
+																		<option value="120">2 hours</option>
+																		<option value="480">8 hours</option>
+																		<option value="1440">1 day</option>
+																		<option value="0">Manually</option>		
+																	</c:when>
+																	<c:when test="${duration==60 }">
+																		<option value="60">1 hour</option>
+																		<option value="120">2 hours</option>
+																		<option value="480">8 hours</option>
+																		<option value="1440">1 day</option>
+																		<option value="5">5 minutes</option>
+																		<option value="0">Manually</option>
+																	</c:when>
+																	<c:when test="${duration==120 }">
+																		<option value="120">2 hours</option>
+																		<option value="480">8 hours</option>
+																		<option value="1440">1 day</option>
+																		<option value="0">Manually</option>
+																		<option value="5">5 minutes</option>
+																		<option value="60">1 hour</option>
+																	</c:when>
+																	<c:when test="${duration==480 }">
+																		<option value="480">8 hours</option>
+																		<option value="5">5 minutes</option>
+																		<option value="60">1 hour</option>
+																		<option value="120">2 hours</option>
+																		<option value="1440">1 day</option>
+																		<option value="0">Manually</option>
+																	</c:when>
+																	<c:when test="${duration==1440 }">
+																		<option value="1440">1 day</option>
+																		<option value="0">Manually</option>
+																		<option value="5">5 minutes</option>
+																		<option value="60">1 hour</option>
+																		<option value="120">2 hours</option>
+																		<option value="480">8 hours</option>
+																	</c:when>
+																</c:choose>
+																
+															</select>
+							                            </div>
+							                        </div>
+							                	</div>
+							                	<div class="modal-footer">
+							                		<a class="btn btn-default" data-dismiss="modal">Cancel</a>
+							                    	<button class="btn btn-primary"  data-dismiss="modal" id="btnsave">Save</button>
+							                	</div>
+							               	</div>
+							            </div>
+							        </div>
+							    </div>
+								<!--end modal  -->
+						</li>	
 						
 					</ul><!--end .header-nav-options -->
 					<ul class="header-nav header-nav-profile">

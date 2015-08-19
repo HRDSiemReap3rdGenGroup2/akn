@@ -453,4 +453,20 @@
     <servlet-name>formscan</servlet-name>
     <url-pattern>/admin/html/pages/formscan</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>updatescanduration</servlet-name>
+    <servlet-class>controller.admin.news.AutoScanNews</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updatescanduration</servlet-name>
+    <url-pattern>/admin/html/pages/updatescanduration</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>stopscan</servlet-name>
+    <servlet-class>controller.admin.news.StopAutoScan</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>stopscan</servlet-name>
+    <url-pattern>/admin/html/pages/stopscan</url-pattern>
+  </servlet-mapping>
 </web-app>
