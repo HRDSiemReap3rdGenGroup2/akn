@@ -43,13 +43,10 @@ public class AddNews extends HttpServlet {
 		try {
 		if(ServletFileUpload.isMultipartContent(request)){
                 List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
-              System.out.println("I love cambodia");
                 for(FileItem item : multiparts){
                     if(!item.isFormField()){
                         //get file name
                     	String filename = new File(item.getName()).getName();//+new Date();
-                        System.out.println("MyFileName: "+filename);
-                        
                         //copy image to folder
                         item.write( new File(UPLOAD_DIRECTORY + File.separator + filename));
                         UPLOAD_DIRECTORY = UPLOAD_DIRECTORY + File.separator + filename;
