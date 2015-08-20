@@ -345,10 +345,8 @@ public class NewsDAO {
 	public ArrayList<News> getAllNews() throws Exception {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			String sql = "SELECT n.news_id, c.category_name, n.news_title, n.news_date"
-						+" FROM tbnews n"
-						+" INNER JOIN tbcategory c ON c.category_id=n.category_id"
-						+" ORDER BY n.news_id DESC";
+			String sql = "SELECT news_id,news_title, category_name ,news_date FROM tbnews n INNER JOIN tbcategory c ON c.category_id=n.category_id order by news_id desc";
+
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -459,7 +457,8 @@ public class NewsDAO {
 	public ArrayList<News> getTop5News() throws Exception {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			String sql = "SELECT news_id,news_title,news_date,hit_count FROM tbnews ORDER BY hit_count DESC LIMIT 10";
+			String sql = "SELECT news_id,news_title,news_date,news_hit_count "
+					+ "FROM tbnews ORDER BY news_hit_count DESC LIMIT 10";
 			PreparedStatement p = con.prepareStatement(sql);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
@@ -481,10 +480,15 @@ public class NewsDAO {
 		return null;
 	}
 
+	
 	public int getAKNnews() throws Exception {
 		try {
-			String sql = "select count(*) from tbnews where aknnews=1";
+			int akn_id = new SourceDAO().getSourceId("AKN");
+			
+			String sql = "select count(*) from tbnews where source_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
+			p.setInt(1, akn_id);
+			
 			ResultSet rs = p.executeQuery();
 			rs.next();
 			return rs.getInt(1);
