@@ -45,7 +45,7 @@
 <body>
 <c:set var="list" value="${requestScope.list }"></c:set>
 <c:if test="${list==null }">
-	<c:redirect url="${requestScope.title_id }"></c:redirect>
+	<c:redirect url="home"></c:redirect>
 </c:if>
 <c:set var="user" value="${sessionScope.user }"></c:set>
 <!-- Body Wrapper -->
@@ -125,10 +125,10 @@
                     <div id="pager" class="pager" style="float:right">
                     	<ul>
                     		<c:if test="${requestScope.current_page>1 }">
-	                    		<li><a href="${fn:substring(requestScope.title_id, 0 , requestScope.title_id.length()-1) }?page=">First</a></li>
+	                    		<li><a href="category?id=${requestScope.category_id }&page=">First</a></li>
                     		</c:if>
                     		<c:if test="${requestScope.current_page>1 }">
-	                    		<li><a href="${fn:substring(requestScope.title_id, 0 , requestScope.title_id.length()-1)}?page=${requestScope.current_page-1}">Prev</a></li>
+	                    		<li><a href="category?id=${requestScope.category_id}&page=${requestScope.current_page-1}">Prev</a></li>
                     		</c:if>
 							<c:set value="${requestScope.page_number }" var="total_page"></c:set>
 							<c:choose>
@@ -148,13 +148,13 @@
 								</c:otherwise>
 							</c:choose>
                         	<c:forEach begin="${begin }" end="${end}" var="i">
-                        		<li><a id="${i }" href="${fn:substring(requestScope.title_id, 0 , requestScope.title_id.length()-1)}?page=${i}">${i }</a></li>
+                        		<li><a id="page_${i}" href="category?id=${requestScope.category_id}&page=${i}">${i}</a></li>
                         	</c:forEach>  
                         	<c:if test="${requestScope.current_page<total_page }">
-	                    		<li><a href="${fn:substring(requestScope.title_id, 0 , requestScope.title_id.length()-1)}?page=${requestScope.current_page+1}">Next</a></li>
+	                    		<li><a href="category?id=${requestScope.category_id}&page=${requestScope.current_page+1}">Next</a></li>
                     		</c:if>
                     		<c:if test="${total_page!=requestScope.current_page }">
-	                    		<li><a href="${fn:substring(requestScope.title_id, 0 , requestScope.title_id.length()-1) }?page=${total_page}">Last</a></li>                  	
+	                    		<li><a href="category?id=${requestScope.category_id }&page=${total_page}">Last</a></li>                  	
                     		</c:if>
                     	</ul>
                     </div>
@@ -243,7 +243,7 @@
 <script type="text/javascript" src="js/mypassion.js"></script>
 <script>
 	$("#${requestScope.title_id}").addClass("current"); 
-	$("#${requestScope.current_page}").addClass("active");
+	$("#page_${requestScope.current_page}").addClass("active");
 	function subscribe(category_id){
 		if('${sessionScope.user_id}'==''){
 			swal({   

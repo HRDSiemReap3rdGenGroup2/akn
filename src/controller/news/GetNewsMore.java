@@ -51,7 +51,7 @@ public class GetNewsMore extends HttpServlet {
 	private void doPro(HttpServletRequest req, HttpServletResponse resp) {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			String category = req.getParameter("module_type_code");
+			int category = Integer.parseInt(req.getParameter("category_id"));
 			list = new NewsDAO().getNewsList(category, "top");
 			resp.setContentType("application/json");
 			resp.setCharacterEncoding("utf-8");

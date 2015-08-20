@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dao.ModuleDAO;
+import model.dao.CategoryDAO;
 import model.dao.NewsDAO;
-import model.dto.Module;
+import model.dto.Category;
 import model.dto.News;
 
 /**
@@ -33,17 +33,17 @@ public class UpdateNews extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int news_id = Integer.parseInt(request.getParameter("id"));
-		ArrayList<Module> list;
+		ArrayList<Category> list;
 		try {
 			response.setCharacterEncoding("utf-8");
-			list = new ModuleDAO().getAllModuleTypeCode();
+			list = new CategoryDAO().getAllCategory();
 			request.setAttribute("typecode", list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		try {
 			News news = new NewsDAO().getNews(news_id);
-			news.setStatus(1);
+			//news.setStatus(1);
 			request.setAttribute("news", news);
 			request.getRequestDispatcher("addnews.jsp").forward(request, response);
 

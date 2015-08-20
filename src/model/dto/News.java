@@ -9,57 +9,32 @@ public class News implements Serializable {
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
-	public String toString() {
-		return "News [news_id=" + news_id + ", cat_code=" + cat_code
-				+ ", user_info_code=" + user_info_code + ", news_title="
-				+ news_title + ", news_desc=" + news_desc + ", news_path="
-				+ news_path + ", news_img=" + news_img + ", news_date="
-				+ news_date + ", date_insert=" + date_insert + ", hit_count="
-				+ hit_count + "]";
-	}
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1747541731178749434L;
 	private int news_id;
-	private String cat_code;
-	private String user_info_code;
+	private int category_id;
+	private String category_name;
+	private int source_id;
 	private String news_title;
 	private String news_desc;
 	private String news_path;
 	private String news_img;
-	private String news_date;
-	private Date date_insert;
+	private Date news_date;
 	private int hit_count;
-	private String module_type;
-	// just added
-	private String module_code;
-	private int status;
 
-	public String getModule_code() {
-		return module_code;
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
-	public void setModule_code(String module_code) {
-		this.module_code = module_code;
-	}
-
-	public String getModule_type() {
-		return module_type;
-	}
-
-	public void setModule_type(String module_type) {
-		this.module_type = module_type;
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "News [news_id=" + news_id + ", category_id=" + category_id
+				+ ", category_name=" + category_name + ", source_id="
+				+ source_id + ", news_title=" + news_title + ", news_desc="
+				+ news_desc + ", news_path=" + news_path + ", news_img="
+				+ news_img + ", news_date=" + news_date + ", hit_count="
+				+ hit_count + "]";
 	}
 
 	/**
@@ -78,35 +53,8 @@ public class News implements Serializable {
 	}
 
 	/**
-	 * @return the cat_code
-	 */
-	public String getCat_code() {
-		return cat_code;
-	}
-
-	/**
-	 * @param cat_code
-	 *            the cat_code to set
-	 */
-	public void setCat_code(String cat_code) {
-		this.cat_code = cat_code;
-	}
-
-	/**
 	 * @return the user_info_code
 	 */
-	public String getUser_info_code() {
-		return user_info_code;
-	}
-
-	/**
-	 * @param user_info_code
-	 *            the user_info_code to set
-	 */
-	public void setUser_info_code(String user_info_code) {
-		this.user_info_code = user_info_code;
-	}
-
 	/**
 	 * @return the news_title
 	 */
@@ -170,7 +118,7 @@ public class News implements Serializable {
 	/**
 	 * @return the news_date
 	 */
-	public String getNews_date() {
+	public Date getNews_date() {
 		return news_date;
 	}
 
@@ -178,16 +126,8 @@ public class News implements Serializable {
 	 * @param news_date
 	 *            the news_date to set
 	 */
-	public void setNews_date(String news_date) {
+	public void setNews_date(Date news_date) {
 		this.news_date = news_date;
-	}
-
-	public Date getDate_insert() {
-		return date_insert;
-	}
-
-	public void setDate_insert(Date date_insert) {
-		this.date_insert = date_insert;
 	}
 
 	public int getHit_count() {
@@ -197,5 +137,31 @@ public class News implements Serializable {
 	public void setHit_count(int hit_count) {
 		this.hit_count = hit_count;
 	}
+
+	public int getCategory_id() {
+		return category_id;
+	}
+
+	public void setCategory_id(int category_id) {
+		this.category_id = category_id;
+	}
+
+	public int getSource_id() {
+		return source_id;
+	}
+
+	public void setSource_id(int source_id) {
+		this.source_id = source_id;
+	}
+
+	public String getCategory_name() {
+		return category_name;
+	}
+
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
+
+
 
 }

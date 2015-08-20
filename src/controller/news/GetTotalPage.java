@@ -46,7 +46,7 @@ public class GetTotalPage extends HttpServlet {
 
 	private void doPro(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			String category = req.getParameter("module_type_code");
+			int category = Integer.parseInt(req.getParameter("module_type_code"));
 			// paging
 			int pagenumber = new NewsDAO().getTotalPage(category, 4);
 			resp.setContentType("application/json");

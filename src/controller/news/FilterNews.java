@@ -43,10 +43,10 @@ public class FilterNews extends HttpServlet {
 			} catch (Exception e) {
 				n = 5;
 			}
-			String media = req.getParameter("media");
-			String category = req.getParameter("category");
-			String time = req.getParameter("time");
-			list = new NewsDAO().filterNews(n, media, category, time);
+			int source = Integer.parseInt(req.getParameter("source"));
+			int category = Integer.parseInt(req.getParameter("category"));
+			int time = Integer.parseInt(req.getParameter("time"));
+			list = new NewsDAO().filterNews(n, source, category, time);
 			resp.setContentType("application/json");
 			resp.setCharacterEncoding("utf-8");
 			String buf = new Gson().toJson(list);

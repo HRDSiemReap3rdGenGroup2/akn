@@ -15,6 +15,12 @@ public class NewsDAO {
 	private Connection con;
 
 	public NewsDAO() {
+//		try{
+//			Class.forName("org.postgresql.Driver");
+//			con=DriverManager.getConnection("jdbc:postgresql://192.168.178.127:5432/dbAKN?user=postgres&password=123");
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
 		con = new DBUtility().getConnection();
 	}
 
@@ -23,32 +29,24 @@ public class NewsDAO {
 		return false;
 	}
 
-	public ArrayList<News> getNewsList(String category) throws SQLException {
+	public ArrayList<News> getNewsList(int category_id) throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			String s1 = "select module_code from tbmoduleinfo where module_type_code=?";
-			PreparedStatement p1 = con.prepareStatement(s1);
-			p1.setString(1, category);
-			ResultSet r1 = p1.executeQuery();
-			String sql = "SELECT * FROM tbnews WHERE cat_code in ('";
-			while (r1.next()) {
-				sql += r1.getString(1) + "','";
-			}
-			sql += "') ORDER BY news_id DESC LIMIT 4 OFFSET 0";
+			String sql="select * from tbnews where category_id=? limit 4 offset 0";
 			PreparedStatement p = con.prepareStatement(sql);
+			p.setInt(1,category_id);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				News e = new News();
 				e.setNews_id(rs.getInt("news_id"));
-				e.setCat_code(rs.getString("cat_code"));
+				e.setCategory_id(rs.getInt("category_id"));
 				e.setNews_title(rs.getString("news_title"));
-				e.setNews_date(rs.getString("news_date"));
+				e.setNews_date(rs.getDate("news_date"));
 				e.setNews_img(rs.getString("news_img"));
 				e.setNews_path(rs.getString("news_path"));
-				e.setUser_info_code(rs.getString("user_info_code"));
-				e.setNews_desc(rs.getString("news_desc"));
-				e.setDate_insert(rs.getDate("date_insert"));
-				e.setHit_count(rs.getInt("hit_count"));
+				e.setSource_id(rs.getInt("source_id"));
+				e.setNews_desc(rs.getString("news_description"));
+				e.setHit_count(rs.getInt("news_hit_count"));
 				list.add(e);
 			}
 		} catch (Exception e) {
@@ -60,34 +58,26 @@ public class NewsDAO {
 		return list;
 	}
 
-	public ArrayList<News> getNewsList(String category, int limit)
+	public ArrayList<News> getNewsList(int category_id, int limit)
 			throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			String s1 = "select module_code from tbmoduleinfo where module_type_code=?";
-			PreparedStatement p1 = con.prepareStatement(s1);
-			p1.setString(1, category);
-			ResultSet r1 = p1.executeQuery();
-			String sql = "SELECT * FROM tbnews WHERE cat_code in ('";
-			while (r1.next()) {
-				sql += r1.getString(1) + "','";
-			}
-			sql += "') ORDER BY news_id DESC LIMIT ? OFFSET 0";
+			String sql="SELECT * FROM tbnews WHERE category_id=? ORDER BY news_id DESC LIMIT ? OFFSET 0";
 			PreparedStatement p = con.prepareStatement(sql);
-			p.setInt(1, limit);
+			p.setInt(1, category_id);
+			p.setInt(2, limit);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				News e = new News();
 				e.setNews_id(rs.getInt("news_id"));
-				e.setCat_code(rs.getString("cat_code"));
+				e.setCategory_id(rs.getInt("category_id"));
+				e.setSource_id(rs.getInt("source_id"));
 				e.setNews_title(rs.getString("news_title"));
-				e.setNews_date(rs.getString("news_date"));
+				e.setNews_date(rs.getDate("news_date"));
 				e.setNews_img(rs.getString("news_img"));
 				e.setNews_path(rs.getString("news_path"));
-				e.setUser_info_code(rs.getString("user_info_code"));
-				e.setNews_desc(rs.getString("news_desc"));
-				e.setDate_insert(rs.getDate("date_insert"));
-				e.setHit_count(rs.getInt("hit_count"));
+				e.setNews_desc(rs.getString("news_description"));
+				e.setHit_count(rs.getInt("news_hit_count"));
 				list.add(e);
 			}
 		} catch (Exception e) {
@@ -100,7 +90,7 @@ public class NewsDAO {
 	}
 
 	public ArrayList<News> getPopNews() throws SQLException {
-		return filterNews(4, "%", "%", "monthly");
+		return filterNews(4, 0, 0, 7);
 	}
 
 	public ArrayList<News> getLatestNews() throws SQLException {
@@ -112,15 +102,14 @@ public class NewsDAO {
 			while (rs.next()) {
 				News e = new News();
 				e.setNews_id(rs.getInt("news_id"));
-				e.setCat_code(rs.getString("cat_code"));
+				e.setCategory_id(rs.getInt("category_id"));
+				e.setSource_id(rs.getInt("source_id"));
 				e.setNews_title(rs.getString("news_title"));
-				e.setNews_date(rs.getString("news_date"));
+				e.setNews_date(rs.getDate("news_date"));
 				e.setNews_img(rs.getString("news_img"));
 				e.setNews_path(rs.getString("news_path"));
-				e.setUser_info_code(rs.getString("user_info_code"));
-				e.setNews_desc(rs.getString("news_desc"));
-				e.setDate_insert(rs.getDate("date_insert"));
-				e.setHit_count(rs.getInt("hit_count"));
+				e.setNews_desc(rs.getString("news_description"));
+				e.setHit_count(rs.getInt("news_hit_count"));
 				list.add(e);
 			}
 		} catch (Exception e) {
@@ -181,14 +170,13 @@ public class NewsDAO {
 			while (rs.next()) {
 				News e = new News();
 				e.setNews_id(rs.getInt("news_id"));
-				e.setCat_code(rs.getString("cat_code"));
+				e.setCategory_id(rs.getInt("category_id"));
+				e.setSource_id(rs.getInt("source_id"));
 				e.setNews_title(rs.getString("news_title"));
-				e.setNews_date(rs.getString("news_date"));
+				e.setNews_date(rs.getDate("news_date"));
 				e.setNews_img(rs.getString("news_img"));
 				e.setNews_path(rs.getString("news_path"));
-				e.setUser_info_code(rs.getString("user_info_code"));
-				e.setNews_desc(rs.getString("news_desc"));
-				e.setDate_insert(rs.getDate("date_insert"));
+				e.setNews_desc(rs.getString("news_description"));
 				e.setHit_count(rs.getInt("hit_count"));
 				list.add(e);
 			}
@@ -210,7 +198,7 @@ public class NewsDAO {
 	 */
 	public boolean read(int id) throws SQLException {
 		try {
-			String sql = "UPDATE tbnews SET hit_count=hit_count+1 WHERE news_id=?";
+			String sql = "UPDATE tbnews SET news_hit_count=news_hit_count+1 WHERE news_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, id);
 			if (p.executeUpdate() > 0)
@@ -223,54 +211,35 @@ public class NewsDAO {
 		}
 		return false;
 	}
-
 	/**
 	 * 
 	 * @param limit
-	 * @param media
-	 *            (module info code)
+	 * @param source
 	 * @param category
-	 *            (module type code)
-	 * @param time
-	 *            (today, weekly, monthly)
-	 * @return
+	 * @param time (1, 7, 30)
 	 * @throws SQLException
 	 */
-	public ArrayList<News> filterNews(int n, String media, String category,
-			String time) throws SQLException {
+	public ArrayList<News> filterNews(int n, int source, int category, int time) throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
-		int t = 1;
-		if (time.equalsIgnoreCase("today"))
-			t = 1;
-		if (time.equalsIgnoreCase("weekly"))
-			t = 7;
-		if (time.equalsIgnoreCase("monthly"))
-			t = 30;
 		try {
-			String sql = "select * from tbnews n "
-					+ "INNER JOIN tbmoduleinfo m on m.module_code=n.cat_code "
-					+ "WHERE m.module_info_code like ? and "
-					+ "m.module_type_code like ? and "
-					+ "n.date_insert BETWEEN (date(now()) - ?) and date(now()) "
-					+ "ORDER BY n.hit_count DESC " + "LIMIT ? OFFSET 0";
+			String sql = "SELECT * FROM filterNews(?,?,?,?)";
 			PreparedStatement p = con.prepareStatement(sql);
-			p.setString(1, media);
-			p.setString(2, category);
-			p.setInt(3, t);
+			p.setInt(1, source);
+			p.setInt(2, category);
+			p.setInt(3, time);
 			p.setInt(4, n);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				News e = new News();
 				e.setNews_id(rs.getInt("news_id"));
-				e.setCat_code(rs.getString("cat_code"));
+				e.setCategory_id(rs.getInt("category_id"));
 				e.setNews_title(rs.getString("news_title"));
-				e.setNews_date(rs.getString("news_date"));
+				e.setNews_date(rs.getDate("news_date"));
 				e.setNews_img(rs.getString("news_img"));
 				e.setNews_path(rs.getString("news_path"));
-				e.setUser_info_code(rs.getString("user_info_code"));
-				e.setNews_desc(rs.getString("news_desc"));
-				e.setDate_insert(rs.getDate("date_insert"));
-				e.setHit_count(rs.getInt("hit_count"));
+				e.setSource_id(rs.getInt("source_id"));
+				e.setNews_desc(rs.getString("news_description"));
+				e.setHit_count(rs.getInt("news_hit_count"));
 				list.add(e);
 			}
 		} catch (Exception e) {
@@ -281,19 +250,18 @@ public class NewsDAO {
 		}
 		return list;
 	}
-
-	public int getTotalPage(String category, int limit) throws SQLException {
+	/**
+	 * 
+	 * @param category_id
+	 * @param limit
+	 * @return
+	 * @throws SQLException
+	 */
+	public int getTotalPage(int category_id, int limit) throws SQLException {
 		try {
-			String s1 = "select module_code from tbmoduleinfo where module_type_code=?";
-			PreparedStatement p1 = con.prepareStatement(s1);
-			p1.setString(1, category);
-			ResultSet r1 = p1.executeQuery();
-			String sql = "select count(*) from tbnews where cat_code in ('";
-			while (r1.next()) {
-				sql += r1.getString(1) + "','";
-			}
-			sql += "')";
+			String sql = "select count(*) from tbnews where category_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
+			p.setInt(1, category_id);
 			ResultSet rs = p.executeQuery();
 			if (rs.next())
 				return rs.getInt(1) / limit;
@@ -306,37 +274,29 @@ public class NewsDAO {
 		return 0;
 	}
 
-	public ArrayList<News> getNewsList(String category, int limit, int offset)
+	public ArrayList<News> getNewsList(int category_id, int limit, int offset)
 			throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
 		if(offset==0)offset=1;
 		offset = limit * (offset - 1);
 		try {
-			String s1 = "select module_code from tbmoduleinfo where module_type_code=?";
-			PreparedStatement p1 = con.prepareStatement(s1);
-			p1.setString(1, category);
-			ResultSet r1 = p1.executeQuery();
-			String sql = "SELECT * FROM tbnews WHERE cat_code in ('";
-			while (r1.next()) {
-				sql += r1.getString(1) + "','";
-			}
-			sql += "') ORDER BY news_id DESC LIMIT ? OFFSET ?";
+			String sql = "SELECT * FROM tbnews WHERE category_id=? ORDER BY news_id DESC LIMIT ? OFFSET ?";
 			PreparedStatement p = con.prepareStatement(sql);
-			p.setInt(1, limit);
-			p.setInt(2, offset);
+			p.setInt(1, category_id);
+			p.setInt(2, limit);
+			p.setInt(3, offset);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				News e = new News();
 				e.setNews_id(rs.getInt("news_id"));
-				e.setCat_code(rs.getString("cat_code"));
+				e.setCategory_id(rs.getInt("category_id"));
+				e.setSource_id(rs.getInt("source_id"));
 				e.setNews_title(rs.getString("news_title"));
-				e.setNews_date(rs.getString("news_date"));
+				e.setNews_date(rs.getDate("news_date"));
 				e.setNews_img(rs.getString("news_img"));
 				e.setNews_path(rs.getString("news_path"));
-				e.setUser_info_code(rs.getString("user_info_code"));
-				e.setNews_desc(rs.getString("news_desc"));
-				e.setDate_insert(rs.getDate("date_insert"));
-				e.setHit_count(rs.getInt("hit_count"));
+				e.setNews_desc(rs.getString("news_description"));
+				e.setHit_count(rs.getInt("news_hit_count"));
 				list.add(e);
 			}
 		} catch (Exception e) {
@@ -361,13 +321,13 @@ public class NewsDAO {
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, i);
-			pstmt.setString(2, news.getCat_code());
+			pstmt.setInt(2, news.getCategory_id());
 			pstmt.setString(3, news.getNews_title());
 			pstmt.setString(4, news.getNews_desc());
-			pstmt.setString(5, news.getNews_path() + "news.jsp?id=" + i);
+			pstmt.setString(5, news.getNews_path() + "news?id=" + i);
 			pstmt.setString(6, news.getNews_img());
-			pstmt.setString(7, news.getNews_date());
-			pstmt.setString(8, news.getUser_info_code());
+			pstmt.setString(7, news.getNews_date().toString());
+			pstmt.setInt(8, news.getSource_id());
 			System.out.println("done!");
 			if (pstmt.executeUpdate() > 0)
 				return true;
@@ -385,15 +345,18 @@ public class NewsDAO {
 	public ArrayList<News> getAllNews() throws Exception {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			String sql = "SELECT news_id, module_type,news_title,news_date FROM tbnews n INNER JOIN tbmoduleinfo m ON m.module_code=n.cat_code order by news_id desc";
+			String sql = "SELECT n.news_id, c.category_name, n.news_title, n.news_date"
+						+" FROM tbnews n"
+						+" INNER JOIN tbcategory c ON c.category_id=n.category_id"
+						+" ORDER BY n.news_id DESC";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				News news = new News();
 				news.setNews_id(rs.getInt(1));
-				news.setModule_type(rs.getString(2));
+				news.setCategory_name(rs.getString(2));
 				news.setNews_title(rs.getString(3));
-				news.setNews_date(rs.getString(4));
+				news.setNews_date(rs.getDate(4));
 				list.add(news);
 			}
 
@@ -408,7 +371,11 @@ public class NewsDAO {
 
 	public News getNews(int news_id) throws Exception {
 		try {
-			String sql = "SELECT news_img, news_id, module_code,module_type,news_title,news_desc,news_date,hit_count FROM tbnews n INNER JOIN tbmoduleinfo m ON m.module_code=n.cat_code WHERE news_id=?";
+			String sql = "SELECT n.news_img, n.news_id, c.category_name, n.news_title, n.news_description,"
+						+" n.news_date, n.news_hit_count"
+						+" FROM tbnews n"
+						+" INNER JOIN tbcategory c ON c.category_id=n.category_id"
+						+" WHERE n.news_id=?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, news_id);
 			ResultSet rs = pstmt.executeQuery();
@@ -416,10 +383,9 @@ public class NewsDAO {
 				News news = new News();
 				news.setNews_id(rs.getInt("news_id"));
 				news.setNews_title(rs.getString("news_title"));
-				news.setNews_desc(rs.getString("news_desc"));
-				news.setNews_date(rs.getString("news_date"));
-				news.setModule_type(rs.getString("module_type"));
-				news.setModule_code(rs.getString("module_code"));
+				news.setNews_desc(rs.getString("news_description"));
+				news.setNews_date(rs.getDate("news_date"));
+				news.setCategory_name(rs.getString("category_name"));
 				news.setNews_img(rs.getString("news_img"));
 				news.setHit_count(rs.getInt("hit_count"));
 				return news;
@@ -440,8 +406,8 @@ public class NewsDAO {
 			pstmt.setString(1, news.getNews_title());
 			pstmt.setString(2, news.getNews_desc());
 			pstmt.setString(3, news.getNews_img());
-			pstmt.setString(4, news.getNews_date());
-			pstmt.setString(5, news.getCat_code());
+			pstmt.setString(4, news.getNews_date().toString());
+			pstmt.setInt(5, news.getCategory_id());
 			pstmt.setInt(6, news.getNews_id());
 			
 			if(pstmt.executeUpdate()>0)
@@ -500,7 +466,7 @@ public class NewsDAO {
 				News news = new News();
 				news.setNews_id(rs.getInt(1));
 				news.setNews_title(rs.getString(2));
-				news.setNews_date(rs.getString(3));
+				news.setNews_date(rs.getDate(3));
 				news.setHit_count(rs.getInt(4));
 				list.add(news);
 			}
@@ -549,38 +515,32 @@ public class NewsDAO {
 		return 0;
 	}
 
-	public ArrayList<News> getNewsList(String category, String option)
+	public ArrayList<News> getNewsList(int category_id, String option)
 			throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			String s1 = "select module_code from tbmoduleinfo where module_type_code=?";
-			PreparedStatement p1 = con.prepareStatement(s1);
-			p1.setString(1, category);
-			ResultSet r1 = p1.executeQuery();
-			String sql = "SELECT * FROM tbnews n INNER JOIN tbmoduleinfo m on n.cat_code=m.module_code WHERE cat_code in ('";
-			while (r1.next()) {
-				sql += r1.getString(1) + "','";
-			}
+			
+			String sql="select n.news_date, n.news_id, n.news_title, n.news_description, n.news_img, n.news_path, n.news_hit_count, n.category_id, n.source_id, c.category_name, s.source_name from tbnews n inner join tbcategory c on c.category_id=n.category_id inner join tbsource s on s.source_id=n.source_id where n.category_id=?";
 			if (option.equals("latest")) {
-				sql += "') ORDER BY news_id DESC LIMIT 4 OFFSET 0";
+				sql += " ORDER BY news_id DESC LIMIT 4 OFFSET 0";
 			} else {
-				sql += "') ORDER BY hit_count DESC LIMIT 4 OFFSET 0";
+				sql += " ORDER BY news_hit_count DESC LIMIT 4 OFFSET 0";
 			}
 			PreparedStatement p = con.prepareStatement(sql);
+			p.setInt(1, category_id);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				News e = new News();
 				e.setNews_id(rs.getInt("news_id"));
-				e.setCat_code(rs.getString("cat_code"));
+				e.setCategory_id(rs.getInt("category_id"));
 				e.setNews_title(rs.getString("news_title"));
-				e.setNews_date(rs.getString("news_date"));
+				e.setNews_date(rs.getDate("news_date"));
 				e.setNews_img(rs.getString("news_img"));
 				e.setNews_path(rs.getString("news_path"));
-				e.setModule_type(rs.getString("module_type"));
-				e.setUser_info_code(rs.getString("user_info_code"));
-				e.setNews_desc(rs.getString("news_desc"));
-				e.setDate_insert(rs.getDate("date_insert"));
-				e.setHit_count(rs.getInt("hit_count"));
+				e.setCategory_name(rs.getString("category_name"));
+				e.setSource_id(rs.getInt("source_id"));
+				e.setNews_desc(rs.getString("news_description"));
+				e.setHit_count(rs.getInt("news_hit_count"));
 				list.add(e);
 			}
 		} catch (Exception e) {
@@ -658,10 +618,10 @@ public class NewsDAO {
 				n.setNews_title(rs.getString("news_title"));
 				n.setNews_id(rs.getInt("news_id"));
 				n.setNews_path(rs.getString("news_path"));
-				n.setNews_desc(rs.getString("news_desc"));
+				n.setNews_desc(rs.getString("news_description"));
 				n.setHit_count(rs.getInt("hit_count"));
 				n.setNews_img(rs.getString("news_img"));
-				n.setNews_date(rs.getString("news_date"));
+				n.setNews_date(rs.getDate("news_date"));
 				list.add(n);
 			}
 		} catch (Exception ex) {

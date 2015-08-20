@@ -54,46 +54,6 @@
     <url-pattern>/savenews</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>health</servlet-name>
-    <servlet-class>controller.news.HealthPage</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>health</servlet-name>
-    <url-pattern>/health</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>entertainment</servlet-name>
-    <servlet-class>controller.news.EntertainmentPage</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>entertainment</servlet-name>
-    <url-pattern>/entertainment</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>politic</servlet-name>
-    <servlet-class>controller.news.PoliticPage</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>politic</servlet-name>
-    <url-pattern>/politic</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>sport</servlet-name>
-    <servlet-class>controller.news.SportPage</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>sport</servlet-name>
-    <url-pattern>/sport</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>tech</servlet-name>
-    <servlet-class>controller.news.TechPage</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>tech</servlet-name>
-    <url-pattern>/tech</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>more</servlet-name>
     <jsp-file>/more.jsp</jsp-file>
   </servlet>
@@ -132,14 +92,6 @@
   <servlet-mapping>
     <servlet-name>getmodulename</servlet-name>
     <url-pattern>/getmodulename</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>getmoduletype</servlet-name>
-    <servlet-class>controller.module.GetModuleType</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>getmoduletype</servlet-name>
-    <url-pattern>/getmoduletype</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>gettopnews</servlet-name>
@@ -204,14 +156,6 @@
   <servlet-mapping>
     <servlet-name>getresults</servlet-name>
     <url-pattern>/getresults</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>getpagination</servlet-name>
-    <servlet-class>controller.news.Pagination</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>getpagination</servlet-name>
-    <url-pattern>/getpagination</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>formuser</servlet-name>
@@ -452,6 +396,14 @@
   <servlet-mapping>
     <servlet-name>formscan</servlet-name>
     <url-pattern>/admin/html/pages/formscan</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>category-news</servlet-name>
+  	<servlet-class>controller.news.NewsPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>category-news</servlet-name>
+  	<url-pattern>/category</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>updatescanduration</servlet-name>

@@ -1,6 +1,7 @@
 package controller.admin.news;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,33 +34,27 @@ public class ActionUpdateNews extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try{
 		int id = Integer.parseInt(request.getParameter("id"));
 		String path = request.getParameter("path");
 		String khmer = request.getParameter("khmer");
-		String english = request.getParameter("english");
-		String category = request.getParameter("category");
+		int category_id = Integer.parseInt(request.getParameter("category"));
 		String date = request.getParameter("mydate");
 		String khmercontent = request.getParameter("khmercontent");
-		String englishcontent = request.getParameter("englishcontent");
-		System.out.println(path);
-		System.out.println(id);
-		System.out.println(khmer);
-		System.out.println(english);
-		System.out.println(category);
-		System.out.println(date);
-		System.out.println(khmercontent);
-		System.out.println(englishcontent);
+		int source_id=6;
+		
 		
 		News news = new News();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		
 		news.setNews_id(id);
 		news.setNews_title(khmer);
 		news.setNews_desc(khmercontent);
 		news.setNews_img(path);
-		news.setNews_date(date);
-		news.setCat_code(category);
+		news.setNews_date(formatter.parse(date));
+		news.setCategory_id(category_id);
 		news.setNews_path(request.getContextPath()+"/");
-		news.setUser_info_code("B010000");
+		news.setSource_id(source_id);
 		try {
 			boolean status = new NewsDAO().updateNews(news);
 			if(status){
@@ -67,6 +62,9 @@ public class ActionUpdateNews extends HttpServlet {
 				response.sendRedirect("listnews");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 		

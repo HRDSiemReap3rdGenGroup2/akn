@@ -37,7 +37,22 @@ public class CategoryDAO {
 		}
 		return list;
 	}
-
+	public String getCategoryName(int category_id) throws SQLException{
+		try{
+			String sql="select category_name from tbcategory where category_id=?";
+			PreparedStatement p = con.prepareStatement(sql);
+			p.setInt(1, category_id);
+			ResultSet rs= p.executeQuery();
+			while(rs.next()){
+				return rs.getString(1);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(con!=null)con.close();
+		}
+		return "";
+	}
 	public int getCategoryId(String category_name)throws Exception{
 		try {
 			String sql = "SELECT category_id FROM tbcategory WHERE category_name=?";

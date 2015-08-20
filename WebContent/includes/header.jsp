@@ -54,11 +54,9 @@
                     <nav id="nav">
                         <ul class="sf-menu">
                             <li id="index"><a href="home">ទំព័រដើម</a></li>
-                            <li id="politic1"><a href="politic">នយោបាយ</a></li>
-                            <li id="tech1"><a href="tech">បច្ចេកវិទ្យា</a></li>
-                            <li id="entertainment1"><a href="entertainment">កម្សាន្ត</a></li>
-                            <li id="sport1"><a href="sport">កីទ្បា</a></li>
-                            <li id="health1"><a href="health">សុខភាព</a></li>
+                            <c:forEach items="${requestScope.menu }" var="i">
+                            	<li id="${i.index}"><a href="category?id=${i.index}">${i.name}</a></li>
+                            </c:forEach>
                             <li id="statistic"><a href="statistic">ស្ថិតិ</a></li>
                             <li id="other"><a href="more">ផ្សេងទៀត</a></li>
                         </ul>

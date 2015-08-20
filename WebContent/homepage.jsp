@@ -120,9 +120,9 @@
                 	<div class="column-one-third">
                     	<h5 class="line"><span><a href="statistic">ពត៌មានពេញនិយម</a></span>
                     		<select style="float: right;margin-top: 5px;margin-left: 10px;" id="cbopopnews">
-							  <option value="today">Today</option>
-							  <option value="weekly">Weekly</option>
-							  <option value="monthly">Monthly</option>
+							  <option value="1">Today</option>
+							  <option value="7">Weekly</option>
+							  <option value="30">Monthly</option>
 							</select>
                     	</h5>
                         <div class="outertight">
@@ -174,7 +174,7 @@
                     	</h5>
                         <div class="outertight m-r-no">
                         	<ul class="block" id="ultech">
-                        	<c:set var="list" value="${requestScope.B010105 }"></c:set>
+                        	<c:set var="list" value="${requestScope.tech }"></c:set>
                             <c:forEach items="${list }" var="row">
                         		<li>
                         			<a href="news?id=${row.news_id}" target="_blank"><img src="${row.news_img}" alt="${row.news_title}" class="alignleft" width="140" height="86"/></a>
@@ -213,13 +213,13 @@
                     <!-- Life Style -->
                     <div class="column-two-third">
                     	<h5 class="line">
-                        	<span><a href="politic">នយោបាយ</a></span>
+                        	<span><a href="politic">ពាណិជ្ជកម្ម</a></span>
                             <div class="" style="position:absolute;top:0px;right:0px;">
                                 <a id="next1" class="next" href="#"><span></span></a>	
                                 <a id="prev1" class="prev" href="#"><span></span></a>
                             </div>
                         </h5>
-                        <c:set var="list" value="${requestScope.B020103 }"></c:set>
+                        <c:set var="list" value="${requestScope.advertise }"></c:set>
                         <c:set var="x" value="${list[0]}" ></c:set>
                         <div class="outertight">
                         	<img src="${x.news_img }" alt="${x.news_img }" style="width:300px;height:162px;"/>
@@ -282,7 +282,7 @@
                     	</h5>
                         <div class="outertight m-r-no">
                         	<ul class="block" id="ulentertainment">
-                        	<c:set var="list" value="${requestScope.B030302 }"></c:set>
+                        	<c:set var="list" value="${requestScope.entertainment}"></c:set>
                             <c:forEach items="${list }" var="row">
                         		<li>
                         			<a href="news?id=${row.news_id}" target="_blank"><img src="${row.news_img}" alt="${row.news_title}" class="alignleft" width="140" height="86"/></a>
@@ -320,15 +320,15 @@
                     
                     <!-- Hot News -->
                     <div class="column-one-third">
-                    	<h5 class="line"><span><a href="health">សុខភាព</a></span>
-                    		<select style="float: right;margin-top: 5px;margin-left: 10px;" id="cbohealth">
+                    	<h5 class="line"><span><a href="health">ជីវិតនិងសង្គម</a></span>
+                    		<select style="float: right;margin-top: 5px;margin-left: 10px;" id="cbolife">
 							  <option value="latest">Latest</option>
 							  <option value="top">Top View</option>
 							</select>
                     	</h5>
                         <div class="outertight m-r-no">
                         	<ul class="block" id="ulhealth">
-                                <c:set var="list" value="${requestScope.B020503 }"></c:set>
+                                <c:set var="list" value="${requestScope.life }"></c:set>
 	                            <c:forEach items="${list }" var="row">
 	                        		<li>
 	                        			<a href="news?id=${row.news_id}" target="_blank"><img src="${row.news_img}" alt="${row.news_title}" class="alignleft" width="140" height="86"/></a>
@@ -436,7 +436,7 @@
 	});
 	$("#cbotech").change(function(){
 		$.post("getpopnews",{
-			category:"B000105",
+			category:"4",
 			option:$("#cbotech :selected").val()
 		},function(data){
 			var str="";
@@ -475,7 +475,7 @@
 	});
 	$("#cboentertainment").change(function(){
 		$.post("getpopnews",{
-			category:"B000302",
+			category:"8",
 			option:$("#cboentertainment :selected").val()
 		},function(data){
 			var str="";
@@ -512,10 +512,10 @@
 			$("#ulentertainment").html(str);
 		});
 	});
-	$("#cbohealth").change(function(){
+	$("#cbolife").change(function(){
 		$.post("getpopnews",{
-			category:"B000503",
-			option:$("#cbohealth :selected").val()
+			category:"7",
+			option:$("#cbolife :selected").val()
 		},function(data){
 			var str="";
 			for(var i=0;i<data.length;i++){

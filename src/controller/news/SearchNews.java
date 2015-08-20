@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dao.ModuleDAO;
 import model.dao.NewsDAO;
 import model.dao.SaveListDAO;
 import model.dto.SaveList;
@@ -70,7 +69,7 @@ public class SearchNews extends HttpServlet {
 			s_query = req.getParameter("s_query");
 			req.setAttribute("s_query", s_query);
 
-			req.setAttribute("filter", new ModuleDAO().getAllModuleType(list_module_type));
+			//req.setAttribute("filter", new ModuleDAO().getAllModuleType(list_module_type));
 
 			list = new NewsDAO().search(s_query, list_module_type);
 			req.setAttribute("result", list);

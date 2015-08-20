@@ -52,10 +52,10 @@ public class GetPopNews extends HttpServlet {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
 			if (req.getParameter("time") != null) {
-				String time = req.getParameter("time");
-				list = new NewsDAO().filterNews(4, "%", "%", time);
+				int time = Integer.parseInt(req.getParameter("time"));
+				list = new NewsDAO().filterNews(4, 0, 0, time);
 			} else {
-				String category = req.getParameter("category");
+				int category = Integer.parseInt(req.getParameter("category"));
 				String option = req.getParameter("option");
 				list = new NewsDAO().getNewsList(category, option);
 			}

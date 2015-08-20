@@ -3,6 +3,7 @@ package model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import model.dto.Menu;
 import utilities.DBUtility;
@@ -16,17 +17,8 @@ public class MenuDAO {
 
 	public boolean updateMenu(Menu menu) throws Exception {
 		try {
-			String sql = "UPDATE tbmenu SET index0=?, index1=?, index2=?, index3=?, index4=?, index5=?, index6=?";
-			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, menu.getIndex0());
-			pstmt.setString(2, menu.getIndex1());
-			pstmt.setString(3, menu.getIndex2());
-			pstmt.setString(4, menu.getIndex3());
-			pstmt.setString(5, menu.getIndex4());
-			pstmt.setString(6, menu.getIndex5());
-			pstmt.setString(7, menu.getIndex6());
-
-			if (pstmt.executeUpdate() > 0)
+			//String sql = "UPDATE tbmenu SET index0=?, index1=?, index2=?, index3=?, index4=?, index5=?, index6=?";
+		
 				return true;
 
 		} catch (Exception ex) {
@@ -38,29 +30,26 @@ public class MenuDAO {
 		return false;
 	}
 
-	public Menu getAllMenu() throws Exception {
+	public ArrayList<Menu> getAllMenu() throws Exception {
+		ArrayList<Menu> list =new ArrayList<Menu>();
 		try {
-			String sql = "SELECT * FROM tbmenu";
+			String sql = "SELECT * FROM tbmenu m inner join tbcategory c on c.category_id=m.category_id order by menu_index asc";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
-			Menu menu = new Menu();
 			while (rs.next()) {
-				menu.setIndex0(rs.getString(1));
-				menu.setIndex1(rs.getString(2));
-				menu.setIndex2(rs.getString(3));
-				menu.setIndex3(rs.getString(4));
-				menu.setIndex4(rs.getString(5));
-				menu.setIndex5(rs.getString(6));
-				menu.setIndex6(rs.getString(7));
+				Menu m=new Menu();
+				m.setId(rs.getInt("menu_id"));
+				m.setIndex(rs.getInt("category_id"));
+				m.setName(rs.getString("category_name"));
+				list.add(m);
 			}
-			System.out.println(menu);
-			return menu;
+			return list;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
 			if (con != null)
 				con.close();
 		}
-		return null;
+		return list;
 	}
 }

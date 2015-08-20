@@ -1,7 +1,6 @@
 package controller.news;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.dao.MenuDAO;
 import model.dao.NewsDAO;
 import model.dao.SaveListDAO;
 import model.dto.SaveList;
@@ -50,19 +50,20 @@ public class GetAllNews extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			resp.setIntHeader("Refresh", 60 * 5);
-			java.util.ArrayList<model.dto.News> list = new NewsDAO()
-					.getPopNews();
+			java.util.ArrayList<model.dto.News> list = new NewsDAO().getPopNews();
 			req.setAttribute("popularnews", list);
-			list = new NewsDAO().getNewsList("B000503", 3);
-			req.setAttribute("B020503", list);
-			list = new NewsDAO().getNewsList("B000302");
-			req.setAttribute("B030302", list);
-			list = new NewsDAO().getNewsList("B000105");
-			req.setAttribute("B010105", list);
-			list = new NewsDAO().getNewsList("B000103", 6);
-			req.setAttribute("B020103", list);
+			list = new NewsDAO().getNewsList(7, 3);
+			req.setAttribute("life", list);
+			list = new NewsDAO().getNewsList(8);
+			req.setAttribute("entertainment", list);
+			list = new NewsDAO().getNewsList(4);
+			req.setAttribute("tech", list);
+			list = new NewsDAO().getNewsList(1, 6);
+			req.setAttribute("advertise", list);
 			req.setAttribute("latestnews", new NewsDAO().getLatestNews());
 
+			//menu
+			req.setAttribute("menu", new MenuDAO().getAllMenu());
 			// user
 			if (req.getSession().getAttribute("user") != null
 					&& (req.getSession().getAttribute("user") != "")) {
@@ -73,7 +74,7 @@ public class GetAllNews extends HttpServlet {
 			}
 
 			req.getRequestDispatcher("homepage.jsp").forward(req, resp);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
