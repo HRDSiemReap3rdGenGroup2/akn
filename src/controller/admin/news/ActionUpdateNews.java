@@ -1,7 +1,6 @@
 package controller.admin.news;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -39,19 +38,16 @@ public class ActionUpdateNews extends HttpServlet {
 		String path = request.getParameter("path");
 		String khmer = request.getParameter("khmer");
 		int category_id = Integer.parseInt(request.getParameter("category"));
-		String date = request.getParameter("mydate");
+		
 		String khmercontent = request.getParameter("khmercontent");
 		int source_id=6;
 		
-		
 		News news = new News();
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		
 		news.setNews_id(id);
 		news.setNews_title(khmer);
 		news.setNews_desc(khmercontent);
 		news.setNews_img(path);
-		news.setNews_date(formatter.parse(date));
 		news.setCategory_id(category_id);
 		news.setNews_path(request.getContextPath()+"/");
 		news.setSource_id(source_id);
