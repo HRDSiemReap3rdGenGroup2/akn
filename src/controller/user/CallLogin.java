@@ -8,15 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.dao.MenuDAO;
-import model.dao.UserDAO;
-import model.dto.User;
 
-public class UserPage extends HttpServlet {
+public class CallLogin extends HttpServlet {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3258514143419052021L;
+	private static final long serialVersionUID = -8540213079178204280L;
 
 	/* (non-Javadoc)
 	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
@@ -24,7 +22,13 @@ public class UserPage extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		doPro(req,resp);
+		//menu
+		try {
+			req.setAttribute("menu", new MenuDAO().getAllMenu());
+			req.getRequestDispatcher("login.jsp").forward(req, resp);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/* (non-Javadoc)
@@ -33,26 +37,8 @@ public class UserPage extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		doPro(req,resp);
-	}
-
-	private void doPro(HttpServletRequest req, HttpServletResponse resp) {
-		try{
-			//menu
-			req.setAttribute("menu", new MenuDAO().getAllMenu());
-			
-			if(req.getSession().getAttribute("user_id")!=null){
-			int user_id=(int) req.getSession().getAttribute("user_id");
-			User u=new UserDAO().getUser(user_id);
-			req.setAttribute("user", u);
-			
-			req.getRequestDispatcher("user.jsp").forward(req, resp);
-			}else{
-				resp.sendRedirect(req.getContextPath());
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		// TODO Auto-generated method stub
+		super.doPost(req, resp);
 	}
 
 }

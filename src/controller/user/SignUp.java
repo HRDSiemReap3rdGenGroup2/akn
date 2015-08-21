@@ -68,8 +68,11 @@ public class SignUp extends HttpServlet {
 				resp.getWriter().write("e4");
 				return;
 			}
-			String gender = (Integer.parseInt(req.getParameter("gender")) == 1) ? "Male"
-					: "Female";
+			int gender = Integer.parseInt(req.getParameter("gender"));
+			if(gender>2){
+				resp.getWriter().write("e2");
+				return;
+			}
 			User u = new User();
 			u.setUser_name(username);
 			u.setEmail(email);
@@ -81,7 +84,7 @@ public class SignUp extends HttpServlet {
 				req.getSession().setAttribute("user_id", u2.getUser_id());
 				resp.getWriter().write("success");
 			} else {
-				// resp.getWriter().write("e2");
+				resp.getWriter().write("e2");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
