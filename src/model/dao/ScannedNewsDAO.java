@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import model.dto.NewsDTO;
 import utilities.DBUtility;
@@ -21,6 +22,9 @@ public class ScannedNewsDAO {
 				String sql = "INSERT INTO tbnews(news_id, news_title, news_description,"+
 						" news_img, news_path, news_code, category_id, source_id)"+
 						" VALUES(nextval('seq_news_id'),?,?,?,?,?,?,?)";
+				
+				Collections.reverse(listnews);
+				
 				for(NewsDTO news:listnews){
 					PreparedStatement p = con.prepareStatement(sql);
 					p.setString(1, news.getNews_title());

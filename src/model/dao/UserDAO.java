@@ -27,8 +27,8 @@ public class UserDAO {
 				user.setUser_id(rs.getInt("user_id"));
 				user.setUser_name(rs.getString("user_name"));
 				user.setUser_pass(rs.getString("user_pass"));
-				user.setUser_type_id(rs.getInt("user_type_id"));
-				user.setUser_type(rs.getString("user_type"));
+				user.setUser_email(rs.getString("user_email"));
+				user.setUser_type(rs.getInt("user_type"));
 				list.add(user);
 			}
 			return list;
@@ -52,7 +52,7 @@ public class UserDAO {
 				User u = new User();
 				u.setUser_id(rs.getInt("user_id"));
 				u.setUser_name(rs.getString("user_name"));
-				u.setUser_type(rs.getString("user_type"));
+				u.setUser_type(rs.getInt("user_type"));
 
 				return u;
 			}
@@ -72,8 +72,9 @@ public class UserDAO {
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setString(1, user.getUser_name());
 			p.setString(2, user.getUser_pass());
-			p.setString(3, user.getEmail());
-			p.setInt(4, user.getGender());
+			p.setString(3, user.getUser_email());
+			p.setInt(4, user.getUser_gender());
+
 			if (p.executeUpdate() > 0)
 				return true;
 		} catch (Exception ex) {
@@ -96,9 +97,10 @@ public class UserDAO {
 				user.setUser_id(rs.getInt("user_id"));
 				user.setUser_name(rs.getString("user_name"));
 				user.setUser_pass(rs.getString("user_pass"));
-				user.setUser_type(rs.getString("user_type"));
-				user.setGender(rs.getInt("user_gender"));
-				user.setEmail(rs.getString("user_email"));
+				user.setUser_type(rs.getInt("user_type"));
+				user.setUser_gender(rs.getInt("user_gender"));
+				user.setUser_email(rs.getString("user_email"));
+
 				list.add(user);
 			}
 			return list;
@@ -123,9 +125,9 @@ public class UserDAO {
 				user.setUser_id(rs.getInt("user_id"));
 				user.setUser_name(rs.getString("user_name"));
 				user.setUser_pass(rs.getString("user_pass"));
-				user.setUser_type(rs.getString("user_type"));
-				user.setGender(rs.getInt("user_gender"));
-				user.setEmail(rs.getString("user_email"));
+				user.setUser_type(rs.getInt("user_type"));
+				user.setUser_gender(rs.getInt("user_gender"));
+				user.setUser_email(rs.getString("user_email"));
 				return user;
 			}
 
@@ -143,12 +145,12 @@ public class UserDAO {
 			String sql = "INSERT INTO tbuser(user_id,user_type,user_name,user_pass, user_email, user_gender) VALUES(nextval('seq_user_id'),?,?,?,?,?)";
 			PreparedStatement p = con.prepareStatement(sql);
 
-			p.setString(1, u.getUser_type());
+			p.setInt(1, u.getUser_type());
 			p.setString(2, u.getUser_name());
 			p.setString(3, u.getUser_pass());
-			p.setString(4, u.getEmail());
-			p.setInt(5, u.getGender());
-
+			p.setString(4, u.getUser_email());
+			p.setInt(5, u.getUser_gender());
+			
 			if (p.executeUpdate() > 0)
 				return true;
 
@@ -169,10 +171,12 @@ public class UserDAO {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user.getUser_name());
 			pstmt.setString(2, user.getUser_pass());
-			pstmt.setString(3, user.getEmail());
-			pstmt.setInt(4, user.getGender());
-			pstmt.setString(5, user.getUser_type());
+
+			pstmt.setString(3, user.getUser_email());
+			pstmt.setInt(4, user.getUser_gender());
+			pstmt.setInt(5, user.getUser_type());
 			pstmt.setInt(6, user.getUser_id());
+			
 			if (pstmt.executeUpdate() > 0)
 				return true;
 

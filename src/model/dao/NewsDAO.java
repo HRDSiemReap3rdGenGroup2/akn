@@ -315,7 +315,7 @@ public class NewsDAO {
 				i = tmp.getInt(1);
 			else
 				return false;
-			String sql = "INSERT INTO tbnews(news_id,cat_code,news_title,news_desc,news_path,news_img,news_date,user_info_code) VALUES(?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO tbnews(news_id,category_id,news_title,news_description,news_path,news_img,news_date,source_id) VALUES(?,?,?,?,?,?,?,?)";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, i);
@@ -324,7 +324,7 @@ public class NewsDAO {
 			pstmt.setString(4, news.getNews_desc());
 			pstmt.setString(5, news.getNews_path() + "news?id=" + i);
 			pstmt.setString(6, news.getNews_img());
-			pstmt.setString(7, news.getNews_date().toString());
+			pstmt.setTimestamp(7, new java.sql.Timestamp(new java.util.Date().getTime()));
 			pstmt.setInt(8, news.getSource_id());
 			System.out.println("done!");
 			if (pstmt.executeUpdate() > 0)
@@ -349,10 +349,10 @@ public class NewsDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				News news = new News();
-				news.setNews_id(rs.getInt(1));
-				news.setCategory_name(rs.getString(2));
-				news.setNews_title(rs.getString(3));
-				news.setNews_date(rs.getDate(4));
+				news.setNews_id(rs.getInt("news_id"));
+				news.setCategory_name(rs.getString("category_name"));
+				news.setNews_title(rs.getString("news_title"));
+				news.setNews_date(rs.getDate("news_date"));
 				list.add(news);
 			}
 
@@ -395,15 +395,48 @@ public class NewsDAO {
 		return null;
 	}
 
+	public News getNewsForUpdate(int news_id) throws Exception {
+		try {
+			String sql = "SELECT n.news_img, n.news_id, c.category_name, n.news_title, "
+					+ "n.news_description,n.news_date, n.category_id, n.source_id,a.source_name "
+					+ "FROM tbnews n INNER JOIN tbcategory c ON c.category_id=n.category_id "
+					+ "INNER JOIN tbsource a ON a.source_id=n.source_id WHERE n.news_id=?";
+			
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, news_id);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				News news = new News();
+				news.setNews_id(rs.getInt("news_id"));
+				news.setNews_title(rs.getString("news_title"));
+				news.setCategory_name(rs.getString("category_name"));
+				news.setNews_img(rs.getString("news_img"));
+				news.setNews_desc(rs.getString("news_description"));
+				news.setNews_date_timestamp(rs.getTimestamp("news_date"));
+				news.setCategory_id(rs.getInt("category_id"));
+				news.setSource_id(rs.getInt("source_id"));
+				news.setSource_name(rs.getString("source_name"));
+				return news;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (con != null)
+				con.close();
+		}
+		return null;
+	}
+	
+	
 	public boolean updateNews(News news) throws Exception{
 		try{
-			String sql = "UPDATE tbnews SET news_title=?, news_desc=?,news_img=?, news_date=?, cat_code=? WHERE news_id=?";
+			String sql = "UPDATE tbnews SET news_title=?, news_description=?,news_img=?,category_id=?, source_id=? WHERE news_id=?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, news.getNews_title());
 			pstmt.setString(2, news.getNews_desc());
 			pstmt.setString(3, news.getNews_img());
-			pstmt.setString(4, news.getNews_date().toString());
-			pstmt.setInt(5, news.getCategory_id());
+			pstmt.setInt(4, news.getCategory_id());
+			pstmt.setInt(5, news.getSource_id());
 			pstmt.setInt(6, news.getNews_id());
 			
 			if(pstmt.executeUpdate()>0)
