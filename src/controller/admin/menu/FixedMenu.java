@@ -32,9 +32,9 @@ public class FixedMenu extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
-			Menu menu = new MenuDAO().getAllMenu();
+			//Menu menu = new MenuDAO().getAllMenu();
 
-			request.setAttribute("menu", menu);
+			request.setAttribute("menu", 2);
 
 			request.getRequestDispatcher("fixedmenu.jsp").forward(request,
 					response);
