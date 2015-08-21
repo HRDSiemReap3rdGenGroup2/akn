@@ -1,7 +1,6 @@
 package controller.news;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -10,8 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.dao.CategoryDAO;
+import model.dao.MenuDAO;
 import model.dao.NewsDAO;
 import model.dao.SaveListDAO;
+import model.dto.News;
 import model.dto.SaveList;
 
 public class SearchNews extends HttpServlet {
@@ -51,28 +53,30 @@ public class SearchNews extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			req.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		}
-		ArrayList<String> list_module_type = new ArrayList<String>();
-		try {
-			Enumeration<String> category_list = req.getParameterNames();
-			while (category_list.hasMoreElements()) {
-				String module_type = category_list.nextElement();
-				if (module_type.contains("category"))
-					list_module_type.add(req.getParameter(module_type));
+			ArrayList<Integer> category_list = new ArrayList<Integer>();
+			ArrayList<News> list = new ArrayList<News>();
+			
+			Enumeration<String> category_list_name = req.getParameterNames();
+			while (category_list_name.hasMoreElements()) {
+				String tmp=category_list_name.nextElement();
+				if (tmp.contains("category"))
+					category_list.add(Integer.parseInt(req.getParameter(tmp)));
 			}
-			java.util.ArrayList<model.dto.News> list = new NewsDAO()
-					.getPopNews();
-			req.setAttribute("popularnews", list);
 			String s_query = "";
 			s_query = req.getParameter("s_query");
 			req.setAttribute("s_query", s_query);
 
-			//req.setAttribute("filter", new ModuleDAO().getAllModuleType(list_module_type));
+			//menu
+			req.setAttribute("menu", new MenuDAO().getAllMenu());
+			
+			req.setAttribute("filter", new CategoryDAO().getCategoryName(category_list));
 
-			list = new NewsDAO().search(s_query, list_module_type);
+			list = new NewsDAO().search(s_query, category_list);
 			req.setAttribute("result", list);
+			
+			java.util.ArrayList<model.dto.News> l = new NewsDAO().getPopNews();
+			req.setAttribute("popularnews", l);
+			
 			// resp.setContentType("application/json");
 			// resp.setCharacterEncoding("utf-8");
 			// String buf= new Gson().toJson(list);
