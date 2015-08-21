@@ -421,4 +421,54 @@
     <servlet-name>stopscan</servlet-name>
     <url-pattern>/admin/html/pages/stopscan</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>formsource</servlet-name>
+    <servlet-class>controller.admin.source.FormSource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>formsource</servlet-name>
+    <url-pattern>/admin/html/pages/formsource</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>listsource</servlet-name>
+    <servlet-class>controller.admin.source.ListSource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>listsource</servlet-name>
+    <url-pattern>/admin/html/pages/listsource</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>addsource</servlet-name>
+    <servlet-class>controller.admin.source.AddSource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addsource</servlet-name>
+    <url-pattern>/admin/html/pages/addsource</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>getsource</servlet-name>
+    <servlet-class>controller.admin.source.GetSource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getsource</servlet-name>
+    <url-pattern>/admin/html/pages/updatesource</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>editsource</servlet-name>
+    <servlet-class>controller.admin.source.EditSource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>editsource</servlet-name>
+    <url-pattern>/admin/html/pages/editsource</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>deletesource</servlet-name>
+  	<servlet-class>controller.admin.source.DeleteSource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deletesource</servlet-name>
+    <url-pattern>/admin/html/pages/deletesource</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
