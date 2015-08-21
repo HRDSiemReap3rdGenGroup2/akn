@@ -158,7 +158,7 @@
 		<script>
 
 			$(document).ready(function(){
-				$('#dashboard').addClass('active');
+				$('#sourcemenu').addClass('active');
 			});
 			
 		</script>

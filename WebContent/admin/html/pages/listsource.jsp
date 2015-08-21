@@ -149,7 +149,7 @@
 		<script>
 
 			$(document).ready(function(){
-				$('#dashboard').addClass('active');
+				$('#sourcemenu').addClass('active');
 			});
 			
 			function myedit(source_id, source_code, source_name){

@@ -101,6 +101,19 @@
 			</li><!--end /menu-li -->
 			<!-- END RECOMENDATION -->
 			
+			<!-- BEGIN Source -->
+			<li class="gui-folder" id=sourcemenu>
+				<a>
+					<div class="gui-icon"><i class="md md-share"></i></div>
+					<span class="title">Source</span>
+					<!--start submenu -->
+				</a>
+				<ul>
+					<li><a href="formsource" ><span class="title">Add Source</span></a></li>
+					<li><a href="listsource" ><span class="title">List Source</span></a></li>
+				</ul><!--end /submenu -->
+			</li><!--end /menu-li -->
+			<!-- END Source -->
 			
 			<!-- BEGIN SCAN NEWS -->
 			<li class="gui-folder" id=scannewsmenu>
@@ -114,6 +127,9 @@
 				</ul><!--end /submenu -->
 			</li><!--end /menu-li -->
 			<!-- END SCAN NEWS -->
+			
+			
+			
 			
 		</ul><!--end .main-menu -->
 		<!-- END MAIN MENU -->

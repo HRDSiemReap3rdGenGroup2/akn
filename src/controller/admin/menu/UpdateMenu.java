@@ -1,6 +1,7 @@
 package controller.admin.menu;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.dao.MenuDAO;
-import model.dto.Menu;
 
 /**
  * Servlet implementation class UpdateMenu
@@ -46,18 +46,23 @@ public class UpdateMenu extends HttpServlet {
 
 		request.setCharacterEncoding("utf-8");
 
-		String menu0 = request.getParameter("menu0");
-		String menu1 = request.getParameter("menu1");
-		String menu2 = request.getParameter("menu2");
-		String menu3 = request.getParameter("menu3");
-		String menu4 = request.getParameter("menu4");
-		String menu5 = request.getParameter("menu5");
-		String menu6 = request.getParameter("menu6");
+		//category_id
+		int index0 = Integer.parseInt(request.getParameter("index0")); 
+		int index1 = Integer.parseInt(request.getParameter("index1"));
+		int index2 = Integer.parseInt(request.getParameter("index2"));
+		int index3 = Integer.parseInt(request.getParameter("index3"));
+		int index4 = Integer.parseInt(request.getParameter("index4"));
 
-		Menu menu = new Menu();
+		ArrayList<Integer> category_id  = new ArrayList<Integer>();
+		
+		category_id.add(index0);
+		category_id.add(index1);
+		category_id.add(index2);
+		category_id.add(index3);
+		category_id.add(index4);
 		
 		try {
-			boolean status = new MenuDAO().updateMenu(menu);
+			boolean status = new MenuDAO().updateMenu(category_id);
 			if (status)
 				System.out.println("success");
 			response.sendRedirect("fixedmenu");

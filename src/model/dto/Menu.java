@@ -4,6 +4,8 @@ public class Menu {
 	private int id;
 	private String name;
 	private int index;
+	private int category_id;
+	
 	/**
 	 * @return the id
 	 */
@@ -33,5 +35,11 @@ public class Menu {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getCategory_id() {
+		return category_id;
+	}
+	public void setCategory_id(int category_id) {
+		this.category_id = category_id;
 	}
 }

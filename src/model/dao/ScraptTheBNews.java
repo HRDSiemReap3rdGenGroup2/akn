@@ -32,7 +32,7 @@ public class ScraptTheBNews {
 		ArrayList<NewsDTO> world = getTheBNews(WORLD_URL,"ពត៌មានពិភពលោក");
 		ArrayList<NewsDTO> enterpreneur = getTheBNews(ENTERPRENEUR_URL,"សហក្រិនភាព");
 		ArrayList<NewsDTO> technology = getTheBNews(TECHNOLOGY_URL,"បច្ចេកវិទ្យា");
-		ArrayList<NewsDTO> innovative = getTheBNews(INNOVATIVE_URL,"ថ្មីហើយផ្លែក");
+		ArrayList<NewsDTO> innovative = getTheBNews(INNOVATIVE_URL,"ថ្មីហើយប្លែក");
 		ArrayList<NewsDTO> luxury = getTheBNews(LUXURY_URL,"ស៊ីវីល័យ");
 		
 		allCategory.addAll(business);
@@ -57,10 +57,10 @@ public class ScraptTheBNews {
 		try {
 			//get category id
 			category_id = new CategoryDAO().getCategoryId(category_name);
-			System.out.println("Category ID:"+category_id);
+			System.out.println("TheBNews Category:"+category_id);
 			//get source id
 			source_id = new SourceDAO().getSourceId("THEBNEWS");
-			System.out.println("Source ID:"+source_id);
+			System.out.println("TheBNews Source:"+source_id);
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}

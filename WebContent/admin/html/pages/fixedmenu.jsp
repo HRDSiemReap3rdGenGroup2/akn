@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Add User's Information</title>
+		<title>Update Menu</title>
 
 		<!-- BEGIN META -->
 		<meta charset="utf-8">
@@ -67,50 +67,54 @@
 										<div class="card-body floating-label">
 										
 											<c:set var="menu" value="${requestScope.menu }"></c:set>
+											<c:set var="category" value="${requestScope.category }"></c:set>
 											
 											<div class="form-group">
-												<select id="menu0" name="menu0" class="form-control">
-													<option value="${menu.index0 }">${menu.index0 }</option>
+												<select id="index0" name="index0" class="form-control">
+													<option value="${menu[0].category_id }">${menu[0].name }</option>
+													<c:forEach var="item" items="${category }">
+														<option value="${item.category_id}">${item.category_name }</option>
+													</c:forEach>
 											    </select>
 												<label for="Password2">1st Menu</label>
 											</div>
 											<div class="form-group">
-												<select id="menu1" name="menu1" class="form-control">
-													<option value="${menu.index1 }">${menu.index1 }</option>
+												<select id="index1" name="index1" class="form-control">
+													<option value="${menu[1].category_id }">${menu[1].name }</option>
+													<c:forEach var="item" items="${category }">
+														<option value="${item.category_id}">${item.category_name }</option>
+													</c:forEach>
 											    </select>
 												<label for="Password2">2nd Menu</label>
 											</div>
 											<div class="form-group">
-												<select id="menu2" name="menu2" class="form-control">
-												    <option value="${menu.index2 }">${menu.index2 }</option>
+												<select id="index2" name="index2" class="form-control">
+												    <option value="${menu[2].category_id }">${menu[2].name }</option>
+												    <c:forEach var="item" items="${category }">
+														<option value="${item.category_id}">${item.category_name }</option>
+													</c:forEach>
 											    </select>
 												<label for="Password2">3rd Menu</label>
 											</div>
 											<div class="form-group">
-												<select id="menu3" name="menu3" class="form-control">
-												    <option value="${menu.index3 }">${menu.index3 }</option>
+												<select id="index3" name="index3" class="form-control">
+												    <option value="${menu[3].category_id }">${menu[3].name }</option>
+												    <c:forEach var="item" items="${category }">
+														<option value="${item.category_id}">${item.category_name }</option>
+													</c:forEach>
 											    </select>
-												<label for="Password2">4th Menu</label>
+												<label for="Password2">4rd Menu</label>
 											</div>
 											<div class="form-group">
-												<select id="menu4" name="menu4" class="form-control">
-												    <option value="${menu.index4 }">${menu.index4 }</option>
+												<select id="index4" name="index4" class="form-control">
+												    <option value="${menu[4].category_id }">${menu[4].name }</option>
+												    <c:forEach var="item" items="${category }">
+														<option value="${item.category_id}">${item.category_name }</option>
+													</c:forEach>
 											    </select>
-												<label for="Password2">5th Menu</label>
+												<label for="Password2">5rd Menu</label>
 											</div>
-											<div class="form-group">
-												<select id="menu5" name="menu5" class="form-control">
-												    <option value="${menu.index5 }">${menu.index5 }</option>
-											    </select>
-												<label for="Password2">6th Menu</label>
-											</div>
-											<div class="form-group">
-												<select id="menu6" name="menu6" class="form-control">
-												    <option value="${menu.index6 }">${menu.index6 }</option>
-											    </select>
-												<label for="Password2">7th Menu</label>
-											</div>
-											
+							
 										</div><!--end .card-body -->
 										<div class="card-actionbar">
 											<div class="card-actionbar-row">
@@ -160,72 +164,6 @@
 				
 				$('#menu').addClass('active');
 		
-				$('#menu1').click(function(){
-					$.post("/Final_Project/getmoduletype",function(data){
-						var str="";
-						for(var i=0;i<data.length;i++){
-							str+="<option value='"+data[i].module_type+"'>"
-								+data[i].module_type
-								+"</option>";
-						}	
-						$('#menu1').append(str);
-					});
-				});
-				$('#menu2').click(function(){
-					$.post("/Final_Project/getmoduletype",function(data){
-						var str="";
-						for(var i=0;i<data.length;i++){
-							str+="<option value='"+data[i].module_type+"'>"
-								+data[i].module_type
-								+"</option>";
-						}	
-						$('#menu2').append(str);
-					});
-				});
-				$('#menu3').click(function(){
-					$.post("/Final_Project/getmoduletype",function(data){
-						var str="";
-						for(var i=0;i<data.length;i++){
-							str+="<option value='"+data[i].module_type+"'>"
-								+data[i].module_type
-								+"</option>";
-						}	
-						$('#menu3').append(str);
-					});
-				});
-				$('#menu4').click(function(){
-					$.post("/Final_Project/getmoduletype",function(data){
-						var str="";
-						for(var i=0;i<data.length;i++){
-							str+="<option value='"+data[i].module_type+"'>"
-								+data[i].module_type
-								+"</option>";
-						}	
-						$('#menu4').append(str);
-					});
-				});
-				$('#menu5').click(function(){
-					$.post("/Final_Project/getmoduletype",function(data){
-						var str="";
-						for(var i=0;i<data.length;i++){
-							str+="<option value='"+data[i].module_type+"'>"
-								+data[i].module_type
-								+"</option>";
-						}	
-						$('#menu5').append(str);
-					});
-				});
-				$('#menu6').click(function(){
-					$.post("/Final_Project/getmoduletype",function(data){
-						var str="";
-						for(var i=0;i<data.length;i++){
-							str+="<option value='"+data[i].module_type+"'>"
-								+data[i].module_type
-								+"</option>";
-						}	
-						$('#menu6').append(str);
-					});
-				});
 			});
 		</script>
 		
