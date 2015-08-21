@@ -41,9 +41,9 @@ public class Filter implements javax.servlet.Filter {
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		
 		if(session.getAttribute("user_type")!=null){
-			String user_type = (String) session.getAttribute("user_type");
+			int user_type = (Integer) session.getAttribute("user_type");
 			
-			if(Integer.parseInt(user_type)==1 || Integer.parseInt(user_type)==2 ){
+			if(user_type==1 || user_type==2 ){
 				chain.doFilter(request, response);
 			}else{
 				((HttpServletResponse)response).sendRedirect(((HttpServletRequest)request).getContextPath());
@@ -51,8 +51,6 @@ public class Filter implements javax.servlet.Filter {
 		}else{
 			((HttpServletResponse)response).sendRedirect(((HttpServletRequest)request).getContextPath());
 		}
-			
-		
 	}
 	/**
 	 * @see Filter#init(FilterConfig)
