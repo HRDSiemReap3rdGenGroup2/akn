@@ -9,10 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.connector.Request;
+
 import model.dao.CategoryDAO;
 import model.dao.NewsDAO;
+import model.dao.SourceDAO;
 import model.dto.Category;
 import model.dto.News;
+import model.dto.Source;
 
 /**
  * Servlet implementation class UpdateNews
@@ -37,13 +41,17 @@ public class UpdateNews extends HttpServlet {
 		try {
 			response.setCharacterEncoding("utf-8");
 			list = new CategoryDAO().getAllCategory();
-			request.setAttribute("typecode", list);
-		} catch (SQLException e) {
+			request.setAttribute("category", list);
+			
+			ArrayList<Source> source = new SourceDAO().getAllSource();
+			request.setAttribute("source", source);
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		try {
-			News news = new NewsDAO().getNews(news_id);
-			//news.setStatus(1);
+			News news = new NewsDAO().getNewsForUpdate(news_id);
+			news.setStatus(1);
 			request.setAttribute("news", news);
 			request.getRequestDispatcher("addnews.jsp").forward(request, response);
 
@@ -51,7 +59,6 @@ public class UpdateNews extends HttpServlet {
 			
 			e.printStackTrace();
 		}
-		
 		
 	}
 
