@@ -73,7 +73,7 @@ public class UserDAO {
 			p.setString(1, user.getUser_name());
 			p.setString(2, user.getUser_pass());
 			p.setString(3, user.getEmail());
-			p.setString(4, user.getGender());
+			p.setInt(4, user.getGender());
 			if (p.executeUpdate() > 0)
 				return true;
 		} catch (Exception ex) {
@@ -97,7 +97,7 @@ public class UserDAO {
 				user.setUser_name(rs.getString("user_name"));
 				user.setUser_pass(rs.getString("user_pass"));
 				user.setUser_type(rs.getString("user_type"));
-				user.setGender(rs.getString("user_gender"));
+				user.setGender(rs.getInt("user_gender"));
 				user.setEmail(rs.getString("user_email"));
 				list.add(user);
 			}
@@ -124,7 +124,7 @@ public class UserDAO {
 				user.setUser_name(rs.getString("user_name"));
 				user.setUser_pass(rs.getString("user_pass"));
 				user.setUser_type(rs.getString("user_type"));
-				user.setGender(rs.getString("user_gender"));
+				user.setGender(rs.getInt("user_gender"));
 				user.setEmail(rs.getString("user_email"));
 				return user;
 			}
@@ -147,7 +147,7 @@ public class UserDAO {
 			p.setString(2, u.getUser_name());
 			p.setString(3, u.getUser_pass());
 			p.setString(4, u.getEmail());
-			p.setString(5, u.getGender());
+			p.setInt(5, u.getGender());
 
 			if (p.executeUpdate() > 0)
 				return true;
@@ -170,7 +170,7 @@ public class UserDAO {
 			pstmt.setString(1, user.getUser_name());
 			pstmt.setString(2, user.getUser_pass());
 			pstmt.setString(3, user.getEmail());
-			pstmt.setString(4, user.getGender());
+			pstmt.setInt(4, user.getGender());
 			pstmt.setString(5, user.getUser_type());
 			pstmt.setInt(6, user.getUser_id());
 			if (pstmt.executeUpdate() > 0)
@@ -229,8 +229,8 @@ public class UserDAO {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
-				return true;
+			while(rs.next()){
+				if(rs.getInt(1)>0)return true;
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -243,7 +243,7 @@ public class UserDAO {
 
 	public boolean subScribe(int category_id, int user_id) throws SQLException {
 		try {
-			String sql = "insert into tbsubscribe(subscribe, category_id, user_id) values(nextval('seq_subscribe_id'),?,?)";
+			String sql = "insert into tbsubscribe(subscribe_id, category_id, user_id) values(nextval('seq_subscribe_id'),?,?)";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, category_id);
 			pstmt.setInt(2, user_id);
