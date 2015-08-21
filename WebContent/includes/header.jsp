@@ -71,10 +71,10 @@ function googleTranslateElementInit() {
 </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script>
 	$(document).ready(function(){
-		$.post("getmoduletype",function(data){
+		$.post("getcategory",function(data){
 			var str="";
 			for(var i=0;i<data.length;i++){
-				str+="<li style='overflow:hidden'><label><input type='checkbox' name='category"+(i+1)+"' value='"+data[i].module_type_code+"'/>"+data[i].module_type;
+				str+="<li style='overflow:hidden'><label><input type='checkbox' name='category"+(i+1)+"' value='"+data[i].category_id+"'/>"+data[i].category_name;
 				str+="</label></li>";
 			}
 			$("#search-list").append(str);
