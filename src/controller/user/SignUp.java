@@ -75,8 +75,8 @@ public class SignUp extends HttpServlet {
 			}
 			User u = new User();
 			u.setUser_name(username);
-			u.setEmail(email);
-			u.setGender(gender);
+			u.setUser_email(email);
+			u.setUser_gender(gender);
 			u.setUser_pass(password);
 			if (new UserDAO().addUser(u)) {
 				User u2 = new model.dao.UserDAO().login(email, password);
