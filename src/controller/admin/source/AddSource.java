@@ -42,7 +42,7 @@ public class AddSource extends HttpServlet {
 	}
 	
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("sui");
+		
 		String source_name = request.getParameter("source_name");
 		String source_code = request.getParameter("source_code");
 		
