@@ -33,7 +33,8 @@
 <link rel="stylesheet" type="text/css" href="css/devices/767.css" media="only screen and (min-width: 480px) and (max-width: 767px)" />
 <link rel="stylesheet" type="text/css" href="css/devices/479.css" media="only screen and (min-width: 200px) and (max-width: 479px)" />
 <link href='http://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
-
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+        <script src="dist/sweetalert.min.js"></script>
 <!--[if lt IE 9]> <script type="text/javascript" src="js/customM.js"></script> <![endif]-->
 
 <style>
@@ -121,11 +122,20 @@
                             <tr>
                                 <td>Email Address</td>
                                 <td>${user.email }</td>
-                                <td><button id="edit-user">Edit</button></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>Gender</td>
-                                <td>${user.gender }</td>
+                                <td>
+                                	<c:choose>
+                                		<c:when test="${user.gender==1}">
+                                			Male
+                                		</c:when>
+                                		<c:otherwise>
+                                			Female
+                                		</c:otherwise>
+                                	</c:choose>
+                                </td>
                                 <td><button id="edit-user">Edit</button></td>
                             </tr>
                             <tr>
@@ -168,7 +178,32 @@
 <!--[if lt IE 9]> <script type="text/javascript" src="js/html5.js"></script> <![endif]-->
 <script type="text/javascript" src="js/mypassion.js"></script>
 <script>
-	$("#save-news").click(function(){
+	$("#edit-name").click(function(){
+		swal({   
+			title: "",   
+			text: "Edit your name:",   
+			type: "input",   
+			showCancelButton: true,   
+			closeOnConfirm: false,   
+			animation: "slide-from-top",   
+			inputPlaceholder: "${user.user_name }" 
+			}, 
+			function(inputValue){   
+				if (inputValue === false) return false;      
+				if (inputValue === "") {     
+					swal.showInputError("Click cancel if you don't want to edit.");     
+					return false   } 
+				$.post("updateuserinfo",{
+					username:inputValue
+				},function(data){
+					if(data=='success'){
+						swal("Done!", "Your name change to " + inputValue, "success");						
+					}else{
+						swal("Error!", "Cannot change your name", "error");
+					}
+				});
+			}
+		);
 	});
 </script>
 </body>

@@ -42,11 +42,8 @@
 </head>
 
 <body>
-<c:if test="${requestScope.signup_status!=null }">
-	<script type="text/javascript">alert("Signup Error!");</script>
-</c:if>
-<c:if test="${requestScope.logstatus!=null }">
-	Login Fail!
+<c:if test="${sessionScope.user!=null }">
+	<c:redirect url="home"></c:redirect>
 </c:if>
 <!-- Body Wrapper -->
 <div class="body-wrapper">
@@ -116,7 +113,7 @@
 	                                      </div>
 	                                      <div class="field-wrap">
 											    <select id="gender">
-											        <option selected> Select Gender </option>
+											        <option selected value="" disabled> Select Gender </option>
 											        <option value="1">Male</option>
 											        <option value="2">Female</option>
 											    </select>
@@ -183,7 +180,11 @@ app.directive('validPasswordC', function() {
 });
 
 app.controller('homeCtrl', function($scope) {});
-
+$("#password").keypress(function(e) {
+    if(e.which == 13) {
+       login();
+    }
+});
 function login(){
 $.post("user/login",{
 	email:$("#email").val(),
@@ -216,6 +217,7 @@ function signup(){
 			swal("Email address either invalid or already existed!","","error");
 		}else if(data=="success"){
 			swal("Your account is created successfully!","","success");
+			window.location.href="home";
 		}
 	});
 }

@@ -63,7 +63,7 @@
 	                		<c:set value="${requestScope.filter.size() }" var="n"></c:set>
                 			ប្រភេទ:
                 			<c:forEach items="${requestScope.filter }" var="i">
-								${i.module_type } 
+								${i} 
 								<c:if test="${n>1 }">,
 									<c:set value="${n-1 }" var="n"></c:set>
 								</c:if>
@@ -82,7 +82,7 @@
 								<c:forEach items="${result}" var="row">
 									<div class="news-row column-two-third">
 			                            <div class="items">
-			                               <img src="${row.news_img }" />
+			                               <img src="${row.news_img }" style="height:170px" />
 			                                <a href="news?id=${row.news_id }" target="_blank">
 			                                	<h5>${row.news_title }</h5>
 			                                </a>

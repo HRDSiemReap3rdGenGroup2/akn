@@ -92,15 +92,15 @@
                         </div><!-- /.div -->
                         <div style="position:relative;right:-15px;">
                         <select id="media" style="border:1px solid #DBDBDB; margin-left:0; margin-right:0;margin-top:10px; margin-bottom:10px; width:32%; font-family: 'Khmer OS Siemreap'">
-                            <option value="%">All Media</option>
+                            <option value="0">All Media</option>
                         </select>
                         <select id="category" style="border:1px solid #DBDBDB; margin-left:0; margin-right:0;margin-top:10px; margin-bottom:10px; width:32%; font-family: 'Khmer OS Siemreap'">
-                            <option value="%">All Category</option>
+                            <option value="0">All Category</option>
                         </select>
                         <select id="time" style="border:1px solid #DBDBDB; margin-left:0; margin-right:0;margin-top:10px; margin-bottom:10px; width:32%; font-family: 'Khmer OS Siemreap'">
-                            <option value="today">Today</option>
-                            <option value="weekly">Weekly</option>
-                            <option value="monthly">Monthly</option>
+                            <option value="1">Today</option>
+                            <option value="7">Weekly</option>
+                            <option value="30">Monthly</option>
                         </select>
                         </div>
                         <table class="table" id="tbl">
@@ -158,7 +158,7 @@
 	function listpopnews(){
 		$.post("gettopnews",{
 			n:$('#number :selected').text(),
-			media:$('#media :selected').val(),
+			source:$('#media :selected').val(),
 			category:$('#category :selected').val(),
 			time:$('#time :selected').val()
 		},function(data){
@@ -183,20 +183,20 @@
 	}
 	
 	function list(){
-		$.post("getmoduletype",function(data){
+		$.post("getcategory",function(data){
 			var str="";
 			for(var i=0;i<data.length;i++){
-				str+="<option value='"+data[i].module_type_code+"'>"
-					+data[i].module_type
+				str+="<option value='"+data[i].category_id+"'>"
+					+data[i].category_name
 					+"</option>";
 			}	
 			$("#category").append(str);
 		});
-		$.post("getmodulename",function(data){
+		$.post("getsource",function(data){
 			var str="";
 			for(var i=0;i<data.length;i++){
-				str+="<option value='"+data[i].module_info_code+"'>"
-					+data[i].module_name
+				str+="<option value='"+data[i].source_id+"'>"
+					+data[i].source_name
 					+"</option>";
 			}	
 			$("#media").append(str);
