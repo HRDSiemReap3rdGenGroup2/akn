@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dao.MenuDAO;
-import model.dto.Menu;
-
 /**
  * Servlet implementation class FixedMenu
  */
