@@ -160,33 +160,7 @@
 			$(document).ready(function(){
 				$('#dashboard').addClass('active');
 			});
-			/* 
 			
-			//Using ajax jquery
-			
-			$('#btncreate').click(function(){
-				$.post('addsource',{
-					source_name : $("#source_name").val(),
-					source_code : $("#source_code").val()
-				},function(data){
-					alert(1);
-					$("#source_name").val(null);
-					$("#source_code").val(null);
-					swal("Done!","Add Successfully!","success");
-				});	
-			});
-			
-			$('#btnupdate').click(function(){
-				$.post('editsource',{
-					source_id : $("#source_id").val(),
-					source_name : $("#source_name").val(),
-					source_code : $("#source_code").val()
-				},function(data){
-					swal("Done!","Updated Successfully!","success");
-					location.href="listsource";
-				});	
-			});
-			 */
 		</script>
 		
 	</body>
