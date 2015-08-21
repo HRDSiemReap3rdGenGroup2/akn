@@ -1,7 +1,6 @@
 package controller.admin.news;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,8 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dao.ModuleDAO;
-import model.dto.Module;
+import model.dao.CategoryDAO;
+import model.dao.SourceDAO;
+import model.dto.Category;
+import model.dto.Source;
+
 
 /**
  * Servlet implementation class FormNews
@@ -31,14 +33,16 @@ public class FormNews extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Module> list;
 		try {
 			response.setCharacterEncoding("utf-8");
-			list = new ModuleDAO().getAllModuleTypeCode();
-			request.setAttribute("typecode", list);
+			ArrayList<Category> list = new CategoryDAO().getAllCategory();
 			
+			ArrayList<Source> source = new SourceDAO().getAllSource();
+			request.setAttribute("source", source);	
+			
+			request.setAttribute("category", list);
 			request.getRequestDispatcher("addnews.jsp").forward(request, response);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
