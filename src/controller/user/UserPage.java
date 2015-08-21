@@ -42,7 +42,7 @@ public class UserPage extends HttpServlet {
 			req.setAttribute("menu", new MenuDAO().getAllMenu());
 			
 			if(req.getSession().getAttribute("user_id")!=null){
-			int user_id=(int) req.getSession().getAttribute("user_id");
+			int user_id=(Integer) req.getSession().getAttribute("user_id");
 			User u=new UserDAO().getUser(user_id);
 			req.setAttribute("user", u);
 			
