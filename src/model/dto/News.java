@@ -1,6 +1,7 @@
 package model.dto;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class News implements Serializable {
@@ -17,13 +18,16 @@ public class News implements Serializable {
 	private int category_id;
 	private String category_name;
 	private int source_id;
+	private String source_name;
 	private String news_title;
 	private String news_desc;
 	private String news_path;
 	private String news_img;
 	private Date news_date;
 	private int hit_count;
-
+	private Timestamp news_date_timestamp;
+	
+	private int status;
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -162,6 +166,31 @@ public class News implements Serializable {
 		this.category_name = category_name;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public Timestamp getNews_date_timestamp() {
+		return news_date_timestamp;
+	}
+
+	public void setNews_date_timestamp(Timestamp news_date_timestamp) {
+		this.news_date_timestamp = news_date_timestamp;
+	}
+
+	public String getSource_name() {
+		return source_name;
+	}
+
+	public void setSource_name(String source_name) {
+		this.source_name = source_name;
+	}
+
+	
 
 
 }
