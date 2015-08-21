@@ -55,14 +55,7 @@ public class UpdateMenu extends HttpServlet {
 		String menu6 = request.getParameter("menu6");
 
 		Menu menu = new Menu();
-		menu.setIndex0(menu0);
-		menu.setIndex1(menu1);
-		menu.setIndex2(menu2);
-		menu.setIndex3(menu3);
-		menu.setIndex4(menu4);
-		menu.setIndex5(menu5);
-		menu.setIndex6(menu6);
-
+		
 		try {
 			boolean status = new MenuDAO().updateMenu(menu);
 			if (status)
