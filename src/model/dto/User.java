@@ -1,15 +1,6 @@
 package model.dto;
 
 public class User {
-	@Override
-	public String toString() {
-		return "User [user_id=" + user_id + ", user_name=" + user_name
-				+ ", user_pass=" + user_pass + ", user_type=" + user_type
-				+ ", user_type_id=" + user_type_id + ", email=" + email
-				+ ", gender=" + gender + ", subscribe=" + subscribe
-				+ ", phone=" + phone + ", department=" + department
-				+ ", school=" + school + "]";
-	}
 
 	private int user_id;
 	private String user_name;
@@ -17,7 +8,7 @@ public class User {
 	private String user_type;
 	private int user_type_id;
 	private String email;
-	private String gender;
+	private int gender;
 	private int subscribe;
 	private String phone;
 	private String department;
@@ -38,14 +29,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
 	}
 
 	public int getSubscribe() {
@@ -118,6 +101,14 @@ public class User {
 
 	public void setSchool(String school) {
 		this.school = school;
+	}
+
+	public int getGender() {
+		return gender;
+	}
+
+	public void setGender(int gender) {
+		this.gender = gender;
 	}
 
 }

@@ -2,9 +2,9 @@ package model.dto;
 
 public class Subscribe {
 	private int id;
-	private int module_id;
+	private int category_id;
 	private int user_id;
-	private String module_name;
+	private String category_name;
 	/**
 	 * @return the id
 	 */
@@ -18,18 +18,6 @@ public class Subscribe {
 		this.id = id;
 	}
 	/**
-	 * @return the module_id
-	 */
-	public int getModule_id() {
-		return module_id;
-	}
-	/**
-	 * @param module_id the module_id to set
-	 */
-	public void setModule_id(int module_id) {
-		this.module_id = module_id;
-	}
-	/**
 	 * @return the user_id
 	 */
 	public int getUser_id() {
@@ -41,10 +29,16 @@ public class Subscribe {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
-	public String getModule_name() {
-		return module_name;
+	public int getCategory_id() {
+		return category_id;
 	}
-	public void setModule_name(String module_name) {
-		this.module_name = module_name;
+	public void setCategory_id(int category_id) {
+		this.category_id = category_id;
+	}
+	public String getCategory_name() {
+		return category_name;
+	}
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
 	}
 }

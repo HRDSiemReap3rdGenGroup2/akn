@@ -90,7 +90,10 @@ public class NewsDAO {
 	}
 
 	public ArrayList<News> getPopNews() throws SQLException {
-		return filterNews(4, 0, 0, 7);
+		ArrayList<News> list = new ArrayList<News>();
+		list=filterNews(4, 0, 0, 1);
+		if(list.size()<4)list=filterNews(4, 0, 0, 7);
+		return list;
 	}
 
 	public ArrayList<News> getLatestNews() throws SQLException {
@@ -138,27 +141,22 @@ public class NewsDAO {
 		return "";
 	}
 
-	public ArrayList<News> search(String s_query, List<String> category)
+	public ArrayList<News> search(String s_query, List<Integer> category)
 			throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
-		List<String> l1=new ArrayList<String>();
-		for(String x:category){
-			l1.add(x.substring(4, 7));
-		}
-		category=l1;
 		try {
 			String sql = "select * from tbnews where lower(news_title) like '%' || lower(?) || '%'";
 			if (category.size() > 1) {
-				sql += " and substring(cat_code from 5 for 3) in (";
+				sql += " and category_id in (";
 				for (int i = 0; i < category.size() - 1; i++) {
-					sql += "'" + category.get(i).toString() + "',";
+					sql +=category.get(i)+",";
 				}
-				sql += "'" + category.get(category.size() - 1).toString() + "'";
+				sql += category.get(category.size() - 1);
 				sql += ") limit 10 offset 0";
 			} else if (category.size() == 1) {
-				sql += " and substring(cat_code from 5 for 3) in (";
+				sql += " and category_id in (";
 				for (int i = 0; i < category.size(); i++) {
-					sql += "'" + category.get(i).toString() + "'";
+					sql += category.get(i);
 				}
 				sql += ") limit 10 offset 0";
 			} else {
@@ -177,7 +175,7 @@ public class NewsDAO {
 				e.setNews_img(rs.getString("news_img"));
 				e.setNews_path(rs.getString("news_path"));
 				e.setNews_desc(rs.getString("news_description"));
-				e.setHit_count(rs.getInt("hit_count"));
+				e.setHit_count(rs.getInt("news_hit_count"));
 				list.add(e);
 			}
 		} catch (Exception e) {
@@ -385,7 +383,7 @@ public class NewsDAO {
 				news.setNews_date(rs.getDate("news_date"));
 				news.setCategory_name(rs.getString("category_name"));
 				news.setNews_img(rs.getString("news_img"));
-				news.setHit_count(rs.getInt("hit_count"));
+				news.setHit_count(rs.getInt("news_hit_count"));
 				return news;
 			}
 		} catch (Exception ex) {
@@ -592,24 +590,6 @@ public class NewsDAO {
 		return list;
 	}
 
-	public String getModuleType(String category_id) throws SQLException {
-		try {
-			String sql = "select module_type from tbmoduleinfo where module_id=?";
-			PreparedStatement p = con.prepareStatement(sql);
-			p.setInt(1, Integer.parseInt(category_id));
-			ResultSet rs = p.executeQuery();
-			while (rs.next()) {
-				return rs.getString(1);
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			if (con != null)
-				con.close();
-		}
-		return "";
-	}
-
 	public ArrayList<News> getSavedNews(int user_id) throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
@@ -623,7 +603,7 @@ public class NewsDAO {
 				n.setNews_id(rs.getInt("news_id"));
 				n.setNews_path(rs.getString("news_path"));
 				n.setNews_desc(rs.getString("news_description"));
-				n.setHit_count(rs.getInt("hit_count"));
+				n.setHit_count(rs.getInt("news_hit_count"));
 				n.setNews_img(rs.getString("news_img"));
 				n.setNews_date(rs.getDate("news_date"));
 				list.add(n);

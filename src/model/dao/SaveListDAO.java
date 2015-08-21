@@ -40,7 +40,7 @@ public class SaveListDAO {
 
 	public boolean saveNews(int user_id, int news_id) throws SQLException {
 		try {
-			String sql = "INSERT INTO tbsavelist(id, user_id, news_id) values (nextval('seq_savelist_id'),?,?)";
+			String sql = "INSERT INTO tbsavelist(savelist_id, user_id, news_id) values (nextval('seq_savelist_id'),?,?)";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, user_id);
 			p.setInt(2, news_id);

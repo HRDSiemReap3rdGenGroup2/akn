@@ -37,6 +37,17 @@ public class CategoryDAO {
 		}
 		return list;
 	}
+	public ArrayList<String> getCategoryName(ArrayList<Integer> list){
+		ArrayList<String> l=new ArrayList<String>();
+		try{
+		for(Integer x:list){
+			l.add(new CategoryDAO().getCategoryName(x));
+		}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return l;
+	}
 	public String getCategoryName(int category_id) throws SQLException{
 		try{
 			String sql="select category_name from tbcategory where category_id=?";
