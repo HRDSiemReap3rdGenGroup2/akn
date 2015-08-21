@@ -37,17 +37,17 @@ public class AddUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String username=request.getParameter("username");
-		String gender = request.getParameter("gender");
+		int gender = Integer.parseInt(request.getParameter("gender"));
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
-		String usertype = request.getParameter("usertype");
+		int usertype = Integer.parseInt(request.getParameter("usertype"));
 		
 		User user = new User();
 		
 		user.setUser_name(username);
-		user.setEmail(email);
+		user.setUser_email(email);
 		user.setUser_pass(password);
-		user.setGender(gender);
+		user.setUser_gender(gender);
 		user.setUser_type(usertype);
 		
 		System.out.println(username);
