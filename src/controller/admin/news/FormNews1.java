@@ -1,8 +1,6 @@
 package controller.admin.news;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,21 +38,15 @@ public class FormNews1 extends HttpServlet {
 		String path = request.getParameter("path");
 		String khmer = request.getParameter("khmer");
 		int category = Integer.parseInt(request.getParameter("category"));
-		String date = request.getParameter("mydate");
+		
 		String khmercontent = request.getParameter("khmercontent");
 		int source_id=6;
 		
-		
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		News news = new News();
 		news.setNews_title(khmer);
 		news.setNews_desc(khmercontent);
 		news.setNews_img(path);
-		try {
-			news.setNews_date(formatter.parse(date));
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
+		
 		news.setCategory_id(category);
 		news.setNews_path(request.getContextPath()+"/");
 		news.setSource_id(source_id);
