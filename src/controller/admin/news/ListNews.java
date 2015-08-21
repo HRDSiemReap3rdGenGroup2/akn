@@ -33,6 +33,7 @@ public class ListNews extends HttpServlet {
 		try {
 			response.setCharacterEncoding("utf-8");
 			ArrayList<News> list = new NewsDAO().getAllNews();
+			
 			request.setAttribute("allnews", list);
 			request.getRequestDispatcher("listnews.jsp").forward(request, response);
 			
