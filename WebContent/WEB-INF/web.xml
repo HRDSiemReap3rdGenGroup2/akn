@@ -15,7 +15,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>login</servlet-name>
-    <jsp-file>/login.jsp</jsp-file>
+    <servlet-class>controller.user.CallLogin</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>login</servlet-name>
@@ -79,19 +79,11 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>statistic</servlet-name>
-    <jsp-file>/statistic.jsp</jsp-file>
+    <servlet-class>controller.news.CallStatisticPage</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>statistic</servlet-name>
     <url-pattern>/statistic</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>getmodulename</servlet-name>
-    <servlet-class>controller.module.GetModuleName</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>getmodulename</servlet-name>
-    <url-pattern>/getmodulename</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>gettopnews</servlet-name>
@@ -132,14 +124,6 @@
   <servlet-mapping>
     <servlet-name>fixedmenu</servlet-name>
     <url-pattern>/admin/html/pages/fixedmenu</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>getmodulecode</servlet-name>
-    <servlet-class>controller.module.GetModuleCode</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>getmodulecode</servlet-name>
-    <url-pattern>/getmodulecode</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>updatemenu</servlet-name>
@@ -421,7 +405,30 @@
     <servlet-name>stopscan</servlet-name>
     <url-pattern>/admin/html/pages/stopscan</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+  	<servlet-name>getcategory</servlet-name>
+  	<servlet-class>controller.category.GetAllCategory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>getcategory</servlet-name>
+  	<url-pattern>/getcategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>getallsource</servlet-name>
+  	<servlet-class>controller.source.GetAllSource</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>getallsource</servlet-name>
+  	<url-pattern>/getsource</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>updateuserinfo</servlet-name>
+  	<servlet-class>controller.user.UpdateUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>updateuserinfo</servlet-name>
+  	<url-pattern>/updateuserinfo</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>formsource</servlet-name>
     <servlet-class>controller.admin.source.FormSource</servlet-class>
@@ -470,5 +477,4 @@
     <servlet-name>deletesource</servlet-name>
     <url-pattern>/admin/html/pages/deletesource</url-pattern>
   </servlet-mapping>
-  
 </web-app>
