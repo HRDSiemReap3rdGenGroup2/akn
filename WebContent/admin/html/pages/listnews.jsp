@@ -85,7 +85,7 @@
 												<tr class="gradeX">
 													<td>${item.news_id }</td>
 													<td>${item.news_title }</td>
-													<td>${item.module_type }</td>
+													<td>${item.category_name }</td>
 													<td>${item.news_date }</td>
 													<td class="text-right">
 														<a href="updatenews?id=${item.news_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Edit row"><i class="fa fa-pencil"></i></a>

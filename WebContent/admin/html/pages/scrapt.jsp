@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Scrapt News</title>
+		<title>Scan News</title>
 
 		<!-- BEGIN META -->
 		<meta charset="utf-8">
@@ -22,6 +22,8 @@
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/select2/select2.css?1424887856" />
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/multi-select/multi-select.css?1424887857" />
 		
+		<link rel="stylesheet" type="text/css" href="../../../dist/sweetalert.css">
+        <script src="../../../dist/sweetalert.min.js"></script>
 		<!-- END STYLESHEETS -->
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -64,6 +66,28 @@
 			    display: table;
 			    table-layout: fixed;
 			}
+			/*modal  */
+			
+			.modal {
+			}
+			.vertical-alignment-helper {
+			    display:table;
+			    height: 100%;
+			    width: 100%;
+			}
+			.vertical-align-center {
+			    /* To center vertically */
+			    display: table-cell;
+			    vertical-align: middle;
+			}
+			.modal-content {
+			    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+			    width:inherit;
+			    height:inherit;
+			    /* To center horizontally */
+			    margin: 0 auto;
+			}
+			/*--/module  */
 		</style>
 	</head>
 	<body class="menubar-hoverable header-fixed menubar-first full-content ">
@@ -106,7 +130,18 @@
 								</div>
 								<div class="card-actionbar-row" >
 									<center>
-										<button style="font-size:20px" id="scannews" class="btn btn-flat btn-primary ink-reaction">SCAN NEWS</button>
+										<!-- Button trigger modal -->
+										<button id="scannews" class="btn btn-primary btn-lg" data-toggle="modal">SCAN NEWS</button>
+										<!-- Modal -->
+										<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										    <div class="vertical-alignment-helper">
+										        <div class="modal-dialog vertical-align-center">
+										            <div class="">
+										                <img src="../../assets/img/load.gif"/>
+										            </div>
+										        </div>
+										    </div>
+										</div>
 									</center>
 								</div>
 							</div>
@@ -164,7 +199,7 @@
 		
 		<script>
 			$(document).ready(function(){
-				$('#dashboard').addClass('active');
+				$('#scannewsmenu').addClass('active');
 			});
 		   function chooseFile() {
 			   $("#fileInput").click();
@@ -172,12 +207,17 @@
 		   $('select').select2();
 		   
 		   $('#scannews').click(function(){
+			   $("#myModal1").modal();
+			   
+			  // data-target="#myModal1"
 			   
 			   var items = [];
 			   $('#source option:selected').each(function(){ items.push($(this).val()); });
 			   var result = items.join(',');
 			   $.post('scannews',{source:result},function(data){
 				  listdata(data);
+				  $('#myModal1').modal('hide');
+				  swal("Done!","News has been added successfully!","success");
 			   });
 			  
 		   });
@@ -194,9 +234,6 @@
 			   }
 			   $('#mybody').html(str);
 		   }
-		   $("#auto-scannews").click(function(){
-			   
-		   });
 		</script>
 		
 	</body>

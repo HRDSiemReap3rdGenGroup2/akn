@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Form Source</title>
-	
+		<title>List Source</title>
+
 		<!-- BEGIN META -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,9 +24,6 @@
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/DataTables/extensions/dataTables.colVis.css?1423553990" />
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/DataTables/extensions/dataTables.tableTools.css?1423553990" />
 		
-		<link rel="stylesheet" type="text/css" href="../../../dist/sweetalert.css">
-        <script src="../../../dist/sweetalert.min.js"></script>
-		
 		<!-- END STYLESHEETS -->
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -38,7 +35,12 @@
 			body{
 				font-family: 'Khmer OS Siemreap';
 			}
-			
+			button.ColVis_Button {
+				display: none;
+			}
+			thead{
+				background-color:#0AA89E;
+			}
 		</style>
 	</head>
 	<body class="menubar-hoverable header-fixed menubar-first full-content ">
@@ -49,7 +51,7 @@
 
 		<!-- BEGIN BASE-->
 		<div id="base">
-		<c:set value="${requestScope.updatesource }" var="update"></c:set>
+
 			<!-- BEGIN OFFCANVAS LEFT -->
 			<div class="offcanvas">
 			
@@ -62,60 +64,50 @@
 				<!-- BEGIN BLANK SECTION -->
 				<section class="style-default-bright">
 					<div class="section-header">
-						<ol class="breadcrumb">
-							<li class="active">Form Source</li>
-						</ol>
-					</div><!--end .section-header -->
-					<div class="section-body">
-						<div class="row">
-							<c:choose>
-								<c:when test="${update.source_status==1 }">
-									<form method="post" action="editsource" class="form form-validate floating-label" novalidate="novalidate">
-								</c:when>
-								<c:otherwise>
-									<form method="post" action="addsource" class="form form-validate floating-label" novalidate="novalidate">
-								</c:otherwise>
-							</c:choose>
-									<div class="card">
-										
-										<div class="card-head style-primary">
-											<c:choose>
-												<c:when test="${update.source_status==1 }">
-													<header>Update Source</header>
-												</c:when>
-												<c:otherwise>
-													<header>Create Source</header>
-												</c:otherwise>
-											</c:choose>
-										</div><!-- end .card-head -->
-										
-										<div class="card-body floating-label">
-											<input type="text" id="source_id" name="source_id" hidden="hidden" value="${update.source_id }">
-											<div class="form-group floating-label">
-												<input type="text" class="form-control" value="${update.source_name }" id="source_name" name="source_name" required>
-												<label for="regular2">Source Name</label>
-												<p class="help-block">This is for the source name of the pages!</p>
-											</div>
-										    <div class="form-group floating-label">
-												<input type="text" class="form-control" value="${update.source_code }"  id="source_code" name="source_code" required>
-												<label for="regular2">Source Code</label>
-												<p class="help-block">This is for the source code you set!</p>
-											</div>
-											<div class="card-actionbar-row">
-												<c:choose>
-													<c:when test="${update.source_status==1 }">
-														<button type="submit" class="btn btn-flat btn-primary ink-reaction">Update Source</button>
-													</c:when>
-													<c:otherwise>
-														<button type="submit" class="btn btn-flat btn-primary ink-reaction">Create Source</button>
-													</c:otherwise>
-												</c:choose>
-											</div>
-										</div><!-- end .card-body -->
-									</div><!--end .card -->
-								</form><!-- end form -->
+						<div class="col-lg-12" style="padding-left:0px">
+							<a href="formsource"><button type="button" class="btn ink-reaction btn-raised btn-primary">Add Source</button></a>
 						</div>
+					</div>
+					<div class="section-header">	
+						<h2 class="text-primary">List Sources</h2>
+					</div>
+					<div class="section-body">
 						
+						<!-- BEGIN DATATABLE 1 -->
+						
+						<div class="row">
+							<div class="col-lg-12">
+								
+								<div class="table-responsive">
+									<table id="datatable1" class="table table-striped table-hover">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Name</th>
+												<th>Code</th>
+												<th class="sort-alpha">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:set value="${requestScope.allSource }" var="sources"></c:set>
+											<c:forEach items="${sources }" var="item">
+												<tr class="gradeX">
+													<td>${item.source_id }</td>
+													<td>${item.source_name }</td>
+													<td>${item.source_code }</td>
+													<td class="text-right">
+														<a href="updatesource?id=${item.source_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Edit row"><i class="fa fa-pencil"></i></a>
+														<a href="deletesource?id=${item.source_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></a>
+													</td>
+												</tr>
+											</c:forEach>
+											
+										</tbody>
+									</table>
+								</div><!--end .table-responsive -->
+							</div><!--end .col -->
+						</div><!--end .row -->
+						<!-- END DATATABLE 1 -->
 					</div><!--end .section-body -->
 				</section>
 				<!-- BEGIN BLANK SECTION -->
@@ -152,7 +144,6 @@
 		<script src="../../assets/js/libs/DataTables/extensions/ColVis/js/dataTables.colVis.js"></script>
 		<script src="../../assets/js/libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
 		
-		<script src="../../assets/js/libs/validation/jquery.validate.min.js"></script>
 		<!-- END JAVASCRIPT -->
 		
 		<script>
@@ -160,33 +151,85 @@
 			$(document).ready(function(){
 				$('#dashboard').addClass('active');
 			});
-			/* 
 			
-			//Using ajax jquery
+			function myedit(source_id, source_code, source_name){
+				$('#source_id').val(source_id);
+				$('#source_name').val(source_name); 
+				$('#source_code').val(source_code);				
+			}
+			
 			
 			$('#btncreate').click(function(){
-				$.post('addsource',{
-					source_name : $("#source_name").val(),
-					source_code : $("#source_code").val()
-				},function(data){
-					alert(1);
-					$("#source_name").val(null);
-					$("#source_code").val(null);
-					swal("Done!","Add Successfully!","success");
-				});	
+				if($('#btncreate').attr("value") == "Save")
+					$.post('addsource',{
+						source_name : $("#source_name").val(),
+						source_code : $("#source_code").val()
+					},function(data){
+						list();
+					});	
 			});
 			
-			$('#btnupdate').click(function(){
-				$.post('editsource',{
-					source_id : $("#source_id").val(),
-					source_name : $("#source_name").val(),
-					source_code : $("#source_code").val()
+		  	//list();
+			function list(){
+				$.post('sourcelist',function(data){
+					$("#table").html(listDetail(data));
+				});
+			}
+			function listDetail(data){
+				var str="";
+				str ="<table class='table'>"+
+					   "<tr>"+
+							"<th>ID</th>"+
+							"<th>Name</th>"+
+							"<th>Code</th>"+
+							"<th>Action"+
+						"</tr>";
+					for(var i=0;i<data.length;i++){
+						str += "<tr>"+
+									"<td>"+ data[i].source_id+"</td>"+
+									"<td>"+ data[i].source_name +"</td>"+
+									"<td>"+ data[i].source_code +"</td>"+
+									"<td><button type='button' class='btn btn-warning' onclick=editrecord('"+ data[i].source_id +"')>Edit</button>"+
+									"&nbsp;&nbsp;<button type='button' class='btn btn-danger' onclick=deleterecord('"+ data[i].source_id +"')>Delete</button>"+
+									"</td>"+
+								"</tr>";
+					}
+				str += "</table>";
+				return str;
+			}
+			
+			function updatesource(source_id){
+				$.post("getsource",{
+					source_id: source_id
 				},function(data){
-					swal("Done!","Updated Successfully!","success");
-					location.href="listsource";
-				});	
-			});
-			 */
+					$("#id").val(data.source_id);
+					$("#source_name").val(data.source_name);
+					$("#source_code").val(data.source_code);
+					
+					$("#btncreate").attr("value", "Update");
+					$("#btncreate").attr("onclick", "edit('"+ data.source_id +"')");
+				});
+			}
+			function edit(id){
+				if($("#btncreate").attr("value")=="Update"){
+					$.post("editsource",{
+						source_id : id,
+						source_name : $("#source_name").val(),
+						source_code : $("#source_code").val()
+					},function(data){
+						list();
+						$("#btncreate").attr("value","Save");
+					});
+				}
+			}
+			
+			function deletesource(source_id){
+				$.post("deletesource",{
+					source_id : source_id
+				},function(){
+					list();
+				});
+			}
 		</script>
 		
 	</body>

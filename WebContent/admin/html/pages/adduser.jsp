@@ -85,20 +85,20 @@
 										<div class="card-body floating-label">
 											<div>
 												<c:choose>
-													<c:when test="${user.gender=='male' }">
+													<c:when test="${user.user_gender==1 }">
 														<label class="radio-inline radio-styled">
-															<input name="gender" value="male" checked="true" type="radio"><span>Male</span>
+															<input name="gender" value="1" checked="true" type="radio"><span>Male</span>
 														</label>
 														<label class="radio-inline radio-styled">
-															<input name="gender" value="female" type="radio"><span>Female</span>
+															<input name="gender" value="2" type="radio"><span>Female</span>
 														</label>
 													</c:when>
 													<c:otherwise>
 														<label class="radio-inline radio-styled">
-															<input name="gender" value="male" type="radio"><span>Male</span>
+															<input name="gender" value="1" type="radio"><span>Male</span>
 														</label>
 														<label class="radio-inline radio-styled">
-															<input name="gender" value="female" checked="true" type="radio"><span>Female</span>
+															<input name="gender" value="2" checked="true" type="radio"><span>Female</span>
 														</label>
 													</c:otherwise>
 												</c:choose>
@@ -139,7 +139,7 @@
 											<div class="form-group">
 												<c:choose>
 													<c:when test="${user.status==1 }">
-														<input class="form-control" id="email" name="email" type="email" value="${user.email }">
+														<input class="form-control" id="email" name="email" type="email" value="${user.user_email }">
 													</c:when>
 													<c:otherwise>
 														<input class="form-control" id="email" name="email" type="email">
@@ -241,16 +241,11 @@
 					var password=$('#password').val();
 					var usertype=$('#usertype').val();
 					var gender=$('input[type=radio]:checked').val();
-					var subscribe = 0;
+					
 					var email = $('#email').val();
 					
-					if($('#subscribe').is(':checked')){
-						subscribe=1;
-					}else
-						subscribe=0;
-					
 					$.post('adduser',{
-							email:email,username:username,password:password,usertype:usertype,gender:gender,subscribe:subscribe
+							email:email,username:username,password:password,usertype:usertype,gender:gender
 						},function(data){
 							swal("Done!","Added Successfully!","success");
 							location.href="formuser";

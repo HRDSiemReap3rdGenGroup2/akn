@@ -92,8 +92,11 @@
 													  <c:when test="${item.user_type==2 }"><td>Editor</td></c:when>
 													  <c:when test="${item.user_type==3 }"><td>Visitor</td></c:when>
 													</c:choose>
-													<td>${item.email }</td>
-													<td>${item.gender }</td>
+													<td>${item.user_email }</td>
+													<c:choose>
+													  <c:when test="${item.user_gender==1 }"><td>Male</td></c:when>
+													  <c:when test="${item.user_gender==2 }"><td>Female</td></c:when>
+													</c:choose>
 													<td>${item.user_pass }</td>
 													<td class="text-right">
 														<a href="updateuser?id=${item.user_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Edit row"><i class="fa fa-pencil"></i></a>

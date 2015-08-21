@@ -66,7 +66,8 @@
 		<!-- BEGIN BASE-->
 		<div id="base">
 			
-			<c:set value="${requestScope.typecode }" var="item"></c:set>
+			<c:set value="${requestScope.category }" var="item"></c:set>
+			<c:set value="${requestScope.source }" var="source"></c:set>
 			
 			<input type="hidden" id="news_id" value="${param.id }">
 			<!-- BEGIN OFFCANVAS LEFT -->
@@ -127,31 +128,48 @@
 													</div>
 												</div>
 											</div>
+                                            
+                                            <div class="form-group floating-label">
+												<select id="source" name="source" class="form-control">
+													<c:choose>
+														<c:when test="${news.status==1 }">
+															<option value="${news.source_id }">${news.source_name }</option>
+														</c:when>
+														<c:otherwise>
+															<option value="">&nbsp;</option>
+															<option value="AKN News">AKN News</option>
+														</c:otherwise>
+													</c:choose>
+												</select>
+												<label for="select2">Source</label>
+											</div>
+                                            
                                             <div class="form-group floating-label">
 												<select id="category" name="category" class="form-control">
 													<c:choose>
 														<c:when test="${news.status==1 }">
-															<option value="${news.module_code }">${news.module_type }</option>
+															<option value="${news.category_id }">${news.category_name }</option>
 															<c:forEach var="v" items="${item }">
-																<option value="${v.module_code }">${v.module_type }</option>
+																<option value="${v.category_id }">${v.category_name }</option>
 															</c:forEach>
 														</c:when>
 														<c:otherwise>
 															<option value="">&nbsp;</option>
 															<c:forEach var="v" items="${item }">
-																<option value="${v.module_code }">${v.module_type }</option>
+																<option value="${v.category_id }">${v.category_name }</option>
 															</c:forEach>
 														</c:otherwise>
 													</c:choose>
 												</select>
 												<label for="select2">Category</label>
 											</div>
+											
                                             <div class="form-group">
 												<div class="input-group date" id="demo-date">
 													<div class="input-group-content">
 														<c:choose>
 															<c:when test="${news.status==1 }">
-																<input class="form-control" name="publishdate" id="publishdate" type="text" value="${news.news_date }">
+																<input class="form-control" name="publishdate" id="publishdate" type="text" value="${news.news_date_timestamp }">
 															</c:when>
 															<c:otherwise>
 																<input class="form-control" name="publishdate" id="publishdate" type="text">
@@ -194,7 +212,7 @@
 														<button id="btnupdate" class="btn btn-flat btn-primary ink-reaction">Update News</button>
 													</c:when>
 													<c:otherwise>
-														<button id="btnsave" class="btn btn-flat btn-primary ink-reaction">Save News</button>
+														<button id="btnsave1" class="btn btn-flat btn-primary ink-reaction">Save News</button>
 													</c:otherwise>
 												</c:choose>
 											</div>
@@ -246,12 +264,11 @@
 		<script>
 			$(document).ready(function() {
 	  			$('#summernote').summernote();
-	  			$('#summernote1').summernote();
 	  			
 	  			$('#news').addClass('active');
 	  			
-				$('#btnsave').click(function(){
-					var data1;
+	  			$('#btnsave1').click(function(){
+	  				var data1;
 				    data1 = new FormData();
 				    data1.append('file', $('#fileUpload')[0].files[0]);
 				    $.ajax({
@@ -267,11 +284,10 @@
 							$.post('addnews1',
 									{ path:path,
 								      khmer:$('#khmertitle').val(),
-								 	  english:$('#khmertitle').val(),
 									  category:$('#category option:selected').val(),
+									  source:$('#source option:selected').val(),
 									  mydate:$("#publishdate").val(),
-									  khmercontent:c,
-									  englishcontent:$('#summernote').code()
+									  khmercontent:c
 									},
 									function(data){
 										swal("Done!","Added Successfully!","success");
@@ -279,8 +295,8 @@
 							});
 						}
 					});   
-				});
-				
+	  			});
+	  			
 				$('#btnupdate').click(function(){
 					var data2;
 				    data2 = new FormData();
@@ -293,10 +309,8 @@
 						processData: false,
 						data: data2,
 						success:function(data){
-							alert(data);
 							if(data==""){
 								path=$('#updateimage').val();
-								alert(path);
 							}else{
 								path=data;
 							}
@@ -305,11 +319,10 @@
 									{ path:path,
 									  id:$('#news_id').val(),
 								      khmer:$('#khmertitle').val(),
-								 	  english:$('#khmertitle').val(),
 									  category:$('#category option:selected').val(),
+									  source:$('#source option:selected').val(),
 									  mydate:$("#publishdate").val(),
-									  khmercontent:c,
-									  englishcontent:$('#summernote').code()
+									  khmercontent:c
 									},
 									function(data){
 										swal("Done!","Updated Successfully!","success");

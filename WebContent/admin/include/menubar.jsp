@@ -9,8 +9,8 @@
 			</a>
 		</div>
 		<div class="expanded">
-			<a href="dashboard">
-				<span class="text-lg text-bold text-primary ">NEWS&nbsp;ADMIN</span>
+			<a href="../../../" target="_blank">
+				<span class="text-lg text-bold text-primary ">AKN&nbsp;NEWS</span>
 			</a>
 		</div>
 	</div>
@@ -100,6 +100,20 @@
 				</ul><!--end /submenu -->
 			</li><!--end /menu-li -->
 			<!-- END RECOMENDATION -->
+			
+			
+			<!-- BEGIN SCAN NEWS -->
+			<li class="gui-folder" id=scannewsmenu>
+				<a>
+					<div class="gui-icon"><i class="md md-settings-input-antenna"></i></div>
+					<span class="title">Scan News</span>
+					<!--start submenu -->
+				</a>
+				<ul>
+					<li><a href="formscan" ><span class="title">Scan</span></a></li>
+				</ul><!--end /submenu -->
+			</li><!--end /menu-li -->
+			<!-- END SCAN NEWS -->
 			
 		</ul><!--end .main-menu -->
 		<!-- END MAIN MENU -->
