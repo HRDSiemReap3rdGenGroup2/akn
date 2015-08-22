@@ -216,8 +216,9 @@ function signup(){
 		}else if(data=="e5"){
 			swal("Email address either invalid or already existed!","","error");
 		}else if(data=="success"){
-			swal("Your account is created successfully!","","success");
-			window.location.href="home";
+			swal({title:"",text:"Your account is created successfully!",type:"success"},function(isConfirm){
+				window.location.href="home";
+			});
 		}
 	});
 }

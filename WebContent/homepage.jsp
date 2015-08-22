@@ -166,7 +166,7 @@
                     
                     <!-- Health News -->
                     <div class="column-one-third">
-                    	<h5 class="line"><span><a href="tech">ព័ត៌មានបច្ចេកវិទ្យា​</a></span>
+                    	<h5 class="line"><span><a href="category?id=4">ព័ត៌មានបច្ចេកវិទ្យា​</a></span>
                     	<select style="float:right;margin-top:5px;margin-left: 10px;" id="cbotech">
 							  <option value="latest">Latest</option>
 							  <option value="top">Top View</option>
@@ -213,7 +213,7 @@
                     <!-- Life Style -->
                     <div class="column-two-third">
                     	<h5 class="line">
-                        	<span><a href="politic">ពាណិជ្ជកម្ម</a></span>
+                        	<span><a href="category?id=1">ពាណិជ្ជកម្ម</a></span>
                             <div class="" style="position:absolute;top:0px;right:0px;">
                                 <a id="next1" class="next" href="#"><span></span></a>	
                                 <a id="prev1" class="prev" href="#"><span></span></a>
@@ -274,7 +274,7 @@
                 <div class="column-one-third">
                     <!-- Hot News -->
                     <div class="column-one-third">
-                    	<h5 class="line"><span><a href="entertainment">កម្សាន្ត</a>​</span>
+                    	<h5 class="line"><span><a href="category?id=8">កម្សាន្ត</a>​</span>
                     		<select style="float: right;margin-top: 5px;margin-left: 10px;" id="cboentertainment">
 							  <option value="latest">Latest</option>
 							  <option value="top">Top View</option>
@@ -320,7 +320,7 @@
                     
                     <!-- Hot News -->
                     <div class="column-one-third">
-                    	<h5 class="line"><span><a href="health">ជីវិតនិងសង្គម</a></span>
+                    	<h5 class="line"><span><a href="category?id=7">ជីវិតនិងសង្គម</a></span>
                     		<select style="float: right;margin-top: 5px;margin-left: 10px;" id="cbolife">
 							  <option value="latest">Latest</option>
 							  <option value="top">Top View</option>

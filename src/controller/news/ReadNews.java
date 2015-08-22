@@ -1,13 +1,17 @@
 package controller.news;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.dao.MenuDAO;
 import model.dao.NewsDAO;
+import model.dao.SaveListDAO;
+import model.dto.SaveList;
 
 public class ReadNews extends HttpServlet {
 
@@ -46,6 +50,15 @@ public class ReadNews extends HttpServlet {
 			throws ServletException, IOException {
 		int id = Integer.parseInt(req.getParameter("id"));
 		try {
+			// user
+			if (req.getSession().getAttribute("user") != null
+					&& (req.getSession().getAttribute("user") != "")) {
+				int user_id = (Integer) req.getSession().getAttribute("user_id");
+				ArrayList<SaveList> user_savedlist = new SaveListDAO()
+						.getAllSavedNews(user_id);
+				req.setAttribute("user_savedlist", user_savedlist);
+			}
+						
 			String news_path = new NewsDAO().getNewsPath(id);
 			new NewsDAO().read(id);// increase number of hit count of this news
 									// by 1
@@ -54,17 +67,14 @@ public class ReadNews extends HttpServlet {
 				java.util.ArrayList<model.dto.News> list = new NewsDAO()
 						.getPopNews();
 				req.setAttribute("popularnews", list);
-
+				//menu
+				req.setAttribute("menu", new MenuDAO().getAllMenu());
 				req.setAttribute("news", new NewsDAO().getNews(id));
 				req.getRequestDispatcher("/news.jsp").forward(req, resp);
 				;
 			} else {
 				resp.sendRedirect(news_path);
 			}
-			// RequestDispatcher rd= req.getRequestDispatcher("/news1.jsp");
-
-			// resp.setCharacterEncoding("UTF-8");
-			// rd.forward(req, resp);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

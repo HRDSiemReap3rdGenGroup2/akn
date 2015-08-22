@@ -477,4 +477,28 @@
     <servlet-name>deletesource</servlet-name>
     <url-pattern>/admin/html/pages/deletesource</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>deleteaccount</servlet-name>
+  	<servlet-class>controller.user.DeleteUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>deleteaccount</servlet-name>
+  	<url-pattern>/deleteaccount</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>getallcomment</servlet-name>
+  	<servlet-class>controller.comment.GetAllComment</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>getallcomment</servlet-name>
+  	<url-pattern>/getallcomment</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>comment</servlet-name>
+  	<servlet-class>controller.comment.InsertComment</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>comment</servlet-name>
+  	<url-pattern>/comment</url-pattern>
+  </servlet-mapping>
 </web-app>

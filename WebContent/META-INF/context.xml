@@ -7,5 +7,5 @@
 		username="postgres"
 		password="123"
 		driverClassName="org.postgresql.Driver"
-		url="jdbc:postgresql://192.168.178.127:5432/dbAKN"/>
+		url="jdbc:postgresql://127.0.0.1:5432/dbAKN"/>
 </Context>

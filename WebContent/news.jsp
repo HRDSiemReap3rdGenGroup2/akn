@@ -34,7 +34,8 @@
 <link rel="stylesheet" type="text/css" href="css/devices/479.css" media="only screen and (min-width: 200px) and (max-width: 479px)" />
 <link href='http://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
 <!--[if lt IE 9]> <script type="text/javascript" src="js/customM.js"></script> <![endif]-->
-
+<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+        <script src="dist/sweetalert.min.js"></script>
 <style type="text/css">
 	*{
 		font-family: "Khmer OS Siemreap";
@@ -76,14 +77,14 @@
                         
                     <!--comment-->
                     <div class="column-two-third comments">
-                        <h5 class="line"><span>Comments.</span></h5>
+                        <h5 class="line"><span>មតិយោបល់</span></h5>
                         <div class="form">
-                            <textarea style="color:black" name="comment" rows="10" cols="30" placeholder="Your comment here..."></textarea>
-                            <button style="margin-top:5px; padding:10px 15px;">Comment</button>
+                            <textarea style="color:black" name="comment" rows="10" cols="30" placeholder="Your comment here..." id="comment"></textarea>
+                            <button style="margin-top:5px; padding:10px 15px;" id="btn-comment">Comment</button>
                         </div>    
                         
                         <ul>
-                            <li>
+                            <li id="box-comment">
                                 <div>
                                     <div class="comment-avatar"><img src="img/avatar.png" alt="MyPassion" /></div>
                                     <div class="commment-text-wrap">
@@ -92,32 +93,8 @@
                                         </div>
                                         <div class="comment-text">Curabitur nunc mauris, <a href="#">link test</a> id dictum quis, aliquet vel diam. Aliquam gravida, augue et dictum hendrerit, nisl erat congue elit, et molestie magna sapien cursus tortor.</div>
                                     </div>
-
                                 </div>
-                                <div>
-                                    <div class="comment-avatar"><img src="img/avatar.png" alt="MyPassion" /></div>
-                                    <div class="commment-text-wrap">
-                                        <div class="comment-data">
-                                            <p><a href="#" class="url">MyPassion</a> <br /> <span>January 12, 2013 - <a href="#" class="comment-reply-link">reply</a></span></p>
-                                        </div>
-                                        <div class="comment-text">Curabitur nunc mauris, <a href="#">link test</a> id dictum quis, aliquet vel diam. Aliquam gravida, augue et dictum hendrerit, nisl erat congue elit, et molestie magna sapien cursus tortor.</div>
-                                    </div>
-
-                                </div>
-                                <ul class="children">
-                                    <li>
-                                        <div>
-                                            <div class="comment-avatar"><img src="img/avatar.png" alt="MyPassion" /></div>
-                                            <div class="commment-text-wrap">
-                                                <div class="comment-data">
-                                                    <p><a href="#" class="url">MyPassion</a> <br /> <span>January 12, 2013 - <a href="#" class="comment-reply-link">reply</a></span></p>
-                                                </div>
-                                                <div class="comment-text">Curabitur nunc mauris, imperdiet id dictum quis, aliquet vel diam. Aliquam gravida, augue et dictum hendrerit, nisl erat congue elit, et molestie magna sapien cursus tortor.</div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                                                    <div>
+                               <div>
                                 <div class="comment-avatar"><img src="img/avatar.png" alt="MyPassion" /></div>
                                     <div class="commment-text-wrap">
                                         <div class="comment-data">
@@ -199,6 +176,7 @@
 
 <!-- SCRIPTS -->
 <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/myscript.js"></script>
 <script type="text/javascript" src="js/easing.min.js"></script>
 <script type="text/javascript" src="js/1.8.2.min.js"></script>
 <script type="text/javascript" src="js/ui.js"></script>
@@ -213,6 +191,78 @@
 
 <!--[if lt IE 9]> <script type="text/javascript" src="js/html5.js"></script> <![endif]-->
 <script type="text/javascript" src="js/mypassion.js"></script>
-
+<script>
+list_comment();
+	function list_comment(){
+		$.post("getallcomment",{
+			news_id:"${param.id}"
+		},function(data){
+			var str="";
+			for(var i=0;i<data.length;i++){
+				str+="<div>"
+                    +"<div class='comment-avatar'><img src='"+data[i].user_img+"' alt='"+data[i].user_name+"' /></div>"
+                    +"<div class='commment-text-wrap'>"
+                        +"<div class='comment-data'>"
+                            +"<p><a href='#' class='url'>"+data[i].user_name+"</a> <br /> <span>"+data[i].comment_date+"</span></p>"
+                        +"</div>"
+                        +"<div class='comment-text'>"+data[i].comment_detail+"</div>"
+                    +"</div>"
+                +"</div>";
+			}
+			$("#box-comment").html(str);
+		});
+	}
+	$("#btn-comment").click(function(){
+			if('${sessionScope.user}'!=''){
+				$.post("comment",{
+					news_id:news_id,
+					comment_detail:$("#comment").val()
+				},function(data){
+					if(data=='success'){
+						list_comment();
+					}
+				});	
+			}else{
+				swal({   
+					title: "Login first!",   
+							text: "You need to login to save news to your list.",   
+							type: "warning",   
+							showCancelButton: true,   
+							confirmButtonColor: "#DD6B55",   
+							confirmButtonText: "Login!",   
+							closeOnConfirm: false }, 
+							function(){   
+								window.location.href="login";
+							}
+				);
+		}
+	});
+	function save(news_id){
+		if('${sessionScope.user}'!=''){
+			$.post("savenews",{
+				news_id:news_id
+			},function(data){
+				if(data=='success'){
+					$("#"+news_id).css("background","#ccc");
+					$("#"+news_id).text("Saved");
+					swal("Done!", "News already saved to your save list!", "success")
+				}
+			});
+		}else{
+			swal({   
+				title: "Login first!",   
+						text: "You need to login to save news to your list.",   
+						type: "warning",   
+						showCancelButton: true,   
+						confirmButtonColor: "#DD6B55",   
+						confirmButtonText: "Login!",   
+						closeOnConfirm: false }, 
+						function(){   
+							window.location.href="login";
+						}
+			);
+		}
+	}
+</script>
 </body>
 </html>
