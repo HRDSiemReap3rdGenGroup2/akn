@@ -8,14 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.dao.UserDAO;
-import model.dto.User;
 
-public class UpdateUser extends HttpServlet {
+public class DeleteUser extends HttpServlet {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4485506281902023355L;
+	private static final long serialVersionUID = 2822135095579917491L;
 
 	/* (non-Javadoc)
 	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
@@ -23,7 +22,7 @@ public class UpdateUser extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		doPro(req, resp);
+		doPro(req,resp);
 	}
 
 	/* (non-Javadoc)
@@ -32,25 +31,15 @@ public class UpdateUser extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		doPro(req, resp);
+		doPro(req,resp);
 	}
 
 	private void doPro(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		try{
-			int user_id=(Integer) req.getSession().getAttribute("user_id");
-			String username=req.getParameter("username");
-			String password=req.getParameter("password");
-			if(password.contains("*****")){
-				User tmp=new UserDAO().getUser(user_id);
-				password=tmp.getUser_pass();
-			}
-			int gender=Integer.parseInt(req.getParameter("gender"));
-			User u=new User();
-			u.setUser_id(user_id);
-			u.setUser_name(username);
-			u.setUser_pass(password);
-			u.setUser_gender(gender);
-			if(new UserDAO().updateUserInfo(u)){
+			int user_id = (Integer) req.getSession().getAttribute("user_id");
+			if(new UserDAO().deleteUser(user_id)){
+				req.getSession().removeAttribute("user");
+				req.getSession().removeAttribute("user_id");
 				resp.getWriter().write("success");
 			}else{
 				resp.getWriter().write("error");
