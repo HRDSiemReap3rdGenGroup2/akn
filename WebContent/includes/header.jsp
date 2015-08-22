@@ -18,11 +18,11 @@
 			                        <a href="login"><span>ចូល</span></a><span> | </span><a href="login"><span>ចុះឈ្មោះ</span></a>
 	                        	</c:when>
 	                        	<c:otherwise>
-	                        	<c:set value="${sessionScope.user_type }" var="e"></c:set>
+	                        	<c:set value="${user.user_type }" var="e"></c:set>
 	                        		<c:if test="${e==1 || e==2}">
 	                        			<a href="admin/html/pages/dashboard">Manage News</a><span> | </span>
 	                        		</c:if>
-									<a href="user"><span>${user }</span></a><span> | </span>
+									<a href="user"><span>${user.user_name }</span></a><span> | </span>
 			                        <a href="user/signout"><span>ចេញ</span></a>
 	                        	</c:otherwise>
 	                        </c:choose>

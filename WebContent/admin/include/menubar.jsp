@@ -16,7 +16,7 @@
 	</div>
 	<div class="menubar-scroll-panel">
 		
-		<c:set value="${ sessionScope.user_type}" var="usertype"></c:set>
+		<c:set value="${ sessionScope.user.user_type}" var="usertype"></c:set>
 		
 		<!-- BEGIN MAIN MENU -->
 		<ul id="main-menu" class="gui-controls">
@@ -127,9 +127,6 @@
 				</ul><!--end /submenu -->
 			</li><!--end /menu-li -->
 			<!-- END SCAN NEWS -->
-			
-			
-			
 			
 		</ul><!--end .main-menu -->
 		<!-- END MAIN MENU -->

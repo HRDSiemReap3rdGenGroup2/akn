@@ -9,7 +9,7 @@
 						<li class="header-nav-brand" >
 							<div class="brand-holder">
 								<a href="dashboard">
-									<span class="text-lg text-bold text-primary">NEWS ADMIN</span>
+									<span class="text-lg text-bold text-primary">AKN News</span>
 								</a>
 							</div>
 						</li>
@@ -137,12 +137,12 @@
 							<a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
 								<img src="../../assets/img/avatar1.jpg?1403934956" alt="" />
 								
-								<span class="profile-info">${sessionScope.user }
+								<span class="profile-info">${sessionScope.user.user_name }
 								<c:choose>
-									<c:when test="${sessionScope.user_type==1 }">
+									<c:when test="${sessionScope.user.user_type==1 }">
 										<small>Administrator</small>
 									</c:when>
-									<c:when test="${sessionScope.user_type==2 }">
+									<c:when test="${sessionScope.user.user_type==2 }">
 										<small>Editor</small>
 									</c:when>
 								</c:choose>
@@ -154,8 +154,8 @@
 							</div>
 							<ul class="dropdown-menu animation-dock">
 								<li><button style="background-color:transparent;border:none;padding-left:19px" onclick="chooseFile();"><i class="md md-local-see"></i> Change Profile</button></li>
-								<li><a href="changeusername?user_id=${sessionScope.user_id }&username=${sessionScope.user}"><i class="md md-edit"></i> Change Username</a></li>
-								<li><a href="changepassword?user_id=${sessionScope.user_id }"><i class="md md-https"></i> Change Password</a></li>
+								<li><a href="changeusername?user_id=${sessionScope.user.user_id }&username=${sessionScope.user.user_name}"><i class="md md-edit"></i> Change Username</a></li>
+								<li><a href="changepassword?user_id=${sessionScope.user.user_id }"><i class="md md-https"></i> Change Password</a></li>
 								<li class="divider"></li>
 								<li><a href="../../../user/signout"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
 							</ul><!--end .dropdown-menu -->

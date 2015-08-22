@@ -50,12 +50,6 @@ public class AddUser extends HttpServlet {
 		user.setUser_gender(gender);
 		user.setUser_type(usertype);
 		
-		System.out.println(username);
-		System.out.println(email);
-		System.out.println(usertype);
-		System.out.println(gender);
-		System.out.println(password);
-		
 		try {
 			boolean status = new UserDAO().addAdminUser(user);
 			if(status)

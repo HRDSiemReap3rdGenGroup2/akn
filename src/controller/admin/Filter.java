@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.dto.User;
+
 /**
  * Servlet Filter implementation class Filter
  */
@@ -40,10 +42,10 @@ public class Filter implements javax.servlet.Filter {
 		((HttpServletResponse) response).setHeader("Pragma","no-cache"); //HTTP 1.0 backward compatibility
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		
-		if(session.getAttribute("user_type")!=null){
-			int user_type = (Integer) session.getAttribute("user_type");
+		if(session.getAttribute("user")!=null){
+			User user = (User) session.getAttribute("user");
 			
-			if(user_type==1 || user_type==2 ){
+			if(user.getUser_type()==1 || user.getUser_type()==2 ){
 				chain.doFilter(request, response);
 			}else{
 				((HttpServletResponse)response).sendRedirect(((HttpServletRequest)request).getContextPath());

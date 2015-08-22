@@ -34,7 +34,7 @@ public class UpdateUser extends HttpServlet {
 			response.setCharacterEncoding("utf-8");
 			User user = new UserDAO().getUser(user_id);
 			user.setStatus(1);
-			request.setAttribute("user", user);
+			request.setAttribute("userstatus", user);
 			request.getRequestDispatcher("adduser.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
