@@ -188,6 +188,26 @@ public class UserDAO {
 		}
 		return false;
 	}
+	public boolean updateUserInfo(User user) throws Exception {
+		try {
+			String sql = "UPDATE tbuser SET user_name=?,user_pass=?, user_gender=? WHERE user_id=?";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, user.getUser_name());
+			pstmt.setString(2, user.getUser_pass());
+			pstmt.setInt(3, user.getUser_gender());
+			pstmt.setInt(4, user.getUser_id());
+			
+			if (pstmt.executeUpdate() > 0)
+				return true;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (con != null)
+				con.close();
+		}
+		return false;
+	}
 
 	public int getCountUser() throws Exception {
 		try {
