@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.dao.CommentDAO;
+import model.dto.Comment;
+import model.dto.User;
+
 public class InsertComment extends HttpServlet {
 
 	/**
@@ -33,10 +37,23 @@ public class InsertComment extends HttpServlet {
 	}
 
 	
-	private void doPro(HttpServletRequest req, HttpServletResponse resp) {
+	private void doPro(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		try{
-			
+			int news_id=Integer.parseInt(req.getParameter("news_id"));
+			String comment_detail=req.getParameter("comment_detail");
+			int user_id = ((User)req.getSession().getAttribute("user")).getUser_id();
+			Comment c=new Comment();
+			c.setUser_id(user_id);
+			c.setNews_id(news_id);
+			c.setComment_detail(comment_detail);
+			if(new CommentDAO().insertComment(c)){
+				resp.getWriter().write("success");
+			}
+			else{
+				resp.getWriter().write("error");
+			}
 		}catch(Exception e){
+			resp.getWriter().write("error");
 			e.printStackTrace();
 		}
 	}

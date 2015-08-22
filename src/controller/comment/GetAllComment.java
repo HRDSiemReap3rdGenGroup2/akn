@@ -40,7 +40,7 @@ public class GetAllComment extends HttpServlet {
 
 	private void doPro(HttpServletRequest req, HttpServletResponse resp) {
 		try{
-			int news_id=Integer.parseInt(req.getParameter("id"));
+			int news_id=Integer.parseInt(req.getParameter("news_id"));
 			ArrayList<Comment> list=new ArrayList<Comment>();
 			list = new CommentDAO().getAllComment(news_id);
 			resp.setContentType("application/json");
