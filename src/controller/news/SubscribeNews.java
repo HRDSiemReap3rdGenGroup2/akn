@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.dao.UserDAO;
+import model.dto.User;
 
 public class SubscribeNews extends HttpServlet {
 
@@ -38,8 +39,8 @@ public class SubscribeNews extends HttpServlet {
 			}
 			int category_id = Integer.parseInt(req.getParameter("category_id"));
 			int user_id;
-			if (req.getSession().getAttribute("user_id") != null) {
-				user_id = (Integer) req.getSession().getAttribute("user_id");
+			if (req.getSession().getAttribute("user") != null) {
+				user_id = ((User) req.getSession().getAttribute("user")).getUser_id();
 				new UserDAO().subScribe(category_id, user_id);
 				resp.getWriter().write("success");
 			}

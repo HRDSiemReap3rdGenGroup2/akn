@@ -15,6 +15,7 @@ import model.dao.NewsDAO;
 import model.dao.SaveListDAO;
 import model.dto.News;
 import model.dto.SaveList;
+import model.dto.User;
 
 public class SearchNews extends HttpServlet {
 
@@ -85,8 +86,7 @@ public class SearchNews extends HttpServlet {
 			if (req.getSession().getAttribute("user") != null
 					|| (req.getSession().getAttribute("user") != "")) {
 				if (req.getSession().getAttribute("user_id") != null) {
-					int user_id = (Integer) req.getSession()
-							.getAttribute("user_id");
+					int user_id = ((User) req.getSession().getAttribute("user")).getUser_id();
 					ArrayList<SaveList> user_savedlist = new SaveListDAO()
 							.getAllSavedNews(user_id);
 					req.setAttribute("user_savedlist", user_savedlist);

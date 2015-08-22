@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.dao.MenuDAO;
 import model.dao.SaveListDAO;
 import model.dto.SaveList;
+import model.dto.User;
 
 public class CallStatisticPage extends HttpServlet {
 
@@ -43,7 +44,7 @@ public class CallStatisticPage extends HttpServlet {
 			// user
 			if (req.getSession().getAttribute("user") != null
 					&& (req.getSession().getAttribute("user") != "")) {
-				int user_id = (Integer) req.getSession().getAttribute("user_id");
+				int user_id = ((User) req.getSession().getAttribute("user")).getUser_id();
 				ArrayList<SaveList> user_savedlist = new SaveListDAO()
 						.getAllSavedNews(user_id);
 				req.setAttribute("user_savedlist", user_savedlist);
