@@ -36,6 +36,8 @@
 <!--[if lt IE 9]> <script type="text/javascript" src="js/customM.js"></script> <![endif]-->
 <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
         <script src="dist/sweetalert.min.js"></script>
+        <!-- Place this tag in your head or just before your close body tag. -->
+							<script src="https://apis.google.com/js/platform.js" async defer></script>
 <style type="text/css">
 	*{
 		font-family: "Khmer OS Siemreap";
@@ -44,6 +46,14 @@
 </head>
 
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <c:set value="${requestScope.news }" var="news"></c:set>
 <!-- Body Wrapper -->
 <div class="body-wrapper">
@@ -77,7 +87,17 @@
                         
                     <!--comment-->
                     <div class="column-two-third comments">
-                        <h5 class="line"><span>មតិយោបល់</span></h5>
+                        <h5 class="line"><span>មតិយោបល់</span>
+                        <c:set var="req" value="${pageContext.request}" />
+						<c:set var="baseURL" value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}" />
+						<c:url var="myUrl" value="${baseURL}/${MyID}"/>
+						<div style="float:right">
+							<div style="display:inline;position:relative;right:5px;top:-7px;"><div class="fb-share-button" data-href="${myUrl }news?id=${param.id}" data-layout="button_count"></div></div>
+							<!-- Place this tag where you want the share button to render. -->
+							<div class="g-plus" data-action="share" data-annotation="bubble"></div>
+						</div>
+                        	
+                        </h5>
                         <div class="form">
                             <textarea style="color:black" name="comment" rows="10" cols="30" placeholder="Your comment here..." id="comment"></textarea>
                             <button style="margin-top:5px; padding:10px 15px;" id="btn-comment">Comment</button>
@@ -94,16 +114,6 @@
                                         <div class="comment-text">Curabitur nunc mauris, <a href="#">link test</a> id dictum quis, aliquet vel diam. Aliquam gravida, augue et dictum hendrerit, nisl erat congue elit, et molestie magna sapien cursus tortor.</div>
                                     </div>
                                 </div>
-                               <div>
-                                <div class="comment-avatar"><img src="img/avatar.png" alt="MyPassion" /></div>
-                                    <div class="commment-text-wrap">
-                                        <div class="comment-data">
-                                            <p><a href="#" class="url">MyPassion</a> <br /> <span>January 12, 2013 - <a href="#" class="comment-reply-link">reply</a></span></p>
-                                        </div>
-                                        <div class="comment-text">Curabitur nunc mauris aliquet vel diam.</div>
-                                    </div>
-                                </div>
-
                             </li>
                         </ul>
                     </div>
@@ -200,10 +210,10 @@ list_comment();
 			var str="";
 			for(var i=0;i<data.length;i++){
 				str+="<div>"
-                    +"<div class='comment-avatar'><img src='"+data[i].user_img+"' alt='"+data[i].user_name+"' /></div>"
+                    +"<div class='comment-avatar'><img src='img/avatar.png' alt='"+data[i].user_name+"' /></div>"
                     +"<div class='commment-text-wrap'>"
                         +"<div class='comment-data'>"
-                            +"<p><a href='#' class='url'>"+data[i].user_name+"</a> <br /> <span>"+data[i].comment_date+"</span></p>"
+                            +"<p><a href='#' class='url'>"+data[i].user_name+"</a> <br /> <span>"+data[i].date+"</span></p>"
                         +"</div>"
                         +"<div class='comment-text'>"+data[i].comment_detail+"</div>"
                     +"</div>"
@@ -215,7 +225,7 @@ list_comment();
 	$("#btn-comment").click(function(){
 			if('${sessionScope.user}'!=''){
 				$.post("comment",{
-					news_id:news_id,
+					news_id:'${param.id}',
 					comment_detail:$("#comment").val()
 				},function(data){
 					if(data=='success'){

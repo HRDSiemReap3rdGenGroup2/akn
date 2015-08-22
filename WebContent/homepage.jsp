@@ -552,7 +552,7 @@
 		});
 	});
 	function save(news_id){
-		if('${sessionScope.user_id}'==''){
+		if('${user.user_id}'==''){
 			swal({   
 				title: "Login first!",   
 						text: "You need to login to save news to your list.",   

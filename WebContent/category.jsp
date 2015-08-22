@@ -245,7 +245,7 @@
 	$("#${requestScope.title_id}").addClass("current"); 
 	$("#page_${requestScope.current_page}").addClass("active");
 	function subscribe(category_id){
-		if('${sessionScope.user_id}'==''){
+		if('${user.user_id}'==''){
 			swal({   
 				title: "Login first!",   
 						text: "You need to login to subscribe this category.",   
@@ -272,7 +272,7 @@
 		}
 	}
 	function save(news_id){
-		if('${sessionScope.user_id}'==''){
+		if('${user.user_id}'==''){
 			swal({   
 				title: "Login first!",   
 						text: "You need to login to save news to your list.",   

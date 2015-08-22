@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   <!-- Footer -->
 <footer id="footer">
 	<div class="container">
@@ -23,14 +23,9 @@
 				<span>ប្រភេទពត៌មាន</span>
 			</h5>
 			<ul class="footnav">
-				<li><a href="entertainment"><i class="icon-right-open"></i> កម្សាន្ត</a></li>
-				<li><a href="health"><i class="icon-right-open"></i> សុខភាព</a></li>
-				<li><a href="job"><i class="icon-right-open"></i> ការងារ</a></li>
-				<li><a href="tech"><i class="icon-right-open"></i>
-						បច្ចេកវិទ្យា</a></li>
-				<li><a href="sport"><i class="icon-right-open"></i> កីទ្បា</a></li>
-				<li><a href="politic"><i class="icon-right-open"></i> នយោបាយ</a></li>
-
+				<c:forEach items="${requestScope.menu }" var="i">
+    	           	<li><a href="category?id=${i.index}"><i class="icon-right-open"></i>${i.name}</a></li>
+                </c:forEach>
 			</ul>
 		</div>
 

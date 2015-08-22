@@ -185,6 +185,9 @@ $("#password").keypress(function(e) {
        login();
     }
 });
+$(document).ready(function(){
+	$("#email").focus();
+});
 function login(){
 $.post("user/login",{
 	email:$("#email").val(),

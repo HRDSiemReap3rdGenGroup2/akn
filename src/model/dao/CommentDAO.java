@@ -26,7 +26,6 @@ public class CommentDAO {
 				c.setComment_id(rs.getInt("comment_id"));
 				c.setComment_detail(rs.getString("comment_detail"));
 				c.setDate(rs.getDate("comment_date"));
-				c.setNews_id(rs.getInt("news_id"));
 				c.setUser_name(rs.getString("user_name"));
 				c.setUser_img(rs.getString("user_image"));
 				list.add(c);

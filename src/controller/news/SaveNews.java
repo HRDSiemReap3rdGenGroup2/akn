@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.dao.SaveListDAO;
 import model.dto.SaveList;
+import model.dto.User;
 
 public class SaveNews extends HttpServlet {
 
@@ -53,8 +54,8 @@ public class SaveNews extends HttpServlet {
 			}
 			int news_id = Integer.parseInt(req.getParameter("news_id"));
 			int user_id;
-			if (req.getSession().getAttribute("user_id") != null) {
-				user_id = (Integer) req.getSession().getAttribute("user_id");
+			if (req.getSession().getAttribute("user") != null) {
+				user_id = ((User) req.getSession().getAttribute("user")).getUser_id();
 				ArrayList<SaveList> list = new SaveListDAO()
 						.getAllSavedNews(user_id);
 				boolean help = true;
