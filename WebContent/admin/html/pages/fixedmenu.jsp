@@ -21,6 +21,9 @@
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/material-design-iconic-font.min.css?1421434286" />
 		<!-- END STYLESHEETS -->
 
+		<link rel="stylesheet" type="text/css" href="../../../dist/sweetalert.css">
+        <script src="../../../dist/sweetalert.min.js"></script>
+
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="../../assets/js/libs/utils/html5shiv.js?1403934957"></script>
@@ -62,7 +65,7 @@
 								<form class="form" action="updatemenu" method="post">
 									<div class="card">
 										<div class="card-head style-primary">
-											<header>Arrange Menu</header>
+											<header>Dynamic Menu</header>
 										</div>
 										<div class="card-body floating-label">
 										

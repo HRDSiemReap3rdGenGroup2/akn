@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-
+		
 <script>
        	$('#btnsave').click(function(){
        		if($('#duration option:selected').val()==0){

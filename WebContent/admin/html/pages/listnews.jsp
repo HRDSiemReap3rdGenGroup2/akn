@@ -25,6 +25,10 @@
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/DataTables/extensions/dataTables.tableTools.css?1423553990" />
 		<!-- END STYLESHEETS -->
 
+
+		<link rel="stylesheet" type="text/css" href="../../../dist/sweetalert.css">
+        <script src="../../../dist/sweetalert.min.js"></script>
+        
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="../../assets/js/libs/utils/html5shiv.js?1403934957"></script>
@@ -75,28 +79,13 @@
 												<th>ID</th>
 												<th>Title</th>
 												<th>Category</th>
-												<th class="sort-numeric">Published Date</th>
-												<th class="sort-alpha">Action</th>
+												<th>Source</th>
+												<th>Published Date</th>
+												<!-- <th>Action</th> -->
 											</tr>
 										</thead>
-										<tbody>
-											<c:set value="${requestScope.allnews }" var="news"></c:set>
-											<c:forEach items="${news }" var="item">
-												<tr class="gradeX">
-													<td>${item.news_id }</td>
-													<td>${item.news_title }</td>
-													<td>${item.category_name }</td>
-													<td>${item.news_date }</td>
-													<td class="text-right">
-														<a href="updatenews?id=${item.news_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Edit row"><i class="fa fa-pencil"></i></a>
-														<a href="actiondeletenews?id=${item.news_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></a>
-													</td>
-												</tr>
-											</c:forEach>
-											
-										</tbody>
 									</table>
-								</div><!--end .table-responsive -->
+ 					 			</div><!--end .table-responsive -->
 							</div><!--end .col -->
 						</div><!--end .row -->
 						<!-- END DATATABLE 1 -->
@@ -133,14 +122,36 @@
 		<script src="../../assets/js/core/source/AppNavSearch.js"></script>
 		<script src="../../assets/js/core/source/AppVendor.js"></script>
 		<script src="../../assets/js/core/demo/Demo.js"></script>
-		<script src="../../assets/js/core/demo/DemoTableDynamic.js"></script>
+		<!-- <script src="../../assets/js/core/demo/DemoTableDynamic.js"></script> -->
 		<!-- END JAVASCRIPT -->
 		
 		<script>
 			$(document).ready(function(){
 				$('#news').addClass('active');
+				$('#datatable1').DataTable({
+					"ajax": "getjsonnews",
+			        "columns": [
+			            { "data": "news_id" },
+			            { "data": "news_title" },
+			            { "data": "category_name" },
+			            { "data": "source_name" },
+			            { "data": "news_date" }
+			            /*, { "data": null } */
+			        ],
+			        "order": [ 0, 'desc' ],
+			        "fnCreatedRow": function( nRow, data, iDataIndex ) {
+				           $('td:eq(4)', nRow).append(
+				        		"<a href='updatenews?id="+data.news_id+"' class='btn btn-icon-toggle' data-toggle='tooltip' data-placement='op' data-original-title='Edit Row'><i class='fa fa-pencil'></i></a>"+
+				        		"<a href='actiondeletenews?id="+data.news_id+"' class='btn btn-icon-toggle' data-toggle='tooltip' data-placement='op' data-original-title='Delete Row'><i class='fa fa-trash-o'></i></a>"
+				           );
+				       }
+				});
 			});
+			
+			
 		</script>
+		
+		<jsp:include page="../../include/setting.jsp"></jsp:include>
 		
 	</body>
 </html>

@@ -336,5 +336,8 @@
 			
 		</script>
 		<!-- END JAVASCRIPT -->
+		
+		<jsp:include page="../../include/setting.jsp"></jsp:include>
+		
 	</body>
 </html>

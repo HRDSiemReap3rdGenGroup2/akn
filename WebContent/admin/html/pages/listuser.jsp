@@ -24,6 +24,9 @@
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/DataTables/extensions/dataTables.colVis.css?1423553990" />
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/DataTables/extensions/dataTables.tableTools.css?1423553990" />
 		<!-- END STYLESHEETS -->
+		
+		<link rel="stylesheet" type="text/css" href="../../../dist/sweetalert.css">
+        <script src="../../../dist/sweetalert.min.js"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -151,7 +154,7 @@
 				$('#usermenu').addClass('active');
 			});
 		</script>
-		
+		<jsp:include page="../../include/setting.jsp"></jsp:include>
 	</body>
 </html>
 

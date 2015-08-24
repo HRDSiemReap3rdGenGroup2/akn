@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
- <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>Form Category</title>
-
+	
 		<!-- BEGIN META -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,14 @@
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/materialadmin.css?1425466319" />
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/font-awesome.min.css?1422529194" />
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/material-design-iconic-font.min.css?1421434286" />
+		
+		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/DataTables/jquery.dataTables.css?1423553989" />
+		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/DataTables/extensions/dataTables.colVis.css?1423553990" />
+		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/DataTables/extensions/dataTables.tableTools.css?1423553990" />
+		
+		<link rel="stylesheet" type="text/css" href="../../../dist/sweetalert.css">
+        <script src="../../../dist/sweetalert.min.js"></script>
+		
 		<!-- END STYLESHEETS -->
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -41,7 +49,8 @@
 
 		<!-- BEGIN BASE-->
 		<div id="base">
-
+		<c:set value="${requestScope.updatecategory }" var="update"></c:set>
+		<c:set value="${requestScope.status }" var="status"></c:set>
 			<!-- BEGIN OFFCANVAS LEFT -->
 			<div class="offcanvas">
 			
@@ -53,30 +62,57 @@
 
 				<!-- BEGIN BLANK SECTION -->
 				<section class="style-default-bright">
-					<div class="section-header">
-						<ol class="breadcrumb">
-							<li class="active">Form Category</li>
-						</ol>
-					</div><!--end .section-header -->
 					<div class="section-body">
 						<div class="row">
-							<div class="form">
-								<div class="form-group floating-label">
-									<input type="text" class="form-control" id="category_name" name="category_name">
-									<label for="regular2">Category Name</label>
-								</div>
-								<div class="form-group floating-label">
-									<input type="text" class="form-control" id="category_code" name="category_code">
-									<label for="regular2">Category Description</label>
-								</div>
-								<div class="card-actionbar-row">
-									<button type="submit" class="btn btn-flat btn-primary ink-reaction">Create Category</button>
-								</div>
-							</div>
+							<c:choose>
+								<c:when test="${status==1 }">
+									<form method="post" action="actionupdatecategory" class="form form-validate floating-label" novalidate="novalidate">
+								</c:when>
+								<c:otherwise>
+									<form method="post" action="actioncreatecategory" class="form form-validate floating-label" novalidate="novalidate">
+								</c:otherwise>
+							</c:choose>
+									<div class="card">
+										
+										<div class="card-head style-primary">
+											<c:choose>
+												<c:when test="${status==1 }">
+													<header>Update Category</header>
+												</c:when>
+												<c:otherwise>
+													<header>Create Category</header>
+												</c:otherwise>
+											</c:choose>
+										</div><!-- end .card-head -->
+										
+										<div class="card-body floating-label">
+											<input type="text" id="source_id" name="category_id" hidden="hidden" value="${update.category_id }">
+											<div class="form-group floating-label">
+												<input type="text" class="form-control" value="${update.category_name }" id="category_name" name="category_name" required>
+												<label for="regular2">Category Name</label>
+												<p class="help-block">This is for the source name of the pages!</p>
+											</div>
+										    <div class="form-group floating-label">
+												<input type="text" class="form-control" value="${update.category_description }"  id="category_description" name="category_description" required>
+												<label for="regular2">Category Description</label>
+												<p class="help-block">This is for the source code you set!</p>
+											</div>
+											<div class="card-actionbar-row" style="padding-right:0">
+												<c:choose>
+													<c:when test="${status==1 }">
+														<button type="submit" class="btn btn-flat btn-primary ink-reaction">Update Category</button>
+													</c:when>
+													<c:otherwise>
+														<button type="submit" class="btn btn-flat btn-primary ink-reaction">Create Category</button>
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</div><!-- end .card-body -->
+									</div><!--end .card -->
+								</form><!-- end form -->
 						</div>
 						
 					</div><!--end .section-body -->
-				
 				</section>
 				<!-- BEGIN BLANK SECTION -->
 			
@@ -106,16 +142,23 @@
 		<script src="../../assets/js/core/source/AppNavSearch.js"></script>
 		<script src="../../assets/js/core/source/AppVendor.js"></script>
 		<script src="../../assets/js/core/demo/Demo.js"></script>
+		<script src="../../assets/js/core/demo/DemoTableDynamic.js"></script>
+		
+		<script src="../../assets/js/libs/DataTables/jquery.dataTables.min.js"></script>
+		<script src="../../assets/js/libs/DataTables/extensions/ColVis/js/dataTables.colVis.js"></script>
+		<script src="../../assets/js/libs/DataTables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
+		
+		<script src="../../assets/js/libs/validation/jquery.validate.min.js"></script>
 		<!-- END JAVASCRIPT -->
 		
 		<script>
+
 			$(document).ready(function(){
-				$('#dashboard').addClass('active');
+				$('#categorymenu').addClass('active');
 			});
-		  
 			
 		</script>
-		
+		<jsp:include page="../../include/setting.jsp"></jsp:include>
 	</body>
 </html>
-  	
+ 

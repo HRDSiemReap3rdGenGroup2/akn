@@ -23,6 +23,9 @@
 		
 		<link href="../../assets/js/summernote/summernote.css" rel="stylesheet">
 		
+		<link rel="stylesheet" type="text/css" href="../../../dist/sweetalert.css">
+        <script src="../../../dist/sweetalert.min.js"></script>
+		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="../../assets/js/libs/utils/html5shiv.js?1403934957"></script>
@@ -130,6 +133,10 @@
 				});
 			});
 		</script>
+		
+		
+        
+		<jsp:include page="../../include/setting.jsp"></jsp:include>
 		
 	</body>
 </html>

@@ -24,6 +24,10 @@
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/DataTables/extensions/dataTables.colVis.css?1423553990" />
 		<link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/DataTables/extensions/dataTables.tableTools.css?1423553990" />
 		
+		
+		<link rel="stylesheet" type="text/css" href="../../../dist/sweetalert.css">
+        <script src="../../../dist/sweetalert.min.js"></script>
+        
 		<!-- END STYLESHEETS -->
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -68,9 +72,7 @@
 							<a href="formsource"><button type="button" class="btn ink-reaction btn-raised btn-primary">Add Source</button></a>
 						</div>
 					</div>
-					<div class="section-header">	
-						<h2 class="text-primary">List Sources</h2>
-					</div>
+					
 					<div class="section-body">
 						
 						<!-- BEGIN DATATABLE 1 -->
@@ -232,6 +234,7 @@
 			}
 		</script>
 		
+		<jsp:include page="../../include/setting.jsp"></jsp:include>
 	</body>
 </html>
  

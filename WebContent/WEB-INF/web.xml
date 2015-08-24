@@ -198,14 +198,6 @@
     <url-pattern>/admin/html/pages/addnews1</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>listnews</servlet-name>
-    <servlet-class>controller.admin.news.ListNews</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>listnews</servlet-name>
-    <url-pattern>/admin/html/pages/listnews</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>listnewsdata</servlet-name>
     <servlet-class>controller.admin.news.ListNews</servlet-class>
   </servlet>
@@ -500,5 +492,69 @@
   <servlet-mapping>
   	<servlet-name>comment</servlet-name>
   	<url-pattern>/comment</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>getjsonnews</servlet-name>
+    <servlet-class>controller.admin.news.JsonNews</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getjsonnews</servlet-name>
+    <url-pattern>/admin/html/pages/getjsonnews</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>listnews</servlet-name>
+    <jsp-file>/admin/html/pages/listnews.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>listnews</servlet-name>
+    <url-pattern>/admin/html/pages/listnews</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>formcategory</servlet-name>
+    <jsp-file>/admin/html/pages/addcategory.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>formcategory</servlet-name>
+    <url-pattern>/admin/html/pages/formcategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>actioncreatecategory</servlet-name>
+    <servlet-class>controller.admin.category.ActionCreateCategory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>actioncreatecategory</servlet-name>
+    <url-pattern>/admin/html/pages/actioncreatecategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>listcategory</servlet-name>
+    <servlet-class>controller.admin.category.ListCategory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>listcategory</servlet-name>
+    <url-pattern>/admin/html/pages/listcategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>actiondeletecategory</servlet-name>
+    <servlet-class>controller.admin.category.ActionDeleteCategory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>actiondeletecategory</servlet-name>
+    <url-pattern>/admin/html/pages/actiondeletecategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>updatecategory</servlet-name>
+    <servlet-class>controller.admin.category.UpdateCategory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updatecategory</servlet-name>
+    <url-pattern>/admin/html/pages/updatecategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>actionupdatecategory</servlet-name>
+    <servlet-class>controller.admin.category.ActionUpdateCategory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>actionupdatecategory</servlet-name>
+    <url-pattern>/admin/html/pages/actionupdatecategory</url-pattern>
   </servlet-mapping>
 </web-app>

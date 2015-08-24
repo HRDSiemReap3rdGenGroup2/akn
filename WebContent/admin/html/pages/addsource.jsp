@@ -61,11 +61,6 @@
 
 				<!-- BEGIN BLANK SECTION -->
 				<section class="style-default-bright">
-					<div class="section-header">
-						<ol class="breadcrumb">
-							<li class="active">Form Source</li>
-						</ol>
-					</div><!--end .section-header -->
 					<div class="section-body">
 						<div class="row">
 							<c:choose>
@@ -101,7 +96,7 @@
 												<label for="regular2">Source Code</label>
 												<p class="help-block">This is for the source code you set!</p>
 											</div>
-											<div class="card-actionbar-row">
+											<div class="card-actionbar-row" style="padding-right:0">
 												<c:choose>
 													<c:when test="${update.source_status==1 }">
 														<button type="submit" class="btn btn-flat btn-primary ink-reaction">Update Source</button>
@@ -162,7 +157,7 @@
 			});
 			
 		</script>
-		
+		<jsp:include page="../../include/setting.jsp"></jsp:include>
 	</body>
 </html>
  

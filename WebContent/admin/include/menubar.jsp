@@ -52,8 +52,8 @@
 				</a>
 				<!--start submenu -->
 				<ul>
-					<li><a href="formmodule" ><span class="title">Add Category</span></a></li>
-					<li><a href="listmodule" ><span class="title">List Category</span></a></li>
+					<li><a href="formcategory" ><span class="title">Add Category</span></a></li>
+					<li><a href="listcategory" ><span class="title">List Category</span></a></li>
 				</ul><!--end /submenu -->
 			</li><!--end /menu-li -->
 			<!-- END CATEGORY -->
@@ -83,7 +83,7 @@
 				</a>
 				<!--start submenu -->
 				<ul>
-					<li><a href="fixedmenu" ><span class="title">Fixed Menu</span></a></li>
+					<li><a href="fixedmenu" ><span class="title">Dynamic Menu</span></a></li>
 				</ul><!--end /submenu -->
 			</li><!--end /menu-li -->
 			<!-- END MENU -->
@@ -133,7 +133,7 @@
 	
 		<div class="menubar-foot-panel">
 			<small class="no-linebreak hidden-folded">
-				<span class="opacity-75">Copyright &copy; 2014</span> <strong>CodeCovers</strong>
+				<span class="opacity-75">Copyright &copy; 2015</span> <strong>AKN News</strong>
 			</small>
 		</div>
 	</div><!--end .menubar-scroll-panel-->

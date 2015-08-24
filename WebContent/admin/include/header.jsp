@@ -62,57 +62,31 @@
 																		<option value="0">Manually</option>
 																		<option value="5">5 minutes</option>
 																		<option value="60">1 hour</option>
-																		<option value="120">2 hours</option>
-																		<option value="480">8 hours</option>
 																		<option value="1440">1 day</option>
 																	</c:when>
 																	<c:when test="${duration==0 }">
 																		<option value="0">Manually</option>
 																		<option value="5">5 minutes</option>
 																		<option value="60">1 hour</option>
-																		<option value="120">2 hours</option>
-																		<option value="480">8 hours</option>
 																		<option value="1440">1 day</option>
 																	</c:when>
 																	<c:when test="${duration==5 }">
 																		<option value="5">5 minutes</option>
 																		<option value="60">1 hour</option>
-																		<option value="120">2 hours</option>
-																		<option value="480">8 hours</option>
 																		<option value="1440">1 day</option>
 																		<option value="0">Manually</option>		
 																	</c:when>
 																	<c:when test="${duration==60 }">
 																		<option value="60">1 hour</option>
-																		<option value="120">2 hours</option>
-																		<option value="480">8 hours</option>
 																		<option value="1440">1 day</option>
 																		<option value="5">5 minutes</option>
 																		<option value="0">Manually</option>
-																	</c:when>
-																	<c:when test="${duration==120 }">
-																		<option value="120">2 hours</option>
-																		<option value="480">8 hours</option>
-																		<option value="1440">1 day</option>
-																		<option value="0">Manually</option>
-																		<option value="5">5 minutes</option>
-																		<option value="60">1 hour</option>
-																	</c:when>
-																	<c:when test="${duration==480 }">
-																		<option value="480">8 hours</option>
-																		<option value="5">5 minutes</option>
-																		<option value="60">1 hour</option>
-																		<option value="120">2 hours</option>
-																		<option value="1440">1 day</option>
-																		<option value="0">Manually</option>
-																	</c:when>
+																	</c:when>																	
 																	<c:when test="${duration==1440 }">
 																		<option value="1440">1 day</option>
-																		<option value="0">Manually</option>
 																		<option value="5">5 minutes</option>
 																		<option value="60">1 hour</option>
-																		<option value="120">2 hours</option>
-																		<option value="480">8 hours</option>
+																		<option value="0">Manually</option>
 																	</c:when>
 																</c:choose>
 																
