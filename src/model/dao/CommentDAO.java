@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import utilities.DBUtility;
 import model.dto.Comment;
+import utilities.DBUtility;
 
 public class CommentDAO {
 	private Connection con;
@@ -34,7 +34,12 @@ public class CommentDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			if(con!=null)con.close();
+			if(con!=null)
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 		}
 		return list;
 	}
