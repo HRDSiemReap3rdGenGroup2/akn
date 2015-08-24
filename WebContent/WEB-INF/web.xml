@@ -374,12 +374,12 @@
     <url-pattern>/admin/html/pages/formscan</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>category-news</servlet-name>
-  	<servlet-class>controller.news.NewsPage</servlet-class>
+    <servlet-name>category-news</servlet-name>
+    <servlet-class>controller.news.NewsPage</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>category-news</servlet-name>
-  	<url-pattern>/category</url-pattern>
+    <servlet-name>category-news</servlet-name>
+    <url-pattern>/category</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>updatescanduration</servlet-name>
@@ -389,7 +389,7 @@
     <servlet-name>updatescanduration</servlet-name>
     <url-pattern>/admin/html/pages/updatescanduration</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>stopscan</servlet-name>
     <servlet-class>controller.admin.news.StopAutoScan</servlet-class>
   </servlet>
@@ -398,28 +398,28 @@
     <url-pattern>/admin/html/pages/stopscan</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>getcategory</servlet-name>
-  	<servlet-class>controller.category.GetAllCategory</servlet-class>
+    <servlet-name>getcategory</servlet-name>
+    <servlet-class>controller.category.GetAllCategory</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>getcategory</servlet-name>
-  	<url-pattern>/getcategory</url-pattern>
+    <servlet-name>getcategory</servlet-name>
+    <url-pattern>/getcategory</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>getallsource</servlet-name>
-  	<servlet-class>controller.source.GetAllSource</servlet-class>
+    <servlet-name>getallsource</servlet-name>
+    <servlet-class>controller.source.GetAllSource</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>getallsource</servlet-name>
-  	<url-pattern>/getsource</url-pattern>
+    <servlet-name>getallsource</servlet-name>
+    <url-pattern>/getsource</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>updateuserinfo</servlet-name>
-  	<servlet-class>controller.user.UpdateUser</servlet-class>
+    <servlet-name>updateuserinfo</servlet-name>
+    <servlet-class>controller.user.UpdateUser</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>updateuserinfo</servlet-name>
-  	<url-pattern>/updateuserinfo</url-pattern>
+    <servlet-name>updateuserinfo</servlet-name>
+    <url-pattern>/updateuserinfo</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>formsource</servlet-name>
@@ -462,36 +462,36 @@
     <url-pattern>/admin/html/pages/editsource</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>deletesource</servlet-name>
-  	<servlet-class>controller.admin.source.DeleteSource</servlet-class>
+    <servlet-name>deletesource</servlet-name>
+    <servlet-class>controller.admin.source.DeleteSource</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>deletesource</servlet-name>
     <url-pattern>/admin/html/pages/deletesource</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>deleteaccount</servlet-name>
-  	<servlet-class>controller.user.DeleteUser</servlet-class>
+    <servlet-name>deleteaccount</servlet-name>
+    <servlet-class>controller.user.DeleteUser</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>deleteaccount</servlet-name>
-  	<url-pattern>/deleteaccount</url-pattern>
+    <servlet-name>deleteaccount</servlet-name>
+    <url-pattern>/deleteaccount</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>getallcomment</servlet-name>
-  	<servlet-class>controller.comment.GetAllComment</servlet-class>
+    <servlet-name>getallcomment</servlet-name>
+    <servlet-class>controller.comment.GetAllComment</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>getallcomment</servlet-name>
-  	<url-pattern>/getallcomment</url-pattern>
+    <servlet-name>getallcomment</servlet-name>
+    <url-pattern>/getallcomment</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>comment</servlet-name>
-  	<servlet-class>controller.comment.InsertComment</servlet-class>
+    <servlet-name>comment</servlet-name>
+    <servlet-class>controller.comment.InsertComment</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>comment</servlet-name>
-  	<url-pattern>/comment</url-pattern>
+    <servlet-name>comment</servlet-name>
+    <url-pattern>/comment</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>getjsonnews</servlet-name>
@@ -556,5 +556,13 @@
   <servlet-mapping>
     <servlet-name>actionupdatecategory</servlet-name>
     <url-pattern>/admin/html/pages/actionupdatecategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>changepassword</servlet-name>
+    <servlet-class>controller.admin.user.ActionChangePassword</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>changepassword</servlet-name>
+    <url-pattern>/admin/html/pages/changepassword</url-pattern>
   </servlet-mapping>
 </web-app>
