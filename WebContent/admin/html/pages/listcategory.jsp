@@ -99,7 +99,8 @@
 													<td>${item.category_description }</td>
 													<td class="text-right">
 														<a href="updatecategory?id=${item.category_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Edit row"><i class="fa fa-pencil"></i></a>
-														<a href="actiondeletecategory?id=${item.category_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></a>
+														<button onclick="deletecategory('${item.category_id }')" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></button>
+														<%-- <a href="actiondeletecategory?id=${item.category_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></a> --%>
 													</td>
 												</tr>
 											</c:forEach>
@@ -152,6 +153,25 @@
 			$(document).ready(function(){
 				$('#categorymenu').addClass('active');
 			});
+			
+			function deletecategory(category_id){
+				swal({   title: "Are you sure?",   
+						 text: "You will not be able to recover this category!",   
+						 type: "warning",   showCancelButton: true,   
+						 confirmButtonColor: "#DD6B55",   
+						 confirmButtonText: "Yes, delete it!",   
+						 closeOnConfirm: false 
+				    }, function(){   
+				    	$.get("actiondeletecategory",{
+							id : category_id
+						},function(data){
+					    	swal("Deleted!", "Category has been deleted..!.", "success"); 
+							location.href="listcategory";
+						});
+				    });
+			
+			}
+			
 		</script>
 		
 		<jsp:include page="../../include/setting.jsp"></jsp:include>

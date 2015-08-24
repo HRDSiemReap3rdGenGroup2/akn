@@ -99,7 +99,8 @@
 													<td>${item.source_code }</td>
 													<td class="text-right">
 														<a href="updatesource?id=${item.source_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Edit row"><i class="fa fa-pencil"></i></a>
-														<a href="deletesource?id=${item.source_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></a>
+														<button onclick="deletesource('${item.source_id }')" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></button>
+													<%-- href="deletesource?id=${item.source_id }" --%>
 													</td>
 												</tr>
 											</c:forEach>
@@ -154,83 +155,22 @@
 				$('#sourcemenu').addClass('active');
 			});
 			
-			function myedit(source_id, source_code, source_name){
-				$('#source_id').val(source_id);
-				$('#source_name').val(source_name); 
-				$('#source_code').val(source_code);				
-			}
-			
-			
-			$('#btncreate').click(function(){
-				if($('#btncreate').attr("value") == "Save")
-					$.post('addsource',{
-						source_name : $("#source_name").val(),
-						source_code : $("#source_code").val()
-					},function(data){
-						list();
-					});	
-			});
-			
-		  	//list();
-			function list(){
-				$.post('sourcelist',function(data){
-					$("#table").html(listDetail(data));
-				});
-			}
-			function listDetail(data){
-				var str="";
-				str ="<table class='table'>"+
-					   "<tr>"+
-							"<th>ID</th>"+
-							"<th>Name</th>"+
-							"<th>Code</th>"+
-							"<th>Action"+
-						"</tr>";
-					for(var i=0;i<data.length;i++){
-						str += "<tr>"+
-									"<td>"+ data[i].source_id+"</td>"+
-									"<td>"+ data[i].source_name +"</td>"+
-									"<td>"+ data[i].source_code +"</td>"+
-									"<td><button type='button' class='btn btn-warning' onclick=editrecord('"+ data[i].source_id +"')>Edit</button>"+
-									"&nbsp;&nbsp;<button type='button' class='btn btn-danger' onclick=deleterecord('"+ data[i].source_id +"')>Delete</button>"+
-									"</td>"+
-								"</tr>";
-					}
-				str += "</table>";
-				return str;
-			}
-			
-			function updatesource(source_id){
-				$.post("getsource",{
-					source_id: source_id
-				},function(data){
-					$("#id").val(data.source_id);
-					$("#source_name").val(data.source_name);
-					$("#source_code").val(data.source_code);
-					
-					$("#btncreate").attr("value", "Update");
-					$("#btncreate").attr("onclick", "edit('"+ data.source_id +"')");
-				});
-			}
-			function edit(id){
-				if($("#btncreate").attr("value")=="Update"){
-					$.post("editsource",{
-						source_id : id,
-						source_name : $("#source_name").val(),
-						source_code : $("#source_code").val()
-					},function(data){
-						list();
-						$("#btncreate").attr("value","Save");
-					});
-				}
-			}
-			
 			function deletesource(source_id){
-				$.post("deletesource",{
-					source_id : source_id
-				},function(){
-					list();
-				});
+				swal({   title: "Are you sure?",   
+						 text: "You will not be able to recover this source!",   
+						 type: "warning",   showCancelButton: true,   
+						 confirmButtonColor: "#DD6B55",   
+						 confirmButtonText: "Yes, delete it!",   
+						 closeOnConfirm: false 
+				    }, function(){   
+				    	$.post("deletesource",{
+							id : source_id
+						},function(data){
+					    	swal("Deleted!", "Source has been deleted..!.", "success"); 
+							location.href="listsource";
+						});
+				    });
+			
 			}
 		</script>
 		

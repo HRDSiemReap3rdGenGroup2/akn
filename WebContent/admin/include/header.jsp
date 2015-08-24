@@ -24,23 +24,29 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="headerbar-right">
 					<ul class="header-nav header-nav-options">
+						<c:set var="duration" value="${applicationScope.autoscan }"></c:set>
 						
-						<!-- <li>
-							Search form
-							<form class="navbar-search" role="search">
-								<div class="form-group">
-									<input type="text" class="form-control" name="headerSearch" placeholder="Enter your keyword">
-								</div>
-								<button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
-							</form>
-						</li> -->
+						<c:choose>
+							<c:when test="${duration==null || duration==0 }">
+								<li>
+									<a style="display:none;" class="scanning">
+										<img src="../../assets/img/load.gif" width="70%"/>
+									</a>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li>
+									<a style="display:inline;" class="scanning">
+										<img src="../../assets/img/load.gif" width="70%"/>
+									</a>
+								</li>
+							</c:otherwise>
+						</c:choose>
 						
 						<li>
 							<a href="#contact" style="margin-right:37px" data-toggle="modal">
 								<div class="gui-icon"><i class="md md-settings"></i></div>
 							</a>
-							
-							<c:set var="duration" value="${applicationScope.autoscan }"></c:set>
 							
 							<!-- Modal -->
 							  <div class="modal fade" id="contact" role= "dialog">
@@ -123,13 +129,14 @@
 								
 								</span>
 							</a>
-							<div style="height:0px;overflow:hidden">
+							<!-- <div style="height:0px;overflow:hidden">
 				  				<input type="file" id="fileInput" name="fileInput" />
-							</div>
+							</div> -->
 							<ul class="dropdown-menu animation-dock">
-								<li><button style="background-color:transparent;border:none;padding-left:19px" onclick="chooseFile();"><i class="md md-local-see"></i> Change Profile</button></li>
-								<li><a href="changeusername?user_id=${sessionScope.user.user_id }&username=${sessionScope.user.user_name}"><i class="md md-edit"></i> Change Username</a></li>
-								<li><a href="changepassword?user_id=${sessionScope.user.user_id }"><i class="md md-https"></i> Change Password</a></li>
+								<%-- <li><button style="background-color:transparent;border:none;padding-left:19px" onclick="chooseFile();"><i class="md md-local-see"></i> Change Profile</button></li>
+								<li><a href="changeusername?user_id=${sessionScope.user.user_id }&username=${sessionScope.user.user_name}"><i class="md md-edit"></i> Change Username</a></li> --%>
+								<%-- <li><a href="changepassword?user_id=${sessionScope.user.user_id }"><i class="md md-https"></i> Change Password</a></li> --%>
+								<li><button style="background-color:transparent;border:none;padding-left:19px" onclick="changepassword('${sessionScope.user.user_id }');"><i class="md md-local-see"></i> Change Password</button></li>
 								<li class="divider"></li>
 								<li><a href="../../../user/signout"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
 							</ul><!--end .dropdown-menu -->

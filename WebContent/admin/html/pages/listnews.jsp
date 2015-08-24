@@ -142,14 +142,33 @@
 			        "fnCreatedRow": function( nRow, data, iDataIndex ) {
 				           $('td:eq(4)', nRow).append(
 				        		"<a href='updatenews?id="+data.news_id+"' class='btn btn-icon-toggle' data-toggle='tooltip' data-placement='op' data-original-title='Edit Row'><i class='fa fa-pencil'></i></a>"+
-				        		"<a href='actiondeletenews?id="+data.news_id+"' class='btn btn-icon-toggle' data-toggle='tooltip' data-placement='op' data-original-title='Delete Row'><i class='fa fa-trash-o'></i></a>"
+				        		"<button onclick=deletenews('"+data.news_id+"') class='btn btn-icon-toggle' data-toggle='tooltip' data-placement='op' data-original-title='Delete Row'><i class='fa fa-trash-o'></i></button>"
+				        		/* "<a href='actiondeletenews?id="+data.news_id+"' class='btn btn-icon-toggle' data-toggle='tooltip' data-placement='op' data-original-title='Delete Row'><i class='fa fa-trash-o'></i></a>" */
 				           );
 				       }
 				});
 			});
 			
+			function deletenews(news_id){
+				swal({   title: "Are you sure?",   
+						 text: "You will not be able to recover this news!",   
+						 type: "warning",   showCancelButton: true,   
+						 confirmButtonColor: "#DD6B55",   
+						 confirmButtonText: "Yes, delete it!",   
+						 closeOnConfirm: false 
+				    }, function(){   
+				    	$.get("actiondeletenews",{
+							id : news_id
+						},function(data){
+					    	swal("Deleted!", "News has been deleted..!.", "success"); 
+							location.href="listnews";
+						});
+				    });
+			
+			}
 			
 		</script>
+		
 		
 		<jsp:include page="../../include/setting.jsp"></jsp:include>
 		
