@@ -129,6 +129,13 @@ public class SourceDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 		}
 		return false;
 	}

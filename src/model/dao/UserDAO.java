@@ -282,4 +282,26 @@ public class UserDAO {
 		return false;
 	}
 
+	public boolean updatePassword(int user_id, String password) {
+		try {
+			String sql = "UPDATE tbuser SET user_pass=? WHERE user_id=?";
+			
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, password);
+			pstmt.setInt(2, user_id);
+			if (pstmt.executeUpdate() > 0)
+				return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		return false;
+	}
+
 }
