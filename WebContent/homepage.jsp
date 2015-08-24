@@ -135,6 +135,7 @@
                                         <span title="${row.news_date }">${fn:substring(row.news_date,0,20)}</span>
                                         <a href="news?id=${row.news_id}" target="_blank">${row.news_title}</a>
 	                                	<div>
+	                                		<img src="sabay-logo.png" width="20px"/>
 	                                		<span style="color:#aaa;display:inline;">Viewed:${row.hit_count}</span>
                                 	     	<c:set value="${0}" var="have"></c:set>
 	                                		<c:choose>
@@ -182,6 +183,7 @@
                                         <span title="${row.news_date }">${fn:substring(row.news_date,0,20)}</span>
                                         <a href="news?id=${row.news_id}" target="_blank">${row.news_title}</a>
 	                                	<div>
+	                                		<img src="koh.png" width="35px"/>
 	                                		<span style="color:#aaa;display:inline;">Viewed:${row.hit_count}</span>
 	                                		<c:set value="${0}" var="have"></c:set>
 	                                		<c:choose>
@@ -239,6 +241,7 @@
                                         <a href="news?id=${row.news_id}" target="_blank">${row.news_title}</a>
 	                                	<div>
 	                                		<span style="color:#aaa;display:inline;">Viewed:${row.hit_count}</span>
+	                                		<img src="bnews.png" width="20px"/>
 	                                		<c:set value="${0}" var="have"></c:set>
 	                                		<c:choose>
 		                                			<c:when test="${user!=null || user!=''}">
@@ -290,6 +293,7 @@
                                         <span title="${row.news_date }">${fn:substring(row.news_date,0,20)}</span>
                                         <a href="news?id=${row.news_id}" target="_blank">${row.news_title}</a>
 	                                	<div style="position:relative;bottom:0px;width:100%">
+	                                		<img src="sabay-logo.png" width="20px"/>
 	                                		<span style="color:#aaa;display:inline;">Viewed:${row.hit_count}</span>
 	                                		<c:set value="${0}" var="have"></c:set>
 	                                		<c:choose>
@@ -336,6 +340,7 @@
 	                                        <span title="${row.news_date }">${fn:substring(row.news_date,0,20)}</span>
 	                                        <a href="news?id=${row.news_id}" target="_blank">${row.news_title}</a>
 		                                	<div>
+		                                		<img src="sabay-logo.png" width="20px"/>
 		                                		<span style="color:#aaa;display:inline;">Viewed:${row.hit_count}</span>
 	                                		<c:set value="${0}" var="have"></c:set>
 	                                		<c:choose>
