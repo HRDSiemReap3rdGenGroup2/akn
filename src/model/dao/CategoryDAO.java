@@ -26,6 +26,7 @@ public class CategoryDAO {
 				Category category = new Category();
 				category.setCategory_id(rs.getInt("category_id"));
 				category.setCategory_name(rs.getString("category_name"));
+				category.setCategory_description(rs.getString("category_description"));
 				list.add(category);
 			}
 			return list;
@@ -86,7 +87,12 @@ public class CategoryDAO {
 	
 	public boolean addCategory(Category cate) throws SQLException {
 		try {
-			
+			String sql = "INSERT INTO tbcategory VALUES(nextval('seq_category_id'),?,?)";
+			PreparedStatement p = con.prepareStatement(sql);
+			p.setString(1, cate.getCategory_name());
+			p.setString(2, cate.getCategory_description());
+			if(p.executeUpdate()>0)
+				return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -98,8 +104,13 @@ public class CategoryDAO {
 
 	public boolean updateCategory(Category cate) throws SQLException {
 		try {
-			
-			
+			String sql = "UPDATE tbcategory SET category_name=?, category_description=? WHERE category_id=?";
+			PreparedStatement p = con.prepareStatement(sql);
+			p.setString(1, cate.getCategory_name());
+			p.setString(2, cate.getCategory_description());
+			p.setInt(3, cate.getCategory_id());
+			if(p.executeUpdate()>0)
+				return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -111,7 +122,11 @@ public class CategoryDAO {
 
 	public boolean deleteCategroy(int cate_id) throws SQLException {
 		try {
-			
+			String sql = "DELETE FROM tbcategory WHERE category_id=?";
+			PreparedStatement p = con.prepareStatement(sql);
+			p.setInt(1, cate_id);
+			if(p.executeUpdate()>0)
+				return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -120,4 +135,30 @@ public class CategoryDAO {
 		}
 		return false;
 	}
+	public Category getCategroy(int cate_id) throws SQLException {
+		try {
+			String sql = "SELECT * FROM tbcategory WHERE category_id=?";
+			PreparedStatement p = con.prepareStatement(sql);
+			p.setInt(1, cate_id);
+			
+			ResultSet rs = p.executeQuery();
+			while(rs.next()){
+				Category category = new Category();
+				category.setCategory_id(rs.getInt("category_id"));
+				category.setCategory_name(rs.getString("category_name"));
+				category.setCategory_description(rs.getString("category_description"));
+				return category;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null)
+				con.close();
+		}
+		return null;
+	}
+	
+	
+	
 }
