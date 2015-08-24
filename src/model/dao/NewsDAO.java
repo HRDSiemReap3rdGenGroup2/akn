@@ -551,20 +551,28 @@ public class NewsDAO {
 		}
 		return 0;
 	}
-
-	public ArrayList<News> getNewsList(int category_id, String option)
+	/**
+	 * 
+	 * @param category_id
+	 * @param option ("latest", "top")
+	 * @param offset
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<News> getNewsList(int category_id, String option, int offset)
 			throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
 			
 			String sql="select n.news_date, n.news_id, n.news_title, n.news_description, n.news_img, n.news_path, n.news_hit_count, n.category_id, n.source_id, c.category_name, s.source_name from tbnews n inner join tbcategory c on c.category_id=n.category_id inner join tbsource s on s.source_id=n.source_id where n.category_id=?";
 			if (option.equals("latest")) {
-				sql += " ORDER BY news_id DESC LIMIT 4 OFFSET 0";
+				sql += " ORDER BY news_id DESC LIMIT 6 OFFSET ?";
 			} else {
-				sql += " ORDER BY news_hit_count DESC LIMIT 4 OFFSET 0";
+				sql += " ORDER BY news_hit_count DESC LIMIT 6 OFFSET ?";
 			}
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, category_id);
+			p.setInt(2, offset);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				News e = new News();
@@ -588,7 +596,54 @@ public class NewsDAO {
 		}
 		return list;
 	}
-
+	
+	/**
+	 * 
+	 * @param category_id
+	 * @param option ("latest", "top")
+	 * @param offset
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<News> getNewsList(int category_id, String option, int offset, int limit)
+			throws SQLException {
+		ArrayList<News> list = new ArrayList<News>();
+		try {
+			
+			String sql="select n.news_date, n.news_id, n.news_title, n.news_description, n.news_img, n.news_path, n.news_hit_count, n.category_id, n.source_id, c.category_name, s.source_name from tbnews n inner join tbcategory c on c.category_id=n.category_id inner join tbsource s on s.source_id=n.source_id where n.category_id=?";
+			if (option.equals("latest")) {
+				sql += " ORDER BY news_id DESC LIMIT ? OFFSET ?";
+			} else {
+				sql += " ORDER BY news_hit_count DESC LIMIT ? OFFSET ?";
+			}
+			PreparedStatement p = con.prepareStatement(sql);
+			p.setInt(1, category_id);
+			p.setInt(2, limit);
+			p.setInt(3, offset);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				News e = new News();
+				e.setNews_id(rs.getInt("news_id"));
+				e.setCategory_id(rs.getInt("category_id"));
+				e.setNews_title(rs.getString("news_title"));
+				e.setNews_date(rs.getDate("news_date"));
+				e.setNews_img(rs.getString("news_img"));
+				e.setNews_path(rs.getString("news_path"));
+				e.setCategory_name(rs.getString("category_name"));
+				e.setSource_id(rs.getInt("source_id"));
+				e.setNews_desc(rs.getString("news_description"));
+				e.setHit_count(rs.getInt("news_hit_count"));
+				list.add(e);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null)
+				con.close();
+		}
+		return list;
+	}
+	
 	public String getMediaName(int id) throws SQLException {
 		try {
 			String sql = "select user_info_code from tbnews where news_id=?";

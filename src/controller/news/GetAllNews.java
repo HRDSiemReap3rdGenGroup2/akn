@@ -53,13 +53,13 @@ public class GetAllNews extends HttpServlet {
 			resp.setIntHeader("Refresh", 60 * 5);
 			java.util.ArrayList<model.dto.News> list = new NewsDAO().getPopNews();
 			req.setAttribute("popularnews", list);
-			list = new NewsDAO().getNewsList(7, 3);
+			list = new NewsDAO().getNewsList(7, "latest" ,0,3);
 			req.setAttribute("life", list);
-			list = new NewsDAO().getNewsList(8);
+			list = new NewsDAO().getNewsList(8, "latest" ,0,4);
 			req.setAttribute("entertainment", list);
-			list = new NewsDAO().getNewsList(4);
+			list = new NewsDAO().getNewsList(4, "latest" ,0,4);
 			req.setAttribute("tech", list);
-			list = new NewsDAO().getNewsList(1, 6);
+			list = new NewsDAO().getNewsList(1, "latest" ,0,6);
 			req.setAttribute("advertise", list);
 			req.setAttribute("latestnews", new NewsDAO().getLatestNews());
 

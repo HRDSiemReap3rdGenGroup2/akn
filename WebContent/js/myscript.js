@@ -92,31 +92,6 @@ $('.tab a').on('click', function (e) {
 
       
 /*---------ui accordion---------*/
-    
-$('#saved-news').click(function(){
-    $('#display-user').load('saved-news.html');
-});
-
-$('#user-general').click(function(){
-    $('#display-user').load('user-info.html');
-});
-
-
-$('#shared-news').click(function(){
-    $('#display-user').load('shared-news.html');
-});
-
-$('#commented-news').click(function(){
-    $('#display-user').load('commented-news.html');
-});
-
-$('#edit-user').click(function(){
-    var name = $('#edit-user').parents('tr').children().eq(1).text();
-    $('#username').html('<input style="border:1px solid gray" type="text" value="'+name+'"/>');
-    $('#edit-user').text("Update");
-});
-
-
 
 /*--------/ui accordi0n----------*/
 

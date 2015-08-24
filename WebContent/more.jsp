@@ -122,48 +122,86 @@
 <script type="text/javascript" src="js/mypassion.js"></script>
 <script>
 	$("#other").toggleClass("current");
-	$.post("getmoduletype",function(data){
+	var source="<option value='0'> All Source </option>";
+	$.post("getallsource",function(data){
+		for(var i=0;i<data.length;i++){
+			source+="<option value='"+data[i].source_id+"'>"
+				+data[i].source_name
+				+"</option>";
+		}	
+	});
+	$.post("getcategory",function(data){
 		var str="";
 		for(var i=0;i<data.length;i++){
-			str+="<li id="+data[i].module_type_code+" onclick='getnews(\""+data[i].module_type_code+"\")'>"
-				+"<a>"+data[i].module_type+"</a>"
+			str+="<li id='cate"+data[i].category_id+"' onclick='getnews(\""+data[i].category_id+"\",0)'>"
+				+"<a>"+data[i].category_name+"</a>"
 				+"</li>";
 		}	
 		$("#category").html(str);
 	});
-	getnews("B000202");
+	getnews(1,0,0);
 	function active(id){
 		$("#category li").each(function(index,li) {
 		    $(li).css("background","#fff");
 		});
 		$("#"+id).css("background","#ccc");
 	}
-	function getnews(module_type_code){
-		$.post("getnewsmore",{
-			module_type_code:module_type_code
+	function getnews(category_id,page){
+		var totalpage=0;
+		$.post("gettotalpage",{
+			category_id:category_id
 		},function(data){
-			var str="<h5 class='user-profile'><span>"+data[0].module_type+"</span></h5>"
+			totalpage=data;
+		});
+		$.post("getnewsmore",{
+			category_id:category_id,
+			page:page
+		},function(data){
+			var str="<h5 class='user-profile'><span>"+data[0].category_name+"</span>"
+				+"<select style='float:right;margin-top:4px;' id=''>"+source+"</select>"
+				+"</h5>"
 			+"<div class='wrap-news user'>";
 			for(var i=0;i<data.length;i++){
 				str+="<div class='news-row'>"
             	+"<div class='items'>"
-            	+"<img src='"+data[i].news_img+"' style='height:170px;width:285px'/>"
-            	+"<a href='news?id="+data[i].news_id+"'><h5>"+data[i].news_title+"</h5></a>"
+            	+"<a href='news?id="+data[i].news_id+"' target='_blank'><img src='"+data[i].news_img+"' style='height:170px;width:285px'/></a>"
+            	+"<a href='news?id="+data[i].news_id+"' target='_blank'><h5>"+data[i].news_title+"</h5></a>"
             	+"<p class='publish-date'>"+data[i].news_date+"</p>"
             	+"<p style='min-height:100px;max-height:100px;overflow:hidden'>"+data[i].news_desc+"</p>"
             	+"</div>"      
             	+"</div>";      
 			}
-				var p="<div class='pager' style='float:right'><ul>";
-       				p+="<li><a href='#' class='first-page'></a></li>";
-        			for(var i=0;i<10;i++){
-        				p+="<li><a href='#' class='pagelist'>"+(i+1)+"</a></li>";
-        			}
-        			p+="<li><a href='#' class='last-page'></a></li>";
-        		p+="</ul></div>";
+
+			var p="";		
+			p="<div class='pager' style='float:right'><ul>";
+			if(page>0){
+				p+="<li><a onclick='getnews("+category_id+","+0+")'>First</a></li>";
+				p+="<li><a onclick='getnews("+category_id+","+0+")'>Prev</a></li>";
+			}
+			var begin=1;
+			var end=5;
+			if(page-4<0)
+				begin=0;
+			else
+				begin=page-4;
+			
+			if(totalpage-page<4){
+				end=totalpage;
+			}else{
+				end=page+4;
+			}
+			for(var k=begin;k<end+1;k++){
+				p+="<li><a id='page_"+(k)+"' onclick='getnews("+category_id+","+(k)+")' class='pagelist'>"+(k+1)+"</a></li>";
+			}
+			if(page<totalpage){
+				p+="<li><a onclick='getnews("+category_id+","+(page+1)+")'>Next</a></li>";
+				p+="<li><a onclick='getnews("+category_id+","+totalpage+")'>Last</a></li>";
+			}
+				p+="</ul></div>";		
 			str+=p+"</div>";
 			$("#display-user").html(str);
-			active(module_type_code);
+			active("cate"+category_id);
+			$("#page_"+page).addClass("active");
 		});
 	}
 </script>

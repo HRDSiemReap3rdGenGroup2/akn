@@ -58,7 +58,7 @@
 </head>
 
 <body>
-<c:set value="${requestScope.user }" var="user"></c:set>
+<c:set value="${sessionScope.user }" var="user"></c:set>
 <c:if test="${user==null }">
 	<c:redirect url="home"></c:redirect>
 </c:if>
@@ -85,7 +85,7 @@
                             <div>
                             </div>
                             
-                            <h3 id="save-news">Saved News</h3>
+                            <h3 id="saved-news">Saved News</h3>
                             <div>
                                 <ul class="all-category" id="save-news-li">
                                     <c:set value="${requestScope.savedlist }" var="savedlist"></c:set>
@@ -112,43 +112,7 @@
                 <!--main-content-->
                 <div class="main-content">
                     <div class="column-three-fourth" id="display-user">
-                        <h5 class="user-profile"><span>General User Setting</span>
-                        	<button style="float:right;margin-top:2px;background-color:#e8484c" id="update-user-info">Update Info</button>
-                        </h5>
-                        <table class="table">
-                            <tr>
-                                <td>Username</td>
-                                <td id="username">${user.user_name }</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Password</td>
-                                <td id="password">********</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Email Address</td>
-                                <td id="user-email">${user.user_email }</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Gender</td>
-                                <td id="user-gender">
-                                	<c:choose>
-                                		<c:when test="${user.user_gender==1}">
-                                			Male
-                                		</c:when>
-                                		<c:otherwise>
-                                			Female
-                                		</c:otherwise>
-                                	</c:choose>
-                                </td>
-                                
-                            </tr>
-                            <tr>
-                                <td colspan='3'><a onclick="deactivate()" style="color:#f00">Deactivate</a></td>
-                            </tr>
-                        </table>
+                        
                     </div>
                 </div>
                 <!--/main content-->
@@ -184,67 +148,23 @@
 <!--[if lt IE 9]> <script type="text/javascript" src="js/html5.js"></script> <![endif]-->
 <script type="text/javascript" src="js/mypassion.js"></script>
 <script>
-	$("#update-user-info").click(function(){
-		if($("#update-user-info").text()!='Save'){
-			$("#update-user-info").text("Save");
-			var tmp=$("#username").text();
-			$("#username").html("<input id='input-username' type='text' value='"+tmp+"' style='border:1px solid #000'/>");
-			$("#password").html("<input id='input-password' type='password' value='********' style='border:1px solid #000'/>");
-			$("#user-gender").html("<select id='input-gender'><option value='1'>Male</option><option value='2'>Female</option></select>");
-		}else{
-			var n=$("#input-username").val();
-			var p=$("#input-password").val();
-			var g=$("#input-gender").val();
-			$.post("updateuserinfo",{
-				username:n,
-				password:p,
-				gender:g
-			},function(data){
-				if(data=='success'){
-					$("#username").html(n);
-					$("#password").html("********");
-					var tmp="Male";
-					if(g==2){
-						tmp="Female";
-					}
-					$("#user-gender").html(tmp);
-					swal("Done!", "Your information updated!", "success")
-				}else{
-					swal("Error!", "Error updating your infomation!", "error")
-				}
-				$("#update-user-info").text("Update Info");
-			});
-		}
+	$('#display-user').load('user-setting.jsp');
+	$('#saved-news').click(function(){
+	    $('#display-user').load('saved-news.jsp');
 	});
-	function deactivate(){
-		swal({  
-			title: "Are you sure?",  
-					text: "You're about to delete your account!", 
-					type: "warning", 
-					showCancelButton: true, 
-					confirmButtonColor: "#DD6B55", 
-					confirmButtonText: "Yes", 
-					cancelButtonText: "No",  
-					closeOnConfirm: false, 
-					closeOnCancel: false 
-			},
-					function(isConfirm){   
-						if (isConfirm) {
-								$.post("deleteaccount",function(data){
-									if(data=='success'){
-										swal({title:"Success!", text:"Your account has been deleted.", type:"success"},function(isConfirm){
-											window.location.href="home";
-										});
-									}else{
-										swal("Error!", "Cannot delete", "error");
-									}
-								});
-							} else {  
-								swal("Phew!");  
-							} 
-					}
-			);
-	}
+	
+	$('#user-general').click(function(){
+	    $('#display-user').load('user-setting.jsp');
+	});
+	
+	
+	$('#shared-news').click(function(){
+	    $('#display-user').load('shared-news.html');
+	});
+	
+	$('#commented-news').click(function(){
+	    $('#display-user').load('commented-news.html');
+	});
 </script>
 </body>
 </html>

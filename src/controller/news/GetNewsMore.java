@@ -52,13 +52,19 @@ public class GetNewsMore extends HttpServlet {
 	private void doPro(HttpServletRequest req, HttpServletResponse resp) {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			int category = Integer.parseInt(req.getParameter("category_id"));
-			list = new NewsDAO().getNewsList(category, "top");
+			int category_id = Integer.parseInt(req.getParameter("category_id"));
+			int offset=0;
+			if(req.getParameter("page")!=null){
+				offset=Integer.parseInt(req.getParameter("page"));
+			}
+			offset=offset*6;
+			if((offset/6)>new NewsDAO().getTotalPage(category_id, 6))offset=new NewsDAO().getAllNews().size()-7;
+			if(offset<0)offset=0;
+			list = new NewsDAO().getNewsList(category_id, "latest",offset);
 			resp.setContentType("application/json");
 			resp.setCharacterEncoding("utf-8");
 			String buf = new Gson().toJson(list);
 			resp.getWriter().write(buf);
-
 			// user
 			if (req.getSession().getAttribute("user") != null
 					&& (req.getSession().getAttribute("user") != "")) {

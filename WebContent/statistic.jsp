@@ -192,7 +192,7 @@
 			}	
 			$("#category").append(str);
 		});
-		$.post("getsource",function(data){
+		$.post("getallsource",function(data){
 			var str="";
 			for(var i=0;i<data.length;i++){
 				str+="<option value='"+data[i].source_id+"'>"

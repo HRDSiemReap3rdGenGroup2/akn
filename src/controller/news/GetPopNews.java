@@ -58,7 +58,7 @@ public class GetPopNews extends HttpServlet {
 			} else {
 				int category = Integer.parseInt(req.getParameter("category"));
 				String option = req.getParameter("option");
-				list = new NewsDAO().getNewsList(category, option);
+				list = new NewsDAO().getNewsList(category, option,0,4);
 			}
 			resp.setContentType("application/json");
 			resp.setCharacterEncoding("utf-8");

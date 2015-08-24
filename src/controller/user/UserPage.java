@@ -44,7 +44,7 @@ public class UserPage extends HttpServlet {
 			if(req.getSession().getAttribute("user")!=null){
 			int user_id = ((User) req.getSession().getAttribute("user")).getUser_id();
 			User u=new UserDAO().getUser(user_id);
-			req.setAttribute("user", u);
+			req.getSession().setAttribute("user", u);
 			
 			req.getRequestDispatcher("user.jsp").forward(req, resp);
 			}else{
