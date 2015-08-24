@@ -67,13 +67,13 @@ public class NewsPage extends HttpServlet {
 			// user
 			if (req.getSession().getAttribute("user") != null
 					&& (req.getSession().getAttribute("user") != "")) {
-				int user_id = ((User) req.getSession().getAttribute("user")).getUser_id();
+				User user = (User) req.getSession().getAttribute("user");
 				ArrayList<SaveList> user_savedlist = new SaveListDAO()
-						.getAllSavedNews(user_id);
+						.getAllSavedNews(user.getUser_id());
 				req.setAttribute("user_savedlist", user_savedlist);
 
 				req.setAttribute("subscribe_list",
-						new NewsDAO().getSubscribeList(user_id));
+						new NewsDAO().getSubscribeList(user.getUser_id()));
 			}
 			// category_id
 			req.setAttribute("category_id",category_id);
