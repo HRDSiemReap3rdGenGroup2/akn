@@ -91,8 +91,8 @@ public class NewsDAO {
 
 	public ArrayList<News> getPopNews() throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
-		list=filterNews(4, 0, 0, 1);
-		if(list.size()<4)list=filterNews(4, 0, 0, 7);
+		list=new NewsDAO().filterNews(4, 0, 0, 1);
+		if(list.size()<4)list=new NewsDAO().filterNews(4, 0, 0, 7);
 		return list;
 	}
 
@@ -343,7 +343,7 @@ public class NewsDAO {
 	public ArrayList<News> getAllNews() throws Exception {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			String sql = "SELECT news_id,news_title, category_name ,news_date FROM tbnews n INNER JOIN tbcategory c ON c.category_id=n.category_id order by news_id desc";
+			String sql = "SELECT news_id,news_title, category_name , s.source_name,news_date FROM tbnews n INNER JOIN tbcategory c ON c.category_id=n.category_id INNER JOIN tbsource s ON s.source_id=n.source_id order by news_id desc";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
@@ -352,6 +352,7 @@ public class NewsDAO {
 				news.setNews_id(rs.getInt("news_id"));
 				news.setCategory_name(rs.getString("category_name"));
 				news.setNews_title(rs.getString("news_title"));
+				news.setSource_name(rs.getString("source_name"));
 				news.setNews_date(rs.getDate("news_date"));
 				list.add(news);
 			}
@@ -364,6 +365,7 @@ public class NewsDAO {
 		}
 		return list;
 	}
+
 
 	public News getNews(int news_id) throws Exception {
 		try {
