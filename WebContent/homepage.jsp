@@ -23,7 +23,6 @@
 
 <!-- STYLES -->
 <link rel="stylesheet" type="text/css" href="css/superfish.css" media="screen"/>
-<link rel="stylesheet" type="text/css" href="css/fontello/fontello.css" />
 <link rel="stylesheet" type="text/css" href="css/flexslider.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="css/ui.css" />
 <link rel="stylesheet" type="text/css" href="css/base.css" />
