@@ -67,9 +67,9 @@
                             <p></p>
                             
                             <div class="contact-info">
-                            	<p class="man"><i class="icon-location"></i>Creative Laboratory <br />77 New York Avenue, New York city, <br />USA 10000.</p>
-                                <p class="phone"><i class="icon-phone"></i> Phone:  73 443 11 23. <br />Fax:  73 443 11 23.</p>
-                                <p class="envelop"><i class="icon-mail"></i>Email: <a href="#">mail@page.com</a> <br /> Web: <a href="#">www.page.com</a></p> 
+                            	<p class="man"><i class="icon-location"></i>HRD Center <br />ផ្ទះលេខ#12, ផ្លូវ 323, សង្កាត់​បឹងកក់ II<br /></p>
+                                <p class="phone"><i class="icon-phone"></i> Phone: (855)23 99 13 14 <br />Fax:  73 443 11 23.</p>
+                                <p class="envelop"><i class="icon-mail"></i>Email: <a href="#">info.kshrd@gmail.com</a> <br /></p> 
                             </div>
                     </div><!-- /.column-two-third -->
 	                <div class="column-one-third">
