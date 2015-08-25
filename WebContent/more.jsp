@@ -176,7 +176,7 @@
             	+"<a href='news?id="+data[i].news_id+"' target='_blank'><img src='"+data[i].news_img+"' style='height:155px;width:285px'/></a>"
             	+"<a href='news?id="+data[i].news_id+"' target='_blank'><h5 style='height:50px;overflow:hidden'>"+data[i].news_title+"</h5></a>"
             	+"<p class='publish-date'>"+data[i].news_date+"</p>"
-            	+"<p style='max-height:60px;overflow:hidden'>"+data[i].news_desc+"</p>"
+            	+"<p style='max-height:60px;overflow:hidden'>"+data[i].news_desc.substring(0,100)+"...</p>"
             	+"<div>"
             	+"<img src='img/logo/"+data[i].source_id+".png' style='width:20px;'/>"
                 +"<span style='color:#999'>Viewed:"+data[i].hit_count+"</span>";
@@ -255,7 +255,7 @@
             	+"<a href='news?id="+data[i].news_id+"' target='_blank'><img src='"+data[i].news_img+"' style='height:155px;width:285px'/></a>"
             	+"<a href='news?id="+data[i].news_id+"' target='_blank'><h5 style='height:50px;overflow:hidden'>"+data[i].news_title+"</h5></a>"
             	+"<p class='publish-date'>"+data[i].news_date+"</p>"
-            	+"<p style='max-height:60px;overflow:hidden'>"+data[i].news_desc+"</p>"
+            	+"<p style='max-height:60px;overflow:hidden'>"+data[i].news_desc.substring(0,100)+"...</p>"
             	+"<div>"
             	+"<img src='img/logo/"+data[i].source_id+".png' style='width:20px;'/>"
                 +"<span style='color:#999'>Viewed:"+data[i].hit_count+"</span>";

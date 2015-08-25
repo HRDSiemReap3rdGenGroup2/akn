@@ -54,7 +54,7 @@ function deleteNews(news_id){
 				confirmButtonText: "Yes", 
 				cancelButtonText: "No",  
 				closeOnConfirm: false, 
-				closeOnCancel: false 
+				closeOnCancel: true 
 		},
 				function(isConfirm){   
 					if (isConfirm) {

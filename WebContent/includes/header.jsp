@@ -11,7 +11,7 @@
                         <!-- <div class="languages" style="float:right;">
                             <a href="#"><span>ខ្មែរ</span></a><span> | </span><a href="#">ENG</a>
                         </div> -->
-	                    <div style="float:right;">
+	                    <div class="languages" style="float:right;">
 	                        <c:set var="user" value="${sessionScope.user }"></c:set>
 	                        <c:choose>
 	                        	<c:when test="${user==null || user=='' }">

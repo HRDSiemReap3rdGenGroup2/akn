@@ -69,7 +69,7 @@
 	               		<c:choose>
 	                			<c:when test="${user!=null || user!=''}">
 	                 				<c:forEach items="${requestScope.subscribe_list }" var="i">
-	                						<c:if test="${i==x }">
+	                						<c:if test="${i.category_id==x }">
 	                    						<c:set value="${1}" var="have"></c:set>
 	                    						<button style="float:right;padding:10px;background-color:#ccc" disabled>Subscribed</button>
 	                						</c:if>

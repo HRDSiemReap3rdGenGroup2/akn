@@ -44,9 +44,7 @@ function unsubscribe(category_id){
 				showCancelButton: true, 
 				confirmButtonColor: "#DD6B55", 
 				confirmButtonText: "Yes", 
-				cancelButtonText: "No",  
-				closeOnConfirm: false, 
-				closeOnCancel: true 
+				closeOnConfirm: false 
 		},
 				function(isConfirm){   
 					if (isConfirm) {

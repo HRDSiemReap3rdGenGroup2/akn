@@ -40,7 +40,7 @@ public class NewsPage extends HttpServlet {
 			throws ServletException, IOException {
 		doPro(req,resp);
 	}
-	private void doPro(HttpServletRequest req, HttpServletResponse resp) {
+	private void doPro(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		try{
 			resp.setIntHeader("Refresh", 60 * 5);
 			int category_id = Integer.parseInt(req.getParameter("id"));
@@ -65,31 +65,25 @@ public class NewsPage extends HttpServlet {
 			//menu
 			req.setAttribute("menu", new MenuDAO().getAllMenu());
 			// user
-			if (req.getSession().getAttribute("user") != null
-					&& (req.getSession().getAttribute("user") != "")) {
+			if (req.getSession().getAttribute("user") != null && (req.getSession().getAttribute("user") != "")) {
 				User user = (User) req.getSession().getAttribute("user");
 				ArrayList<SaveList> user_savedlist = new SaveListDAO()
 						.getAllSavedNews(user.getUser_id());
 				req.setAttribute("user_savedlist", user_savedlist);
 
-				req.setAttribute("subscribe_list",
-						new NewsDAO().getSubscribeList(user.getUser_id()));
+				req.setAttribute("subscribe_list", new NewsDAO().getSubscribeList(user.getUser_id()));
 			}
 			// category_id
 			req.setAttribute("category_id",category_id);
-
 			list = new NewsDAO().getNewsList(category_id, 6, current_page);
 			req.setAttribute("list", list);
 			req.setAttribute("title", new CategoryDAO().getCategoryName(category_id));
 			req.setAttribute("title_id", category_id);
 			req.getRequestDispatcher("/category.jsp").forward(req, resp);
+			
 		}catch(Exception e){
 			e.printStackTrace();
-			try {
-				resp.sendRedirect("home");
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			resp.sendRedirect("home");
 		}
 	}
 
