@@ -7,7 +7,7 @@
 </head>
 <body>
 <c:set value="${sessionScope.user }" var="user"></c:set>
-<h5 class="user-profile"><span>Your Saved News</span></h5>
+<h5 class="user-profile"><span>Subscribed news</span></h5>
 <div class="main-content">
 <div class="column-three-fourth">
 <div class="wrap-news">
@@ -18,57 +18,48 @@
 <script>
 listNews();
 function listNews(){
-	$.post("getsavednews",{
+	$.post("getsubscribelist",{
 		user_id:'${user.user_id}'
 	},function(data){
+		if(data.length==0){
+			swal("You're not yet subscribe any category!");
+		}
 		var str="";
 		for(var i=0;i<data.length;i++){
-			str+="<div class='news-row' style='height: 180px'>"
-			    +"<div class='items'>"
-		    +"<a href='news?id="+data[i].news_id+"' target='_blank'>"
-		    +"<img src='"+data[i].news_img+"' style='height:155px;width:285px'>"
+			str+="<div class='news-row' style=''>"
+		    +"<a href='category?id="+data[i].category_id+"' target='_blank'>"
+		    +"<h5 style='height:50px;overflow:hidden'>"+data[i].category_name+"</h5>"
 		    +"</a>"
-		    +"<a href='news?id="+data[i].news_id+"' target='_blank'>"
-		    +"<h5 style='height:50px;overflow:hidden'>"+data[i].news_title+"</h5>"
-		    +"</a>"
-		    +"<p class='publish-date'>"+data[i].news_date+"</p>"
-		    +"<p style='max-height:60px;overflow:hidden'>"+data[i].news_desc+"</p>"
-		    +"<div>"
-		    +"<img src='img/logo/"+data[i].source_id+".png' style='width:20px;'>"
-		    +"<span style='color:#999'>Viewed:"+data[i].hit_count+"</span>"
-		    +"<button style='float:right;background-color:#E9967A' onclick='deleteNews("+data[i].news_id+")' id='"+data[i].news_id+"'>Delete</button>"
-		    +"</div>"
-		    +"</div>"
+		    +"<button style='background-color:#E9967A' onclick='unsubscribe("+data[i].category_id+")' id='"+data[i].news_id+"'>Unsubscribe</button>"
 		    +"</div>"	
 		}
 		$(".wrap-news").html(str);
 	});	
 }
-function deleteNews(news_id){
+function unsubscribe(category_id){
 	swal({  
 		title: "Are you sure?",  
-				text: "You're about to delete your saved news!", 
+				text: "", 
 				type: "warning", 
 				showCancelButton: true, 
 				confirmButtonColor: "#DD6B55", 
 				confirmButtonText: "Yes", 
 				cancelButtonText: "No",  
 				closeOnConfirm: false, 
-				closeOnCancel: false 
+				closeOnCancel: true 
 		},
 				function(isConfirm){   
 					if (isConfirm) {
-							$.post("deletesavednews",{news_id:news_id},function(data){
+							$.post("unsubscribenews",{category_id:category_id},function(data){
 								if(data=='success'){
 									swal({title:"Success!", text:"", type:"success"},function(isConfirm){
 										listNews();
 									});
 								}else{
-									swal("Error!", "Cannot delete", "error");
+									swal("Error!", "", "error");
 								}
 							});
-						} else {  
-						} 
+						}
 				}
 		);
 }

@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.dao.NewsDAO;
-import model.dao.SaveListDAO;
 import model.dto.News;
-import model.dto.SaveList;
-import model.dto.User;
 
 import com.google.gson.Gson;
 
@@ -54,25 +51,22 @@ public class GetNewsMore extends HttpServlet {
 		try {
 			int category_id = Integer.parseInt(req.getParameter("category_id"));
 			int offset=0;
+			int source_id=0;
 			if(req.getParameter("page")!=null){
 				offset=Integer.parseInt(req.getParameter("page"));
 			}
+			if(req.getParameter("source_id")!=null){
+				source_id=Integer.parseInt(req.getParameter("source_id"));
+			}
 			offset=offset*6;
-			if((offset/6)>new NewsDAO().getTotalPage(category_id, 6))offset=new NewsDAO().getAllNews().size()-7;
+			if((offset/6)>new NewsDAO().getTotalPage(category_id, 6))offset=new NewsDAO().getAllNews().size()-6;
 			if(offset<0)offset=0;
-			list = new NewsDAO().getNewsList(category_id, "latest",offset);
+			list = new NewsDAO().getNewsList(category_id,source_id ,"latest",offset,6);
 			resp.setContentType("application/json");
 			resp.setCharacterEncoding("utf-8");
 			String buf = new Gson().toJson(list);
 			resp.getWriter().write(buf);
-			// user
-			if (req.getSession().getAttribute("user") != null
-					&& (req.getSession().getAttribute("user") != "")) {
-				int user_id = ((User) req.getSession().getAttribute("user")).getUser_id();
-				ArrayList<SaveList> user_savedlist = new SaveListDAO()
-						.getAllSavedNews(user_id);
-				req.setAttribute("user_savedlist", user_savedlist);
-			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -18,7 +18,7 @@
 
 <title>${requestScope.title } | AKNEWS</title>
 
-<link rel="shortcut icon" href="img/sms-4.ico" />
+<link rel="shortcut icon" href="img/logo/aknlogo.png" />
 
 <!-- STYLES -->
 <link rel="stylesheet" type="text/css" href="css/superfish.css" media="screen"/>
@@ -96,7 +96,9 @@
 	                                <a href="news?id=${x.news_id}" target="_blank"><h5>${x.news_title }</h5></a>
 	                                <p class="publish-date">${x.news_date }</p>    
 	                                <p>${fn:substring(x.news_desc,0,120) }..</p>
-	                                <div><span style="color:#999">Viewed:${x.hit_count}</span>
+	                                <div>
+	                                <img src="img/logo/${x.source_id}.png" style="width:20px;"/>
+	                                <span style="color:#999">Viewed:${x.hit_count}</span>
 									<c:set value="${0}" var="have"></c:set>
 	                                		<c:choose>
 		                                			<c:when test="${user!=null || user!=''}">
@@ -179,6 +181,7 @@
 		                                        <span title="${row.news_date }">${fn:substring(row.news_date,0,20)}</span>
 		                                        <a href="news?id=${row.news_id}" target="_blank">${fn:substring(row.news_title,0,60)}..</a>
 			                                	<div>
+			                                		<img src="img/logo/${row.source_id}.png" style="width:20px;position:relative;top:5px"/>
 			                                		<span style="color:#aaa;display:inline;">Viewed:${row.hit_count}</span>
 			                                		<c:set value="${0}" var="have"></c:set>
 	                                		<c:choose>

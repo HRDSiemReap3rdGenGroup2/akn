@@ -17,7 +17,7 @@
 
 <title>TOP NEWS | AKNEWS</title>
 
-<link rel="shortcut icon" href="img/sms-4.ico" />
+<link rel="shortcut icon" href="img/logo/aknlogo.png" />
 
 <!-- STYLES -->
 <link rel="stylesheet" type="text/css" href="css/superfish.css" media="screen"/>

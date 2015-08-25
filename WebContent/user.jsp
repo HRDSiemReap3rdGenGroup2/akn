@@ -17,7 +17,7 @@
 
 <title> ${requestScope.user.user_name } | AKNnews</title>
 
-<link rel="shortcut icon" href="img/sms-4.ico" />
+<link rel="shortcut icon" href="img/logo/aknlogo.png" />
 
 <!-- STYLES -->
 <link rel="stylesheet" type="text/css" href="css/superfish.css" media="screen"/>
@@ -81,28 +81,14 @@
                         
                         <h5 class="user-profile"><span>User Profile</span></h5>
                         <div id="accordion">
-                            <h3 id="user-general" style="margin-top:15px">General</h3>
+                            <h3 id="saved-news" style="margin-top:15px;">Saved News</h3>
                             <div>
                             </div>
-                            
-                            <h3 id="saved-news">Saved News</h3>
-                            <div>
-                                <ul class="all-category" id="save-news-li">
-                                    <c:set value="${requestScope.savedlist }" var="savedlist"></c:set>
-	                            	<c:forEach items="${savedlist }" var="i">
-	                            		<li><a onclick="myfun(${i.news_id}})">${i.news_title }</a></li>
-	                            	</c:forEach>
-                                </ul>
-                            </div>
-                        
                             <h3 id="subscribe-list">Subscribe List</h3>
                             <div>
-                            	<ul class="all-category" id="subscribe-li">
-                            	<c:set value="${requestScope.subscribelist }" var="subscribelist"></c:set>
-                            	<c:forEach items="${subscribelist }" var="i">
-                            		<li><a onclick="unsubscribe(${i.module_id}})">${i.module_name }</a></li>
-                            	</c:forEach>
-                                </ul>
+                            </div>
+                            <h3 id="user-general">Setting</h3>
+                            <div>
                             </div>
                         </div>
                     </div>    
@@ -148,7 +134,7 @@
 <!--[if lt IE 9]> <script type="text/javascript" src="js/html5.js"></script> <![endif]-->
 <script type="text/javascript" src="js/mypassion.js"></script>
 <script>
-	$('#display-user').load('user-setting.jsp');
+	$('#display-user').load('saved-news.jsp');
 	$('#saved-news').click(function(){
 	    $('#display-user').load('saved-news.jsp');
 	});
@@ -157,13 +143,8 @@
 	    $('#display-user').load('user-setting.jsp');
 	});
 	
-	
-	$('#shared-news').click(function(){
-	    $('#display-user').load('shared-news.html');
-	});
-	
-	$('#commented-news').click(function(){
-	    $('#display-user').load('commented-news.html');
+	$('#subscribe-list').click(function(){
+	    $('#display-user').load('user-subscribe-list.jsp');
 	});
 </script>
 </body>

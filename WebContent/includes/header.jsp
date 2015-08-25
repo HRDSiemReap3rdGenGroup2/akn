@@ -8,14 +8,14 @@
                 <!--login|signup|languages-->
                 <div class="column" style="margin-bottom:0">
                     <div class="login">
-                        <div class="languages" style="float:right;">
+                        <!-- <div class="languages" style="float:right;">
                             <a href="#"><span>ខ្មែរ</span></a><span> | </span><a href="#">ENG</a>
-                        </div>
+                        </div> -->
 	                    <div style="float:right;">
 	                        <c:set var="user" value="${sessionScope.user }"></c:set>
 	                        <c:choose>
 	                        	<c:when test="${user==null || user=='' }">
-			                        <a href="login"><span>ចូល</span></a><span> | </span><a href="login"><span>ចុះឈ្មោះ</span></a>
+			                        <a href="login"><span>ចូល</span><span> | </span><span>ចុះឈ្មោះ</span></a>
 	                        	</c:when>
 	                        	<c:otherwise>
 	                        	<c:set value="${user.user_type }" var="e"></c:set>
@@ -26,7 +26,7 @@
 			                        <a href="user/signout"><span>ចេញ</span></a>
 	                        	</c:otherwise>
 	                        </c:choose>
-	                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+	                        <!-- <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> -->
 	                    </div>
 	                    <div id="google_translate_element" style="float:right;margin-right:10px;"></div>
                         <div style="clear:both"></div>

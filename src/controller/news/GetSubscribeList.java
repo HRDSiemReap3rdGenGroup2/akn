@@ -8,17 +8,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dao.MenuDAO;
-import model.dao.SaveListDAO;
-import model.dto.SaveList;
-import model.dto.User;
+import model.dao.NewsDAO;
+import model.dto.Category;
 
-public class CallStatisticPage extends HttpServlet {
+import com.google.gson.Gson;
+
+public class GetSubscribeList extends HttpServlet {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8779574409950237628L;
+	private static final long serialVersionUID = -363235646393750940L;
+
 	/* (non-Javadoc)
 	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
@@ -38,22 +39,17 @@ public class CallStatisticPage extends HttpServlet {
 	}
 
 	private void doPro(HttpServletRequest req, HttpServletResponse resp) {
+		ArrayList<Category> list=new ArrayList<Category>();
 		try{
-			//menu
-			req.setAttribute("menu", new MenuDAO().getAllMenu());
-			// user
-			if (req.getSession().getAttribute("user") != null
-					&& (req.getSession().getAttribute("user") != "")) {
-				int user_id = ((User) req.getSession().getAttribute("user")).getUser_id();
-				ArrayList<SaveList> user_savedlist = new SaveListDAO()
-						.getAllSavedNews(user_id);
-				req.setAttribute("user_savedlist", user_savedlist);
-			}
-			req.getRequestDispatcher("statistic.jsp").forward(req, resp);
+			int user_id = Integer.parseInt(req.getParameter("user_id"));
+			list = new NewsDAO().getSubscribeList(user_id);
+			resp.setContentType("application/json");
+			resp.setCharacterEncoding("utf-8");
+			String buf = new Gson().toJson(list);
+			resp.getWriter().write(buf);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
-
 
 }

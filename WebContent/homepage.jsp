@@ -19,7 +19,7 @@
 
 <title>All Khmer News</title>
 
-<link rel="shortcut icon" href="img/sms-4.ico" />
+<link rel="shortcut icon" href="img/logo/aknlogo.png" />
 
 <!-- STYLES -->
 <link rel="stylesheet" type="text/css" href="css/superfish.css" media="screen"/>
@@ -134,7 +134,7 @@
                                         <span title="${row.news_date }">${fn:substring(row.news_date,0,20)}</span>
                                         <a href="news?id=${row.news_id}" target="_blank">${row.news_title}</a>
 	                                	<div>
-	                                		<img src="sabay-logo.png" width="20px"/>
+	                                		<img src="img/logo/${row.source_id}.png" style="width:20px;position:relative;top:5px"/>
 	                                		<span style="color:#aaa;display:inline;">Viewed:${row.hit_count}</span>
                                 	     	<c:set value="${0}" var="have"></c:set>
 	                                		<c:choose>
@@ -182,7 +182,7 @@
                                         <span title="${row.news_date }">${fn:substring(row.news_date,0,20)}</span>
                                         <a href="news?id=${row.news_id}" target="_blank">${row.news_title}</a>
 	                                	<div>
-	                                		<img src="koh.png" width="35px"/>
+	                                		<img src="img/logo/${row.source_id}.png" style="width:20px;position:relative;top:5px"/>
 	                                		<span style="color:#aaa;display:inline;">Viewed:${row.hit_count}</span>
 	                                		<c:set value="${0}" var="have"></c:set>
 	                                		<c:choose>
@@ -239,8 +239,8 @@
                                     	<span title="${row.news_date }">${fn:substring(row.news_date,0,20)}</span>
                                         <a href="news?id=${row.news_id}" target="_blank">${row.news_title}</a>
 	                                	<div>
+	                                		<img src="img/logo/${row.source_id}.png" style="width:20px;position:relative;top:5px;"/>
 	                                		<span style="color:#aaa;display:inline;">Viewed:${row.hit_count}</span>
-	                                		<img src="bnews.png" width="20px"/>
 	                                		<c:set value="${0}" var="have"></c:set>
 	                                		<c:choose>
 		                                			<c:when test="${user!=null || user!=''}">
@@ -292,7 +292,7 @@
                                         <span title="${row.news_date }">${fn:substring(row.news_date,0,20)}</span>
                                         <a href="news?id=${row.news_id}" target="_blank">${row.news_title}</a>
 	                                	<div style="position:relative;bottom:0px;width:100%">
-	                                		<img src="sabay-logo.png" width="20px"/>
+	                                		<img src="img/logo/${row.source_id}.png" style="width:20px;position:relative;top:5px"/>
 	                                		<span style="color:#aaa;display:inline;">Viewed:${row.hit_count}</span>
 	                                		<c:set value="${0}" var="have"></c:set>
 	                                		<c:choose>
@@ -339,7 +339,7 @@
 	                                        <span title="${row.news_date }">${fn:substring(row.news_date,0,20)}</span>
 	                                        <a href="news?id=${row.news_id}" target="_blank">${row.news_title}</a>
 		                                	<div>
-		                                		<img src="sabay-logo.png" width="20px"/>
+		                                		<img src="img/logo/${row.source_id}.png" style="width:20px;position:relative;top:5px"/>
 		                                		<span style="color:#aaa;display:inline;">Viewed:${row.hit_count}</span>
 	                                		<c:set value="${0}" var="have"></c:set>
 	                                		<c:choose>
@@ -412,15 +412,16 @@
 					+"<span title='"+data[i].news_date+"'>"+data[i].news_date.substring(0,20)+"</span>"
 					+"<a href='news?id="+data[i].news_id+"' target='_blank'>"+data[i].news_title+"</a>"
 					+"<div>"
+					+"<img src='img/logo/"+data[i].source_id+".png' style='width:20px;position:relative;top:5px'/>"
 					+"<span style='color:#aaa;display:inline;'>Viewed:"+data[i].hit_count+"</span>";
 					var have=0;
 					if('${user}'!=null||'${user}'!=''){
 						var j=[];
 						<c:forEach items='${requestScope.user_savedlist }' var='i'>
-						    j.push('${i}');
+						    j.push(${i.news_id});
 						</c:forEach>
-						for(j=0;j<i.length;j++){
-							if(j.news_id==i.news_id){
+						for(l=0;l<j.length;l++){
+							if(j[l]==data[i].news_id){
 								have=1;
 								str+="<button style='float:right;background:#ccc' id='"+data[i].news_id+"' disabled>Saved</button>";
 							}
@@ -451,15 +452,16 @@
 					+"<span title='"+data[i].news_date+"'>"+data[i].news_date.substring(0,20)+"</span>"
 					+"<a href='news?id="+data[i].news_id+"' target='_blank'>"+data[i].news_title+"</a>"
 					+"<div>"
+					+"<img src='img/logo/"+data[i].source_id+".png' style='width:20px;position:relative;top:5px'/>"
 					+"<span style='color:#aaa;display:inline;'>Viewed:"+data[i].hit_count+"</span>";
 					var have=0;
 					if('${user}'!=null||'${user}'!=''){
 						var j=[];
 						<c:forEach items='${requestScope.user_savedlist }' var='i'>
-						    j.push('${i}');
+						    j.push(${i.news_id});
 						</c:forEach>
-						for(j=0;j<i.length;j++){
-							if(j.news_id==i.news_id){
+						for(l=0;l<j.length;l++){
+							if(j[l]==data[i].news_id){
 								have=1;
 								str+="<button style='float:right;background:#ccc' id='"+data[i].news_id+"' disabled>Saved</button>";
 							}
@@ -490,15 +492,16 @@
 					+"<span title='"+data[i].news_date+"'>"+data[i].news_date.substring(0,20)+"</span>"
 					+"<a href='news?id="+data[i].news_id+"' target='_blank'>"+data[i].news_title+"</a>"
 					+"<div>"
+					+"<img src='img/logo/"+data[i].source_id+".png' style='width:20px;position:relative;top:5px'/>"
 					+"<span style='color:#aaa;display:inline;'>Viewed:"+data[i].hit_count+"</span>";
 					var have=0;
 					if('${user}'!=null||'${user}'!=''){
 						var j=[];
 						<c:forEach items='${requestScope.user_savedlist }' var='i'>
-						    j.push('${i}');
+						    j.push(${i.news_id});
 						</c:forEach>
-						for(j=0;j<i.length;j++){
-							if(j.news_id==i.news_id){
+						for(l=0;l<j.length;l++){
+							if(j[l]==data[i].news_id){
 								have=1;
 								str+="<button style='float:right;background:#ccc' id='"+data[i].news_id+"' disabled>Saved</button>";
 							}
@@ -529,15 +532,16 @@
 					+"<span title='"+data[i].news_date+"'>"+data[i].news_date.substring(0,20)+"</span>"
 					+"<a href='news?id="+data[i].news_id+"' target='_blank'>"+data[i].news_title+"</a>"
 					+"<div>"
+					+"<img src='img/logo/"+data[i].source_id+".png' style='width:20px;position:relative;top:5px'/>"
 					+"<span style='color:#aaa;display:inline;'>Viewed:"+data[i].hit_count+"</span>";
 					var have=0;
 					if('${user}'!=null||'${user}'!=''){
 						var j=[];
 						<c:forEach items='${requestScope.user_savedlist }' var='i'>
-						    j.push('${i}');
+						    j.push(${i.news_id});
 						</c:forEach>
-						for(j=0;j<i.length;j++){
-							if(j.news_id==i.news_id){
+						for(l=0;l<j.length;l++){
+							if(j[l]==data[i].news_id){
 								have=1;
 								str+="<button style='float:right;background:#ccc' id='"+data[i].news_id+"' disabled>Saved</button>";
 							}

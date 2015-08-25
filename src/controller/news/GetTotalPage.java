@@ -33,7 +33,11 @@ public class GetTotalPage extends HttpServlet {
 	private void doPro(HttpServletRequest req, HttpServletResponse resp) {
 		try{
 			int category_id=Integer.parseInt(req.getParameter("category_id"));
-			int totalpage=new NewsDAO().getTotalPage(category_id, 6);
+			int source_id=0;
+			if(req.getParameter("source_id")!=null)
+				source_id=Integer.parseInt(req.getParameter("source_id"));
+			
+			int totalpage=new NewsDAO().getTotalPage(category_id, 6, source_id);
 			resp.setContentType("application/json");
 			resp.setCharacterEncoding("utf-8");
 			String buf = new Gson().toJson(totalpage);

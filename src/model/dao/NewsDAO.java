@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.dto.Category;
 import model.dto.News;
 import utilities.DBUtility;
 
@@ -261,8 +262,12 @@ public class NewsDAO {
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, category_id);
 			ResultSet rs = p.executeQuery();
+			int tmp=0;
 			if (rs.next())
-				return rs.getInt(1) / limit;
+				tmp= rs.getInt(1);
+			if(tmp%limit==0)tmp=(tmp/limit)-1;
+			else tmp=tmp/limit;
+			return tmp;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -272,6 +277,51 @@ public class NewsDAO {
 		return 0;
 	}
 
+	public int getTotalPage(int category_id, int limit, int source_id) throws SQLException {
+		try {
+			String sql = "select count(*) from tbnews where category_id=?";
+			PreparedStatement p;
+			if(source_id==0){
+				p = con.prepareStatement(sql);
+				p.setInt(1, category_id);
+			}else{
+				sql+=" and source_id=?";
+				p=con.prepareStatement(sql);
+				p.setInt(1, category_id);
+				p.setInt(2,source_id);
+			}
+			ResultSet rs = p.executeQuery();
+			int tmp=0;
+			if (rs.next())
+				tmp= rs.getInt(1);
+			if(tmp%limit==0)tmp=(tmp/limit)-1;
+			else tmp=tmp/limit;
+			return tmp;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null)
+				con.close();
+		}
+		return 0;
+	}
+	
+	public int getTotalNews(int category_id) throws SQLException{
+		try{
+			String sql = "select count(*) from tbnews where category_id=?";
+			PreparedStatement p = con.prepareStatement(sql);
+			p.setInt(1, category_id);
+			ResultSet rs = p.executeQuery();
+			if (rs.next())
+				return rs.getInt(1);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(con!=null)con.close();
+		}
+		return 0;
+	}
+	
 	public ArrayList<News> getNewsList(int category_id, int limit, int offset)
 			throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
@@ -644,6 +694,68 @@ public class NewsDAO {
 		return list;
 	}
 	
+	/**
+	 * 
+	 * @param category_id
+	 * @param source_id (0 for all source)
+	 * @param option ("latest", "top")
+	 * @param offset
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<News> getNewsList(int category_id, int source_id, String option, int offset, int limit)
+			throws SQLException {
+		ArrayList<News> list = new ArrayList<News>();
+		try {
+			PreparedStatement p;
+			String sql="select n.news_date, n.news_id, n.news_title, n.news_description, n.news_img, n.news_path, n.news_hit_count, n.category_id, n.source_id, c.category_name, s.source_name from tbnews n inner join tbcategory c on c.category_id=n.category_id inner join tbsource s on s.source_id=n.source_id where n.category_id=?";
+			if(source_id==0){
+			if (option.equals("latest")) {
+				sql += " ORDER BY news_id DESC LIMIT ? OFFSET ?";
+			} else {
+				sql += " ORDER BY news_hit_count DESC LIMIT ? OFFSET ?";
+			}
+			p = con.prepareStatement(sql);
+			p.setInt(1, category_id);
+			p.setInt(2, limit);
+			p.setInt(3, offset);
+			}else{
+				if (option.equals("latest")) {
+					sql += " and n.source_id=? ORDER BY news_id DESC LIMIT ? OFFSET ?";
+				} else {
+					sql += " and n.source_id=? ORDER BY news_hit_count DESC LIMIT ? OFFSET ?";
+				}
+				p = con.prepareStatement(sql);
+				p.setInt(1, category_id);
+				p.setInt(2, source_id);
+				p.setInt(3, limit);
+				p.setInt(4, offset);
+			}
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				News e = new News();
+				e.setNews_id(rs.getInt("news_id"));
+				e.setCategory_id(rs.getInt("category_id"));
+				e.setNews_title(rs.getString("news_title"));
+				e.setNews_date(rs.getDate("news_date"));
+				e.setNews_img(rs.getString("news_img"));
+				e.setNews_path(rs.getString("news_path"));
+				e.setCategory_name(rs.getString("category_name"));
+				e.setSource_id(rs.getInt("source_id"));
+				e.setNews_desc(rs.getString("news_description"));
+				e.setHit_count(rs.getInt("news_hit_count"));
+				list.add(e);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null)
+				con.close();
+		}
+		return list;
+	}
+	
+	
 	public String getMediaName(int id) throws SQLException {
 		try {
 			String sql = "select user_info_code from tbnews where news_id=?";
@@ -661,15 +773,18 @@ public class NewsDAO {
 		return "";
 	}
 
-	public ArrayList<String> getSubscribeList(int user_id) throws SQLException {
-		ArrayList<String> list = new ArrayList<String>();
+	public ArrayList<Category> getSubscribeList(int user_id) throws SQLException {
+		ArrayList<Category> list = new ArrayList<Category>();
 		try {
-			String sql = "select category_id from tbsubscribe where user_id=?";
+			String sql = "select s.category_id, c.category_name from tbsubscribe s inner join tbcategory c on c.category_id=s.category_id where s.user_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, user_id);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
-				list.add(rs.getString(1));
+				Category c=new Category();
+				c.setCategory_id(rs.getInt("category_id"));
+				c.setCategory_name(rs.getString("category_name"));
+				list.add(c);
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -692,6 +807,7 @@ public class NewsDAO {
 				n.setNews_title(rs.getString("news_title"));
 				n.setNews_id(rs.getInt("news_id"));
 				n.setNews_path(rs.getString("news_path"));
+				n.setSource_id(rs.getInt("source_id"));
 				n.setNews_desc(rs.getString("news_description"));
 				n.setHit_count(rs.getInt("news_hit_count"));
 				n.setNews_img(rs.getString("news_img"));
@@ -705,6 +821,42 @@ public class NewsDAO {
 				con.close();
 		}
 		return list;
+	}
+
+	public boolean deleteSavedNews(int news_id, int user_id) throws SQLException {
+		try {
+			String sql = "DELETE FROM tbsavelist WHERE news_id=? and user_id=?";
+			PreparedStatement p = con.prepareStatement(sql);
+			p.setInt(1, news_id);
+			p.setInt(2, user_id);
+			if (p.executeUpdate() > 0)
+				return true;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (con != null)
+				con.close();
+		}
+		return false;
+	}
+
+	public boolean removeSubscribe(int category_id, int user_id) throws SQLException {
+		try {
+			String sql = "DELETE FROM tbsubscribe WHERE category_id=? and user_id=?";
+			PreparedStatement p = con.prepareStatement(sql);
+			p.setInt(1, category_id);
+			p.setInt(2, user_id);
+			if (p.executeUpdate() > 0)
+				return true;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (con != null)
+				con.close();
+		}
+		return false;
 	}
 	
 	

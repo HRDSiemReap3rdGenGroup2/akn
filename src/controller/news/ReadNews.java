@@ -1,9 +1,12 @@
 package controller.news;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,12 +64,45 @@ public class ReadNews extends HttpServlet {
 			}
 						
 			String news_path = new NewsDAO().getNewsPath(id);
-			new NewsDAO().read(id);// increase number of hit count of this news
-									// by 1
+			
+			boolean help=false;
+			Cookie ck[]=req.getCookies();  
+			StringBuilder sb=new StringBuilder();
+			InetAddress address = InetAddress.getLocalHost();
+            //InetAddress address = InetAddress.getByName("192.168.46.53");
+
+            /*
+             * Get NetworkInterface for the current host and then read the
+             * hardware address.
+             */
+            NetworkInterface ni = NetworkInterface.getByInetAddress(address);
+            if (ni != null) {
+                byte[] mac = ni.getHardwareAddress();
+                if (mac != null) {
+                    for (int i = 0; i < mac.length; i++) {
+                    	sb.append(String.format("%02X ", mac[i]));
+                    }
+                    for(int i=0;i<ck.length;i++){  
+                    	if(ck[i].getName().equalsIgnoreCase("user_address"+id) && ck[i].getValue().equalsIgnoreCase(sb.toString())){
+                    		help=true;
+                    	}
+           			}  
+                } else {
+                	help=true;
+                }
+            } else {
+            	help=true;
+            }
+			
+			if(!help){
+				Cookie c=new Cookie("user_address"+id,sb.toString());
+				c.setMaxAge(60*60*24);
+				resp.addCookie(c);
+				new NewsDAO().read(id);// increase number of hit count of this news by 1
+			}
 			req.setAttribute("url", news_path);
 			if (!news_path.contains("http")) {
-				java.util.ArrayList<model.dto.News> list = new NewsDAO()
-						.getPopNews();
+				java.util.ArrayList<model.dto.News> list = new NewsDAO().getPopNews();
 				req.setAttribute("popularnews", list);
 				//menu
 				req.setAttribute("menu", new MenuDAO().getAllMenu());

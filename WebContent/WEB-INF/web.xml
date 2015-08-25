@@ -38,6 +38,22 @@
     <url-pattern>/subscribenews</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>getsubscribelist</servlet-name>
+    <servlet-class>controller.news.GetSubscribeList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getsubscribelist</servlet-name>
+    <url-pattern>/getsubscribelist</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>unsubscribenews</servlet-name>
+    <servlet-class>controller.news.UnSubscribe</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>unsubscribenews</servlet-name>
+    <url-pattern>/unsubscribenews</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>news</servlet-name>
     <servlet-class>controller.news.ReadNews</servlet-class>
   </servlet>
@@ -52,6 +68,22 @@
   <servlet-mapping>
     <servlet-name>savenews</servlet-name>
     <url-pattern>/savenews</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>getsavednews</servlet-name>
+    <servlet-class>controller.news.GetSavedNews</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getsavednews</servlet-name>
+    <url-pattern>/getsavednews</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>deletesavednews</servlet-name>
+    <servlet-class>controller.news.DeleteSavedNews</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deletesavednews</servlet-name>
+    <url-pattern>/deletesavednews</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>more</servlet-name>
