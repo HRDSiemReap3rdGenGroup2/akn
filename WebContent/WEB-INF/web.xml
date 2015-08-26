@@ -95,7 +95,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>contact</servlet-name>
-    <jsp-file>/contact.jsp</jsp-file>
+    <servlet-class>controller.news.CallContactPage</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>contact</servlet-name>
