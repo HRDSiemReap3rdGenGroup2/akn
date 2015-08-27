@@ -48,7 +48,7 @@
         background-color: darkseagreen;
     }
     .wrap-news{
-        margin-top: 20px;
+        margin-top: 0px;
     }
     .wrap-news p{
         margin-bottom: 6px;
@@ -73,9 +73,8 @@
             <div class="container" style="margin-top:22px">
                 
                 <!--left sidebar-->
-                <div class="column-one-fourth">
+                 <div class="column-one-third">
                     <div class="sidebar">
-                        
                         <h5 class="user-profile"><span>គ្រប់ប្រភេទ</span></h5>
                         <div>
                             <ul class="all-category" id="category">
@@ -84,12 +83,17 @@
 
                     </div>    
                 </div>
+                
                 <!--/left sidebar-->
                 
                 <!--main-content-->
                 <div class="main-content">
-                    <div class="column-three-fourth" id="display-user">
-                    </div>
+                	<div class="column-two-third">
+                		<div class="wrap-news" id="display-user">
+	                        
+                   		</div>
+                	</div>
+                   
                 </div>
                 <!--/main content-->
                 
@@ -171,37 +175,38 @@
 				+"</h5>"
 			+"<div class='wrap-news user'>";
 			for(var i=0;i<data.length;i++){
-				str+="<div class='news-row' style='height: 180px'>"
-            	+"<div class='items'>"
-            	+"<a href='news?id="+data[i].news_id+"' target='_blank'><img src='"+data[i].news_img+"' style='height:155px;width:285px'/></a>"
-            	+"<a href='news?id="+data[i].news_id+"' target='_blank'><h5 style='height:50px;overflow:hidden'>"+data[i].news_title+"</h5></a>"
-            	+"<p class='publish-date'>"+data[i].news_date+"</p>"
-            	+"<p style='max-height:60px;overflow:hidden'>"+data[i].news_desc.substring(0,100)+"...</p>"
-            	+"<div>"
-            	+"<img src='img/logo/"+data[i].source_id+".png' style='width:20px;'/>"
-                +"<span style='color:#999'>Viewed:"+data[i].hit_count+"</span>";
-				var have=0;
-				if('${user}'!=null||'${user}'!=''){
-					var j=[];
-					<c:forEach items='${requestScope.user_savedlist }' var='i'>
-					    j.push(${i.news_id});
-					</c:forEach>
-					for(l=0;l<j.length;l++){
-						if(j[l]==data[i].news_id){
-							have=1;
-							str+="<button style='float:right;background:#ccc' id='"+data[i].news_id+"' disabled>Saved</button>";
+				
+				str+="<div class='news-row column-two-third' style='margin-left:0'>"
+                +"<div class='items'>"
+                   +"<img src='"+data[i].news_img+"' style='height:170px'>"
+                    +"<a href='news?id="+data[i].news_id+"' target='_blank'><h5>"+data[i].news_title+"</h5></a>"
+                    +"<p class='publish-date'>"+data[i].news_date+"</p>"    
+                    +"<p>"+data[i].news_desc.substring(0,100)+"...</p>"
+                    +"<div>"
+                    +"<img src='img/logo/"+data[i].source_id+".png' style='width:20px;'>"
+                    +"<span style='color:#999'>Viewed:"+data[i].hit_count+"</span>";
+					var have=0;
+					if('${user}'!=null||'${user}'!=''){
+						var j=[];
+						<c:forEach items='${requestScope.user_savedlist }' var='i'>
+						    j.push(${i.news_id});
+						</c:forEach>
+						for(l=0;l<j.length;l++){
+							if(j[l]==data[i].news_id){
+								have=1;
+								str+="<button style='float:right;background:#ccc' onclick='save(815)' id='"+data[i].news_id+"' disabled>Saved</button>";
+							}
 						}
-					}
-					if(have!=1){
+						if(have!=1){
+							str+="<button style='float:right' onclick='save("+data[i].news_id+")' id='"+data[i].news_id+"'>Save</button>";
+						}
+					}else{
 						str+="<button style='float:right' onclick='save("+data[i].news_id+")' id='"+data[i].news_id+"'>Save</button>";
 					}
-				}else{
-					str+="<button style='float:right' onclick='save("+data[i].news_id+")' id='"+data[i].news_id+"'>Save</button>";
+					str+="</div>"
+                	+"</div>"  
+            		+"</div>";
 				}
-            	str+="</div>"
-            	+"</div>"      
-            	+"</div>";      
-			}
 			source="";
 			var p="";		
 			p="<div class='pager' style='float:right'><ul>";
@@ -234,6 +239,7 @@
 			$("#page_"+page).addClass("active");
 		});
 	}
+	
 	function changeSource(category_id,page){
 		var source_id=$("#source_choice :selected").val();
 		var totalpage=0;
@@ -250,37 +256,37 @@
 		},function(data){
 			var str="";
 			for(var i=0;i<data.length;i++){
-				str+="<div class='news-row' style='height: 180px'>"
-            	+"<div class='items'>"
-            	+"<a href='news?id="+data[i].news_id+"' target='_blank'><img src='"+data[i].news_img+"' style='height:155px;width:285px'/></a>"
-            	+"<a href='news?id="+data[i].news_id+"' target='_blank'><h5 style='height:50px;overflow:hidden'>"+data[i].news_title+"</h5></a>"
-            	+"<p class='publish-date'>"+data[i].news_date+"</p>"
-            	+"<p style='max-height:60px;overflow:hidden'>"+data[i].news_desc.substring(0,100)+"...</p>"
-            	+"<div>"
-            	+"<img src='img/logo/"+data[i].source_id+".png' style='width:20px;'/>"
-                +"<span style='color:#999'>Viewed:"+data[i].hit_count+"</span>";
-                var have=0;
-				if('${user}'!=null||'${user}'!=''){
-					var j=[];
-					<c:forEach items='${requestScope.user_savedlist }' var='i'>
-					    j.push(${i.news_id});
-					</c:forEach>
-					for(l=0;l<j.length;l++){
-						if(j[l]==data[i].news_id){
-							have=1;
-							str+="<button style='float:right;background:#ccc' id='"+data[i].news_id+"' disabled>Saved</button>";
+				str+="<div class='news-row column-two-third' style='margin-left:0'>"
+                +"<div class='items'>"
+                   +"<img src='"+data[i].news_img+"' style='height:170px'>"
+                    +"<a href='news?id="+data[i].news_id+"' target='_blank'><h5>"+data[i].news_title+"</h5></a>"
+                    +"<p class='publish-date'>"+data[i].news_date+"</p>"    
+                    +"<p>"+data[i].news_desc.substring(0,100)+"...</p>"
+                    +"<div>"
+                    +"<img src='img/logo/"+data[i].source_id+".png' style='width:20px;'>"
+                    +"<span style='color:#999'>Viewed:"+data[i].hit_count+"</span>";
+					var have=0;
+					if('${user}'!=null||'${user}'!=''){
+						var j=[];
+						<c:forEach items='${requestScope.user_savedlist }' var='i'>
+						    j.push(${i.news_id});
+						</c:forEach>
+						for(l=0;l<j.length;l++){
+							if(j[l]==data[i].news_id){
+								have=1;
+								str+="<button style='float:right;background:#ccc' onclick='save(815)' id='"+data[i].news_id+"' disabled>Saved</button>";
+							}
 						}
-					}
-					if(have!=1){
+						if(have!=1){
+							str+="<button style='float:right' onclick='save("+data[i].news_id+")' id='"+data[i].news_id+"'>Save</button>";
+						}
+					}else{
 						str+="<button style='float:right' onclick='save("+data[i].news_id+")' id='"+data[i].news_id+"'>Save</button>";
 					}
-				}else{
-					str+="<button style='float:right' onclick='save("+data[i].news_id+")' id='"+data[i].news_id+"'>Save</button>";
+					str+="</div>"
+                	+"</div>"  
+            		+"</div>";
 				}
-            str+="</div>"
-            	+"</div>"      
-            	+"</div>";      
-			}
 			source="";
 			var p="";		
 			p="<div class='pager' style='float:right'><ul>";
@@ -308,11 +314,12 @@
 			}
 				p+="</ul></div>";		
 			str+=p+"";
-			$(".wrap-news").html(str);
+			$(".wrap-news .user").html(str);
 			active("cate"+category_id);
 			$("#page_"+page).addClass("active");
 		});
 	}
+	
 	function save(news_id){
 		if('${user.user_id}'==''){
 			swal({   

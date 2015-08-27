@@ -15,7 +15,7 @@ ul.sf-menu { display:none; }
 /*	3) Slider
 /*------------------------------------------------------------------*/
 .main-slider {
-	width:300px;
+    width:300px;
 	margin:0;
 }
 .slider2, .slider3{
@@ -74,5 +74,10 @@ ul.children{
 .form textarea{
 	width:278px;
 }
+
+.items img{
+	width:100%;
+}
+
 
 }

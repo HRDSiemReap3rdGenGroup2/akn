@@ -76,7 +76,7 @@
             <div class="container" style="margin-top:22px">
                 
                 <!--left sidebar-->
-                <div class="column-one-fourth">
+                <div class="column-one-third">
                     <div class="sidebar" style="font-family:'Khmer OS Content';font-size:14px">
                         
                         <h5 class="user-profile"><span>User Profile</span></h5>
@@ -97,7 +97,7 @@
                 
                 <!--main-content-->
                 <div class="main-content">
-                    <div class="column-three-fourth" id="display-user">
+                    <div class="column-two-third" id="display-user">
                         
                     </div>
                 </div>

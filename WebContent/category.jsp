@@ -95,28 +95,28 @@
 	                               <img src="${x.news_img }" style="height:170px"/>
 	                                <a href="news?id=${x.news_id}" target="_blank"><h5>${x.news_title }</h5></a>
 	                                <p class="publish-date">${x.news_date }</p>    
-	                                <p>${fn:substring(x.news_desc,0,120) }..</p>
+	                                <p>${fn:substring(x.news_desc,0,120) }...</p>
 	                                <div>
 	                                <img src="img/logo/${x.source_id}.png" style="width:20px;"/>
 	                                <span style="color:#999">Viewed:${x.hit_count}</span>
 									<c:set value="${0}" var="have"></c:set>
 	                                		<c:choose>
-		                                			<c:when test="${user!=null || user!=''}">
-			                                				<c:forEach items="${requestScope.user_savedlist }" var="i">
-		                                						<c:if test="${i.news_id==x.news_id }">
-						                                			<c:set value="${1}" var="have"></c:set>
-						                                			<button style="float:right;background:#ccc" id="${x.news_id}" disabled>Saved</button>
-		                                						</c:if>
-		                                				</c:forEach>
-	                                					<c:if test="${have!=1}">
-			                                				<button style="float:right" onclick="save(${x.news_id})" id="${x.news_id}">Save</button>
-			                                				<c:set value="${0}" var="have"></c:set>
-	                                					</c:if>
-		                                			</c:when>
-		                                			<c:otherwise>
-															<button style="float:right" onclick="save(${x.news_id})" id="${x.news_id}">Save</button>
-		                                			</c:otherwise>
-		                                		</c:choose>
+	                                			<c:when test="${user!=null || user!=''}">
+		                                				<c:forEach items="${requestScope.user_savedlist }" var="i">
+	                                						<c:if test="${i.news_id==x.news_id }">
+					                                			<c:set value="${1}" var="have"></c:set>
+					                                			<button style="float:right;background:#ccc" id="${x.news_id}" disabled>Saved</button>
+	                                						</c:if>
+	                                				</c:forEach>
+                                					<c:if test="${have!=1}">
+		                                				<button style="float:right" onclick="save(${x.news_id})" id="${x.news_id}">Save</button>
+		                                				<c:set value="${0}" var="have"></c:set>
+                                					</c:if>
+	                                			</c:when>
+	                                			<c:otherwise>
+														<button style="float:right" onclick="save(${x.news_id})" id="${x.news_id}">Save</button>
+	                                			</c:otherwise>
+	                                		</c:choose>
 									</div>
 	                            </div>  
 	                        </div>
