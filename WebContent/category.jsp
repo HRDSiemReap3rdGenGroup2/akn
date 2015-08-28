@@ -88,7 +88,6 @@
                 <div class="main-content">
                     <!--list news-->
                     <div class="wrap-news">
-                    
                     	<c:forEach items="${list }" var="x">
 	                    	<div class="news-row column-two-third">
 	                            <div class="items">

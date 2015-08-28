@@ -17,7 +17,7 @@ public class CommentDAO {
 	public ArrayList<Comment> getAllComment(int news_id) throws SQLException{
 		ArrayList<Comment> list=new ArrayList<Comment>();
 		try{
-			String sql="Select comment_id, comment_detail, comment_date, u.user_name, u.user_image from tbcomment c inner join tbuser u on u.user_id=c.user_id  where c.news_id=?";
+			String sql="Select comment_id, comment_detail, comment_date, u.user_name, u.user_image from news.tbcomment c inner join news.tbuser u on u.user_id=c.user_id  where c.news_id=?";
 			PreparedStatement p=con.prepareStatement(sql);
 			p.setInt(1, news_id);
 			ResultSet rs=p.executeQuery();
@@ -45,7 +45,7 @@ public class CommentDAO {
 	}
 	public boolean insertComment(Comment c) throws SQLException{
 		try{
-			String sql="insert into tbcomment values(nextval('seq_comment_id'),?, now(),?,?)";
+			String sql="insert into news.tbcomment values(nextval('news.seq_comment_id'),?, now(),?,?)";
 			PreparedStatement p =con.prepareStatement(sql);
 			p.setString(1, c.getComment_detail());
 			p.setInt(2, c.getUser_id());

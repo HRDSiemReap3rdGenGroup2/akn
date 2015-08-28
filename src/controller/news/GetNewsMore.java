@@ -58,11 +58,9 @@ public class GetNewsMore extends HttpServlet {
 			if(req.getParameter("source_id")!=null){
 				source_id=Integer.parseInt(req.getParameter("source_id"));
 			}
-			offset=offset*6;
+			offset=offset*6; 
 			int totalpage=new NewsDAO().getTotalPage(category_id, 6);
-			System.out.println("offset="+offset);
-			System.out.println("OFfset/6="+offset/6);
-			System.out.println("Totalpage="+totalpage);
+		
 			if((offset/6)>totalpage)offset=new NewsDAO().getAllNews().size()-7;
 
 			if(offset<0)offset=0;
@@ -70,7 +68,6 @@ public class GetNewsMore extends HttpServlet {
 			resp.setContentType("application/json");
 			resp.setCharacterEncoding("utf-8");
 			String buf = new Gson().toJson(list);
-			System.out.println("buf="+buf);
 			resp.getWriter().write(buf);
 			
 		} catch (Exception e) {

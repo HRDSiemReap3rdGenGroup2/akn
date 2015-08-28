@@ -19,7 +19,7 @@ public class MenuDAO {
 		try {
 			System.out.println("hello");
 			System.out.println(category_ids);
-			String sql = "UPDATE tbmenu SET category_id=? WHERE menu_index=?";
+			String sql = "UPDATE news.tbmenu SET category_id=? WHERE menu_index=?";
 			int menu_index = 0;
 			for(Integer category_id:category_ids){
 				
@@ -44,7 +44,7 @@ public class MenuDAO {
 	public ArrayList<Menu> getAllMenu() throws Exception {
 		ArrayList<Menu> list =new ArrayList<Menu>();
 		try {
-			String sql = "SELECT * FROM tbmenu m inner join tbcategory c on c.category_id=m.category_id order by menu_index asc";
+			String sql = "SELECT * FROM news.tbmenu m inner join news.tbcategory c on c.category_id=m.category_id order by menu_index asc";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -68,7 +68,7 @@ public class MenuDAO {
 		ArrayList<Menu> list =new ArrayList<Menu>();
 		try {
 			String sql = "SELECT m.category_id, category_name, menu_index "
-					+ "FROM tbmenu m inner join tbcategory c on "
+					+ "FROM news.tbmenu m inner join news.tbcategory c on "
 					+ "c.category_id=m.category_id order by menu_index asc";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();

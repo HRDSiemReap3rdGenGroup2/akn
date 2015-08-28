@@ -19,7 +19,7 @@ public class UserDAO {
 	public ArrayList<User> getAllUser() throws SQLException {
 		ArrayList<User> list = new ArrayList<User>();
 		try {
-			String sql = "SELECT * FROM tbuser";
+			String sql = "SELECT * FROM news.tbuser";
 			PreparedStatement p = con.prepareStatement(sql);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
@@ -43,7 +43,7 @@ public class UserDAO {
 
 	public User login(String username, String password) throws SQLException {
 		try {
-			String sql = "select * from tbuser where user_email=? and user_pass=?";
+			String sql = "select * from news.tbuser where user_email=? and user_pass=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setString(1, username);
 			p.setString(2, password);
@@ -67,7 +67,7 @@ public class UserDAO {
 
 	public boolean addUser(User user) throws Exception {
 		try {
-			String sql = "INSERT INTO tbuser(user_id, user_type, user_name,user_pass, user_email, user_gender) VALUES(nextval('seq_user_id'),'3',?,?,?,?)";
+			String sql = "INSERT INTO news.tbuser(user_id, user_type, user_name,user_pass, user_email, user_gender) VALUES(nextval('news._user_id'),'3',?,?,?,?)";
 
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setString(1, user.getUser_name());
@@ -89,7 +89,7 @@ public class UserDAO {
 	public ArrayList<User> getAllUser1() throws SQLException {
 		ArrayList<User> list = new ArrayList<User>();
 		try {
-			String sql = "select user_id, user_name, user_type, user_email, user_gender, user_pass From tbuser";
+			String sql = "select user_id, user_name, user_type, user_email, user_gender, user_pass From news.tbuser";
 			PreparedStatement p = con.prepareStatement(sql);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
@@ -116,7 +116,7 @@ public class UserDAO {
 	public User getUser(int user_id) throws Exception {
 
 		try {
-			String sql = "select user_id, user_name, user_type, user_email, user_gender, user_pass From tbuser WHERE user_id=?";
+			String sql = "select user_id, user_name, user_type, user_email, user_gender, user_pass From news.tbuser WHERE user_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, user_id);
 			ResultSet rs = p.executeQuery();
@@ -142,7 +142,7 @@ public class UserDAO {
 
 	public boolean addAdminUser(User u) throws Exception {
 		try {
-			String sql = "INSERT INTO tbuser(user_id,user_type,user_name,user_pass, user_email, user_gender) VALUES(nextval('seq_user_id'),?,?,?,?,?)";
+			String sql = "INSERT INTO news.tbuser(user_id,user_type,user_name,user_pass, user_email, user_gender) VALUES(nextval('news._user_id'),?,?,?,?,?)";
 			PreparedStatement p = con.prepareStatement(sql);
 
 			p.setInt(1, u.getUser_type());
@@ -167,7 +167,7 @@ public class UserDAO {
 
 	public boolean updateUser(User user) throws Exception {
 		try {
-			String sql = "UPDATE tbuser SET user_name=?,user_pass=?, user_email=?, user_gender=?,user_type=? WHERE user_id=?";
+			String sql = "UPDATE news.tbuser SET user_name=?,user_pass=?, user_email=?, user_gender=?,user_type=? WHERE user_id=?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user.getUser_name());
 			pstmt.setString(2, user.getUser_pass());
@@ -190,7 +190,7 @@ public class UserDAO {
 	}
 	public boolean updateUserInfo(User user) throws Exception {
 		try {
-			String sql = "UPDATE tbuser SET user_name=?,user_pass=?, user_gender=? WHERE user_id=?";
+			String sql = "UPDATE news.tbuser SET user_name=?,user_pass=?, user_gender=? WHERE user_id=?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, user.getUser_name());
 			pstmt.setString(2, user.getUser_pass());
@@ -211,7 +211,7 @@ public class UserDAO {
 
 	public int getCountUser() throws Exception {
 		try {
-			String sql = "SELECT COUNT(*) FROM tbuser";
+			String sql = "SELECT COUNT(*) FROM news.tbuser";
 			PreparedStatement p = con.prepareStatement(sql);
 			ResultSet rs = p.executeQuery();
 			rs.next();
@@ -229,7 +229,7 @@ public class UserDAO {
 
 	public boolean deleteUser(int user_id) throws Exception {
 		try {
-			String sql = "DELETE FROM tbuser WHERE user_id=?";
+			String sql = "DELETE FROM news.tbuser WHERE user_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, user_id);
 			if (p.executeUpdate() > 0)
@@ -249,7 +249,7 @@ public class UserDAO {
 	 */
 	public boolean searchEmail(String email) throws SQLException {
 		try {
-			String sql = "select count(user_id) from tbuser where user_email=?";
+			String sql = "select count(user_id) from news.tbuser where user_email=?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			ResultSet rs = pstmt.executeQuery();
@@ -267,7 +267,7 @@ public class UserDAO {
 
 	public boolean subScribe(int category_id, int user_id) throws SQLException {
 		try {
-			String sql = "insert into tbsubscribe(subscribe_id, category_id, user_id) values(nextval('seq_subscribe_id'),?,?)";
+			String sql = "insert into news.tbsubscribe(subscribe_id, category_id, user_id) values(nextval('news._subscribe_id'),?,?)";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, category_id);
 			pstmt.setInt(2, user_id);
@@ -284,7 +284,7 @@ public class UserDAO {
 
 	public boolean updatePassword(int user_id, String password) {
 		try {
-			String sql = "UPDATE tbuser SET user_pass=? WHERE user_id=?";
+			String sql = "UPDATE news.tbuser SET user_pass=? WHERE user_id=?";
 			
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, password);

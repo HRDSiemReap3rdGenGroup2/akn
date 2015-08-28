@@ -86,6 +86,7 @@
 			                                <a href="news?id=${row.news_id }" target="_blank">
 			                                	<h5>${row.news_title }</h5>
 			                                </a>
+			                                <p>${row.news_date }</p>
 			                                <p>${fn:substring(row.news_desc,0,100) }</p>
 			                                <div>
 	                                		<span style="color:#aaa;display:inline;">Viewed:${row.hit_count}</span>

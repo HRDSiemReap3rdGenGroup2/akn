@@ -27,7 +27,7 @@ public class MailDAO {
 	public boolean mySendMail(String subject, String content) throws Exception {
 		ArrayList<Mail> listmail = new ArrayList<Mail>();
 		try {
-			String sql = "SELECT user_email FROM tbuser";
+			String sql = "SELECT user_email FROM news.tbuser";
 			PreparedStatement p = con.prepareStatement(sql);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {

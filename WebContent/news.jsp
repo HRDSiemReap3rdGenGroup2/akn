@@ -230,6 +230,7 @@ list_comment();
 				},function(data){
 					if(data=='success'){
 						list_comment();
+						:$("#comment").val("");
 					}
 				});	
 			}else{

@@ -26,14 +26,14 @@ public class NewsDAO {
 	}
 
 	public boolean insertNews() {
-		// insert into tbnews (date_insert) values (now())
+		// insert into news.tbnews (date_insert) values (now())
 		return false;
 	}
 
 	public ArrayList<News> getNewsList(int category_id) throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			String sql="select * from tbnews where category_id=? limit 4 offset 0";
+			String sql="select * from news.tbnews where category_id=? limit 4 offset 0";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1,category_id);
 			ResultSet rs = p.executeQuery();
@@ -63,7 +63,7 @@ public class NewsDAO {
 			throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			String sql="SELECT * FROM tbnews WHERE category_id=? ORDER BY news_id DESC LIMIT ? OFFSET 0";
+			String sql="SELECT * FROM news.tbnews WHERE category_id=? ORDER BY news_id DESC LIMIT ? OFFSET 0";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, category_id);
 			p.setInt(2, limit);
@@ -100,7 +100,7 @@ public class NewsDAO {
 	public ArrayList<News> getLatestNews() throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			String sql = "SELECT * FROM tbnews ORDER BY news_id DESC LIMIT 3 OFFSET 0";
+			String sql = "SELECT * FROM news.tbnews ORDER BY news_id DESC LIMIT 3 OFFSET 0";
 			PreparedStatement p = con.prepareStatement(sql);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
@@ -127,7 +127,7 @@ public class NewsDAO {
 
 	public String getNewsPath(int id) throws SQLException {
 		try {
-			String sql = "SELECT news_path FROM tbnews WHERE news_id=?";
+			String sql = "SELECT news_path FROM news.tbnews WHERE news_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
@@ -146,7 +146,7 @@ public class NewsDAO {
 			throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			String sql = "select * from tbnews where lower(news_title) like '%' || lower(?) || '%'";
+			String sql = "select * from news.tbnews where lower(news_title) like '%' || lower(?) || '%'";
 			if (category.size() > 1) {
 				sql += " and category_id in (";
 				for (int i = 0; i < category.size() - 1; i++) {
@@ -161,7 +161,7 @@ public class NewsDAO {
 				}
 				sql += ") limit 10 offset 0";
 			} else {
-				sql = "select * from tbnews where lower(news_title) like '%' || lower(?) || '%' limit 10 offset 0";
+				sql = "select * from news.tbnews where lower(news_title) like '%' || lower(?) || '%' limit 10 offset 0";
 			}
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setString(1, s_query);
@@ -197,7 +197,7 @@ public class NewsDAO {
 	 */
 	public boolean read(int id) throws SQLException {
 		try {
-			String sql = "UPDATE tbnews SET news_hit_count=news_hit_count+1 WHERE news_id=?";
+			String sql = "UPDATE news.tbnews SET news_hit_count=news_hit_count+1 WHERE news_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, id);
 			if (p.executeUpdate() > 0)
@@ -221,7 +221,7 @@ public class NewsDAO {
 	public ArrayList<News> filterNews(int n, int source, int category, int time) throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			String sql = "SELECT * FROM filterNews(?,?,?,?)";
+			String sql = "SELECT * FROM news.filterNews(?,?,?,?)";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, source);
 			p.setInt(2, category);
@@ -258,7 +258,7 @@ public class NewsDAO {
 	 */
 	public int getTotalPage(int category_id, int limit) throws SQLException {
 		try {
-			String sql = "select count(*) from tbnews where category_id=?";
+			String sql = "select count(*) from news.tbnews where category_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, category_id);
 			ResultSet rs = p.executeQuery();
@@ -279,7 +279,7 @@ public class NewsDAO {
 
 	public int getTotalPage(int category_id, int limit, int source_id) throws SQLException {
 		try {
-			String sql = "select count(*) from tbnews where category_id=?";
+			String sql = "select count(*) from news.tbnews where category_id=?";
 			PreparedStatement p;
 			if(source_id==0){
 				p = con.prepareStatement(sql);
@@ -308,7 +308,7 @@ public class NewsDAO {
 	
 	public int getTotalNews(int category_id) throws SQLException{
 		try{
-			String sql = "select count(*) from tbnews where category_id=?";
+			String sql = "select count(*) from news.tbnews where category_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, category_id);
 			ResultSet rs = p.executeQuery();
@@ -328,7 +328,7 @@ public class NewsDAO {
 		if(offset==0)offset=1;
 		offset = limit * (offset - 1);
 		try {
-			String sql = "SELECT * FROM tbnews WHERE category_id=? ORDER BY news_id DESC LIMIT ? OFFSET ?";
+			String sql = "SELECT * FROM news.tbnews WHERE category_id=? ORDER BY news_id DESC LIMIT ? OFFSET ?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, category_id);
 			p.setInt(2, limit);
@@ -359,13 +359,13 @@ public class NewsDAO {
 	public boolean addNews(News news) throws Exception {
 		try {
 			Statement s = con.createStatement();
-			ResultSet tmp = s.executeQuery("select nextval('seq_news_id')");
+			ResultSet tmp = s.executeQuery("select nextval('news.seq_news_id')");
 			int i = 0;
 			if (tmp.next())
 				i = tmp.getInt(1);
 			else
 				return false;
-			String sql = "INSERT INTO tbnews(news_id,category_id,news_title,news_description,news_path,news_img,news_date,source_id) VALUES(?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO news.tbnews(news_id,category_id,news_title,news_description,news_path,news_img,news_date,source_id) VALUES(?,?,?,?,?,?,?,?)";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, i);
@@ -393,7 +393,7 @@ public class NewsDAO {
 	public ArrayList<News> getAllNews() throws Exception {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			String sql = "SELECT news_id,news_title, category_name , s.source_name,news_date FROM tbnews n INNER JOIN tbcategory c ON c.category_id=n.category_id INNER JOIN tbsource s ON s.source_id=n.source_id order by news_id desc";
+			String sql = "SELECT news_id,news_title, category_name , s.source_name,news_date FROM news.tbnews n INNER JOIN news.tbcategory c ON c.category_id=n.category_id INNER JOIN news.tbsource s ON s.source_id=n.source_id order by news_id desc";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
@@ -421,8 +421,8 @@ public class NewsDAO {
 		try {
 			String sql = "SELECT n.news_img, n.news_id, c.category_name, n.news_title, n.news_description,"
 						+" n.news_date, n.news_hit_count"
-						+" FROM tbnews n"
-						+" INNER JOIN tbcategory c ON c.category_id=n.category_id"
+						+" FROM news.tbnews n"
+						+" INNER JOIN news.tbcategory c ON c.category_id=n.category_id"
 						+" WHERE n.news_id=?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, news_id);
@@ -451,8 +451,8 @@ public class NewsDAO {
 		try {
 			String sql = "SELECT n.news_img, n.news_id, c.category_name, n.news_title, "
 					+ "n.news_description,n.news_date, n.category_id, n.source_id,a.source_name "
-					+ "FROM tbnews n INNER JOIN tbcategory c ON c.category_id=n.category_id "
-					+ "INNER JOIN tbsource a ON a.source_id=n.source_id WHERE n.news_id=?";
+					+ "FROM news.tbnews n INNER JOIN news.tbcategory c ON c.category_id=n.category_id "
+					+ "INNER JOIN news.tbsource a ON a.source_id=n.source_id WHERE n.news_id=?";
 			
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, news_id);
@@ -482,7 +482,7 @@ public class NewsDAO {
 	
 	public boolean updateNews(News news) throws Exception{
 		try{
-			String sql = "UPDATE tbnews SET news_title=?, news_description=?,news_img=?,category_id=?, source_id=? WHERE news_id=?";
+			String sql = "UPDATE news.tbnews SET news_title=?, news_description=?,news_img=?,category_id=?, source_id=? WHERE news_id=?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, news.getNews_title());
 			pstmt.setString(2, news.getNews_desc());
@@ -505,7 +505,7 @@ public class NewsDAO {
 	}
 	public boolean deleteNews(int news_id) throws Exception {
 		try {
-			String sql = "DELETE FROM tbnews WHERE news_id=?";
+			String sql = "DELETE FROM news.tbnews WHERE news_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, news_id);
 			if (p.executeUpdate() > 0)
@@ -522,7 +522,7 @@ public class NewsDAO {
 
 	public int getCountNews() throws Exception {
 		try {
-			String sql = "SELECT COUNT(*) FROM tbnews";
+			String sql = "SELECT COUNT(*) FROM news.tbnews";
 			PreparedStatement p = con.prepareStatement(sql);
 			ResultSet rs = p.executeQuery();
 			rs.next();
@@ -541,7 +541,7 @@ public class NewsDAO {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
 			String sql = "SELECT news_id,news_title,news_date,news_hit_count "
-					+ "FROM tbnews ORDER BY news_hit_count DESC LIMIT 10";
+					+ "FROM news.tbnews ORDER BY news_hit_count DESC LIMIT 10";
 			PreparedStatement p = con.prepareStatement(sql);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
@@ -568,7 +568,7 @@ public class NewsDAO {
 		try {
 			int akn_id = new SourceDAO().getSourceId("AKN");
 			
-			String sql = "select count(*) from tbnews where source_id=?";
+			String sql = "select count(*) from news.tbnews where source_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, akn_id);
 			
@@ -587,7 +587,7 @@ public class NewsDAO {
 
 	public int getSubscriber() throws Exception {
 		try {
-			String sql = "SELECT count(*) FROM (select DISTINCT user_id as u FROM tbsubscribe) as t";
+			String sql = "SELECT count(*) FROM (select DISTINCT user_id as u FROM news.tbsubscribe) as t";
 			PreparedStatement p = con.prepareStatement(sql);
 			ResultSet rs = p.executeQuery();
 			rs.next();
@@ -614,7 +614,7 @@ public class NewsDAO {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
 			
-			String sql="select n.news_date, n.news_id, n.news_title, n.news_description, n.news_img, n.news_path, n.news_hit_count, n.category_id, n.source_id, c.category_name, s.source_name from tbnews n inner join tbcategory c on c.category_id=n.category_id inner join tbsource s on s.source_id=n.source_id where n.category_id=?";
+			String sql="select n.news_date, n.news_id, n.news_title, n.news_description, n.news_img, n.news_path, n.news_hit_count, n.category_id, n.source_id, c.category_name, s.source_name from news.tbnews n inner join news.tbcategory c on c.category_id=n.category_id inner join news.tbsource s on s.source_id=n.source_id where n.category_id=?";
 			if (option.equals("latest")) {
 				sql += " ORDER BY news_id DESC LIMIT 6 OFFSET ?";
 			} else {
@@ -660,7 +660,7 @@ public class NewsDAO {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
 			
-			String sql="select n.news_date, n.news_id, n.news_title, n.news_description, n.news_img, n.news_path, n.news_hit_count, n.category_id, n.source_id, c.category_name, s.source_name from tbnews n inner join tbcategory c on c.category_id=n.category_id inner join tbsource s on s.source_id=n.source_id where n.category_id=?";
+			String sql="select n.news_date, n.news_id, n.news_title, n.news_description, n.news_img, n.news_path, n.news_hit_count, n.category_id, n.source_id, c.category_name, s.source_name from news.tbnews n inner join news.tbcategory c on c.category_id=n.category_id inner join news.tbsource s on s.source_id=n.source_id where n.category_id=?";
 			if (option.equals("latest")) {
 				sql += " ORDER BY news_id DESC LIMIT ? OFFSET ?";
 			} else {
@@ -708,7 +708,7 @@ public class NewsDAO {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
 			PreparedStatement p;
-			String sql="select n.news_date, n.news_id, n.news_title, n.news_description, n.news_img, n.news_path, n.news_hit_count, n.category_id, n.source_id, c.category_name, s.source_name from tbnews n inner join tbcategory c on c.category_id=n.category_id inner join tbsource s on s.source_id=n.source_id where n.category_id=?";
+			String sql="select n.news_date, n.news_id, n.news_title, n.news_description, n.news_img, n.news_path, n.news_hit_count, n.category_id, n.source_id, c.category_name, s.source_name from news.tbnews n inner join news.tbcategory c on c.category_id=n.category_id inner join news.tbsource s on s.source_id=n.source_id where n.category_id=?";
 			if(source_id==0){
 			if (option.equals("latest")) {
 				sql += " ORDER BY news_id DESC LIMIT ? OFFSET ?";
@@ -758,7 +758,7 @@ public class NewsDAO {
 	
 	public String getMediaName(int id) throws SQLException {
 		try {
-			String sql = "select user_info_code from tbnews where news_id=?";
+			String sql = "select user_info_code from news.tbnews where news_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
@@ -776,7 +776,7 @@ public class NewsDAO {
 	public ArrayList<Category> getSubscribeList(int user_id) throws SQLException {
 		ArrayList<Category> list = new ArrayList<Category>();
 		try {
-			String sql = "select s.category_id, c.category_name from tbsubscribe s inner join tbcategory c on c.category_id=s.category_id where s.user_id=?";
+			String sql = "select s.category_id, c.category_name from news.tbsubscribe s inner join news.tbcategory c on c.category_id=s.category_id where s.user_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, user_id);
 			ResultSet rs = p.executeQuery();
@@ -798,7 +798,7 @@ public class NewsDAO {
 	public ArrayList<News> getSavedNews(int user_id) throws SQLException {
 		ArrayList<News> list = new ArrayList<News>();
 		try {
-			String sql = "SELECT * from tbsavelist sa INNER JOIN tbnews n on n.news_id=sa.news_id where sa.user_id=?";
+			String sql = "SELECT * from news.tbsavelist sa INNER JOIN news.tbnews n on n.news_id=sa.news_id where sa.user_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, user_id);
 			ResultSet rs = p.executeQuery();
@@ -825,7 +825,7 @@ public class NewsDAO {
 
 	public boolean deleteSavedNews(int news_id, int user_id) throws SQLException {
 		try {
-			String sql = "DELETE FROM tbsavelist WHERE news_id=? and user_id=?";
+			String sql = "DELETE FROM news.tbsavelist WHERE news_id=? and user_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, news_id);
 			p.setInt(2, user_id);
@@ -843,7 +843,7 @@ public class NewsDAO {
 
 	public boolean removeSubscribe(int category_id, int user_id) throws SQLException {
 		try {
-			String sql = "DELETE FROM tbsubscribe WHERE category_id=? and user_id=?";
+			String sql = "DELETE FROM news.tbsubscribe WHERE category_id=? and user_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, category_id);
 			p.setInt(2, user_id);

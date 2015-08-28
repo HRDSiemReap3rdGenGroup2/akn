@@ -19,7 +19,7 @@ public class CategoryDAO {
 	public ArrayList<Category> getAllCategory() throws SQLException {
 		ArrayList<Category> list = new ArrayList<Category>();
 		try {
-			String sql = "SELECT * FROM tbcategory";
+			String sql = "SELECT * FROM news.tbcategory";
 			PreparedStatement p = con.prepareStatement(sql);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
@@ -58,7 +58,7 @@ public class CategoryDAO {
 	}
 	public String getCategoryName(int category_id) throws SQLException{
 		try{
-			String sql="select category_name from tbcategory where category_id=?";
+			String sql="select category_name from news.tbcategory where category_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, category_id);
 			ResultSet rs= p.executeQuery();
@@ -74,7 +74,7 @@ public class CategoryDAO {
 	}
 	public int getCategoryId(String category_name)throws Exception{
 		try {
-			String sql = "SELECT category_id FROM tbcategory WHERE category_name=?";
+			String sql = "SELECT category_id FROM news.tbcategory WHERE category_name=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setString(1, category_name);
 			ResultSet rs = p.executeQuery();
@@ -94,7 +94,7 @@ public class CategoryDAO {
 	
 	public boolean addCategory(Category cate) throws SQLException {
 		try {
-			String sql = "INSERT INTO tbcategory VALUES(nextval('seq_category_id'),?,?)";
+			String sql = "INSERT INTO news.tbcategory VALUES(nextval('news._category_id'),?,?)";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setString(1, cate.getCategory_name());
 			p.setString(2, cate.getCategory_description());
@@ -111,7 +111,7 @@ public class CategoryDAO {
 
 	public boolean updateCategory(Category cate) throws SQLException {
 		try {
-			String sql = "UPDATE tbcategory SET category_name=?, category_description=? WHERE category_id=?";
+			String sql = "UPDATE news.tbcategory SET category_name=?, category_description=? WHERE category_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setString(1, cate.getCategory_name());
 			p.setString(2, cate.getCategory_description());
@@ -129,7 +129,7 @@ public class CategoryDAO {
 
 	public boolean deleteCategroy(int cate_id) throws SQLException {
 		try {
-			String sql = "DELETE FROM tbcategory WHERE category_id=?";
+			String sql = "DELETE FROM news.tbcategory WHERE category_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, cate_id);
 			if(p.executeUpdate()>0)
@@ -144,7 +144,7 @@ public class CategoryDAO {
 	}
 	public Category getCategroy(int cate_id) throws SQLException {
 		try {
-			String sql = "SELECT * FROM tbcategory WHERE category_id=?";
+			String sql = "SELECT * FROM news.tbcategory WHERE category_id=?";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setInt(1, cate_id);
 			

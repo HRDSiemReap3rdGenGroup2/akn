@@ -19,9 +19,9 @@ public class ScannedNewsDAO {
 		//news database
 		public boolean insertNews(ArrayList<NewsDTO> listnews)throws Exception{
 			try{
-				String sql = "INSERT INTO tbnews(news_id, news_title, news_description,"+
+				String sql = "INSERT INTO news.tbnews(news_id, news_title, news_description,"+
 						" news_img, news_path, news_code, category_id, source_id)"+
-						" VALUES(nextval('seq_news_id'),?,?,?,?,?,?,?)";
+						" VALUES(nextval('news._news_id'),?,?,?,?,?,?,?)";
 				
 				Collections.reverse(listnews);
 				
@@ -53,7 +53,7 @@ public class ScannedNewsDAO {
 		
 		private boolean exist(String news_code) throws Exception{
 			try{
-				String sql = "SELECT news_code FROM tbnews WHERE news_code=?";
+				String sql = "SELECT news_code FROM news.tbnews WHERE news_code=?";
 				PreparedStatement p = con.prepareStatement(sql);
 				p.setString(1, news_code);
 				ResultSet rs = p.executeQuery();
