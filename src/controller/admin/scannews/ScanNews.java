@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.dao.ScannedNewsDAO;
+import model.dao.ScraptCamboReportNews;
+import model.dao.ScraptFRANews;
+import model.dao.ScraptKhmerNoteNews;
 import model.dao.ScraptKohSontepheapNews;
+import model.dao.ScraptPostKhmerNews;
 import model.dao.ScraptSabayNews;
 import model.dao.ScraptTheBNews;
 import model.dto.NewsDTO;
@@ -60,6 +64,22 @@ public class ScanNews extends HttpServlet {
 				
 			}else if(arr[i].contains("KOH")){
 				news = new ScraptKohSontepheapNews().getAllCategory();
+				allnewslist.addAll(news);
+				
+			}else if(arr[i].contains("CAMBOREPORT")){
+				news = new ScraptCamboReportNews().getAllCategory();
+				allnewslist.addAll(news);
+				
+			}else if(arr[i].contains("KHMERNOTE")){
+				news = new ScraptKhmerNoteNews().getAllCategory();
+				allnewslist.addAll(news);
+				
+			}else if(arr[i].contains("POSTKHMER")){
+				news = new ScraptPostKhmerNews().getAllCategory();
+				allnewslist.addAll(news);
+			
+			}else if(arr[i].contains("RFA")){
+				news = new ScraptFRANews().getAllCategory();
 				allnewslist.addAll(news);
 			}
 		}
