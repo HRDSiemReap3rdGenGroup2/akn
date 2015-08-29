@@ -225,7 +225,7 @@
 			   var str="";
 			   for(var i=0; i<data.length; i++){
 				   str+='<tr>'
-						+	'<td width="10%">'+data[i].news_id+'</td>'
+						+	'<td width="10%">N000'+i+'</td>'
 						+	'<td width="35%">'+data[i].news_title+'</td>'
 						+	'<td>'+data[i].news_date+'</td>'
 						+	'<td>'+data[i].news_source+'</td>'
