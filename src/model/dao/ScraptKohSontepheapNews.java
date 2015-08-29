@@ -87,4 +87,8 @@ public class ScraptKohSontepheapNews {
 		}
 		return null;
 	}
+	public static void main(String[] args) {
+		ArrayList<NewsDTO> list = new ScraptKohSontepheapNews().getKohSantepheapNews("http://kohsantepheapdaily.com.kh/category/classify/", "អចលនទ្រព្យ");
+		System.out.println(list);
+	}
 }
