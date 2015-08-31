@@ -31,10 +31,8 @@ public class ScraptKohSontepheapNews {
 		try {
 			//get category id
 			category_id = new CategoryDAO().getCategoryId(category_name);
-			System.out.println("Category ID:"+category_id);
 			//get source id
 			source_id = new SourceDAO().getSourceId("KOH");
-			System.out.println("Source ID:"+source_id);
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}

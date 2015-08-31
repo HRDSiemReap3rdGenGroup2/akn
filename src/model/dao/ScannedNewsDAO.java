@@ -21,7 +21,7 @@ public class ScannedNewsDAO {
 			try{
 				String sql = "INSERT INTO news.tbnews(news_id, news_title, news_description,"+
 						" news_img, news_path, news_code, category_id, source_id)"+
-						" VALUES(nextval('news._news_id'),?,?,?,?,?,?,?)";
+						" VALUES(nextval('news.seq_news_id'),?,?,?,?,?,?,?)";
 				
 				Collections.reverse(listnews);
 				

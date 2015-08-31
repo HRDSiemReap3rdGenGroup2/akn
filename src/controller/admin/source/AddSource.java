@@ -46,8 +46,7 @@ public class AddSource extends HttpServlet {
 		String source_name = request.getParameter("source_name");
 		String source_code = request.getParameter("source_code");
 		
-		System.out.println(source_name);
-		System.out.println(source_code);
+	
 		
 		Source source = new Source();
 		source.setSource_name(source_name);
@@ -55,7 +54,6 @@ public class AddSource extends HttpServlet {
 		
 		try {
 			if(new SourceDAO().addSource(source)){
-				System.out.println("Added Successfully..!");
 				response.sendRedirect("formsource");
 			}
 			

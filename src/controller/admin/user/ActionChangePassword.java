@@ -38,7 +38,6 @@ public class ActionChangePassword extends HttpServlet {
 		int user_id = Integer.parseInt(request.getParameter("id"));
 		
 		if(new UserDAO().updatePassword(user_id, password)){
-			System.out.println("success");
 		}
 	}
 

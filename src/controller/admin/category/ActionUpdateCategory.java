@@ -48,10 +48,8 @@ public class ActionUpdateCategory extends HttpServlet {
 			if(new CategoryDAO().updateCategory(category)){
 			
 				response.sendRedirect("listcategory");
-				System.out.println("Update SUCCESS");
 				response.getWriter().write("success");
 			}else{
-				System.err.println("Update FAIL");
 				response.getWriter().write("fail");
 			}
 		} catch (Exception e) {

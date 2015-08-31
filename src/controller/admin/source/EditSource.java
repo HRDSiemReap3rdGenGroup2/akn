@@ -45,7 +45,6 @@ public class EditSource extends HttpServlet {
 		int source_id = Integer.parseInt(request.getParameter("source_id"));
 		String source_name = request.getParameter("source_name");
 		String source_code = request.getParameter("source_code");
-		System.out.println(source_id);
 		
 		Source source = new Source();
 		source.setSource_id(source_id);
@@ -54,16 +53,12 @@ public class EditSource extends HttpServlet {
 		
 		try {
 			if(new SourceDAO().editSource(source)){
-				//request.getRequestDispatcher("listsource").forward(request, response);
 				response.sendRedirect("listsource");
-				System.out.println("Update SUCCESS");
 				response.getWriter().write("success");
 			}else{
-				System.err.println("Update FAIL");
 				response.getWriter().write("fail");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

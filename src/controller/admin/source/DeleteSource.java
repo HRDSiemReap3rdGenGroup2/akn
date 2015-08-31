@@ -44,9 +44,7 @@ public class DeleteSource extends HttpServlet {
 		int source_id = Integer.parseInt(request.getParameter("id"));
 		if(new SourceDAO().deleteSource(source_id)){
 			response.sendRedirect("listsource");
-			System.out.println("Delete Succesfull");
 		}else{
-			System.out.println("Delete Fail");
 		}
 	}
 

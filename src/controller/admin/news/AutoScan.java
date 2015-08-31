@@ -49,12 +49,10 @@ public class AutoScan extends HttpServlet {
 		while(true){
 			int i=(Integer)request.getSession().getServletContext().getAttribute("autoscan");
 			if(i==0){
-				System.out.println("Autoscan finished!");
 				break;
 			}
 			else{
 				try {
-					System.out.println("More Duration:"+i);
 					Thread.sleep(i*60*1000);
 					//Thread.sleep(10000);
 					ArrayList<NewsDTO> allnewslist = new ArrayList<NewsDTO>();
@@ -70,9 +68,7 @@ public class AutoScan extends HttpServlet {
 					allnewslist.addAll(news);
 						
 					try {
-						boolean status = new ScannedNewsDAO().insertNews(allnewslist);
-						if(status)
-							System.out.println("success!");
+						new ScannedNewsDAO().insertNews(allnewslist);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

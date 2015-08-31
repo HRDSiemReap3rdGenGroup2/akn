@@ -62,9 +62,7 @@ public class UpdateMenu extends HttpServlet {
 		category_id.add(index4);
 		
 		try {
-			boolean status = new MenuDAO().updateMenu(category_id);
-			if (status)
-				System.out.println("success");
+			new MenuDAO().updateMenu(category_id);
 			response.sendRedirect("fixedmenu");
 
 		} catch (Exception e) {

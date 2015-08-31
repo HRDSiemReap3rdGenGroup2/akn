@@ -35,9 +35,7 @@ public class UpdateCategory extends HttpServlet {
 			request.setAttribute("status", 1);
 			request.setAttribute("updatecategory", category);
 			request.getRequestDispatcher("addcategory.jsp").forward(request, response);
-		//	response.getWriter().write(s);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

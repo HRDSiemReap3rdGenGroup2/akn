@@ -119,7 +119,6 @@
                 	<div class="column-one-third">
                     	<h5 class="line"><span><a href="statistic">ពត៌មានពេញនិយម</a></span>
                     		<select style="float: right;margin-top: 5px;margin-left: 10px;" id="cbopopnews">
-							  <option value="1">Today</option>
 							  <option value="7">Weekly</option>
 							  <option value="30">Monthly</option>
 							</select>

@@ -32,12 +32,9 @@ public class ActionDeleteCategory extends HttpServlet {
 		try {
 			if(new CategoryDAO().deleteCategroy(category_id)){
 				response.sendRedirect("listcategory");
-				System.out.println("Delete Succesfull");
 			}else{
-				System.out.println("Delete Fail");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

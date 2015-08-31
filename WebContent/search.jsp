@@ -112,9 +112,7 @@
 			                            </div>  
 			                        </div>
 								</c:forEach>
-                    </div>
-                    
-                     <!--pager-->
+								<!--pager-->
                     <div id="pager" class="pager" style="float:right">
                     	<ul>
                     		<c:if test="${requestScope.current_page>1 }">
@@ -152,6 +150,7 @@
                     	</ul>
                     </div>
                     <!--/pager-->
+                    </div>                     
                     <!--/list news-->
                 </div>
                 <!-- /Main Content -->

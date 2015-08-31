@@ -51,9 +51,8 @@ public class AddUser extends HttpServlet {
 		user.setUser_type(usertype);
 		
 		try {
-			boolean status = new UserDAO().addAdminUser(user);
-			if(status)
-				System.out.println("success!");
+			new UserDAO().addAdminUser(user);
+			
 			response.sendRedirect("listuser");
 		} catch (Exception e) {
 			e.printStackTrace();

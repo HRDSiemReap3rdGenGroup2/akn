@@ -43,7 +43,6 @@ public class ActionCreateCategory extends HttpServlet {
 		category.setCategory_description(category_description);
 		try {
 			if(new CategoryDAO().addCategory(category)){
-				System.out.println("Added Successfully..!");
 				response.sendRedirect("formcategory");
 			}
 			

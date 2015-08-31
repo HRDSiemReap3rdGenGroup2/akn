@@ -28,10 +28,8 @@ public class ActionDeleteNews extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int news_id = Integer.parseInt(request.getParameter("id"));
-		System.out.println(news_id);
 		try {
 			new NewsDAO().deleteNews(news_id);
-			System.out.println("success");
 			response.sendRedirect("listnews");
 			
 		} catch (Exception e) {

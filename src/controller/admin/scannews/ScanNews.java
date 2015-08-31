@@ -47,9 +47,7 @@ public class ScanNews extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String source = request.getParameter("source");
-		System.out.println(source);
 		String arr[] = source.split(",");
-		System.out.println(arr.length);
 		ArrayList<NewsDTO> allnewslist = new ArrayList<NewsDTO>();
 		ArrayList<NewsDTO> news = null;
 		
@@ -85,10 +83,7 @@ public class ScanNews extends HttpServlet {
 		}
 		
 		try {
-			System.out.println("Test");
-			boolean status = new ScannedNewsDAO().insertNews(allnewslist);
-			if(status)
-				System.out.println("success!");
+			new ScannedNewsDAO().insertNews(allnewslist);
 			
 		} catch (Exception e) {
 			

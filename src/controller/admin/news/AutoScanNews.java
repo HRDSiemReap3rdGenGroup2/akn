@@ -33,7 +33,6 @@ public class AutoScanNews extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int duration = Integer.parseInt(request.getParameter("duration"));
-		System.out.println("Duration:"+duration);
 		
 		request.getSession().getServletContext().setAttribute("autoscan", duration);
 		response.sendRedirect("autoscan");

@@ -34,23 +34,18 @@ public class Dashboard extends HttpServlet {
 		try {
 			allnews = new NewsDAO().getCountNews();
 			request.setAttribute("countnews", allnews);
-			System.out.println(allnews);
 			
 			allusers= new UserDAO().getCountUser();
 			request.setAttribute("countuser", allusers);
-			System.out.println(allusers);
 			
 			ArrayList<News> topnews = new NewsDAO().getTop5News(); 
 			request.setAttribute("topnews", topnews);
-			System.out.println(topnews);
 			
 			int aknnews = new NewsDAO().getAKNnews();
 			request.setAttribute("aknnews", aknnews);
-			System.out.println(aknnews);
 			
 			int subscriber = new NewsDAO().getSubscriber();
 			request.setAttribute("subscriber", subscriber);
-			System.out.println(subscriber);
 			
 		} catch (Exception e) {
 			

@@ -51,17 +51,10 @@ public class ActionUpdateUser extends HttpServlet {
 		user.setUser_type(usertype);
 		user.setUser_id(user_id);
 		
-		System.out.println(user_id);
-		System.out.println(username);
-		System.out.println(email);
-		System.out.println(usertype);
-		System.out.println(gender);
-		System.out.println(password);
 		
 		try {
-			boolean status = new UserDAO().updateUser(user);
-			if(status)
-				System.out.println("success!");
+			new UserDAO().updateUser(user);
+			
 			response.sendRedirect("formuser");
 		} catch (Exception e) {
 			e.printStackTrace();

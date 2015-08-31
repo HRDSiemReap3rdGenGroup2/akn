@@ -49,9 +49,7 @@ public class GetSource extends HttpServlet {
 			source.setSource_status(1);
 			request.setAttribute("updatesource", source);
 			request.getRequestDispatcher("addsource.jsp").forward(request, response);
-		//	response.getWriter().write(s);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

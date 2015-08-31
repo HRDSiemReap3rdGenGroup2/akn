@@ -30,9 +30,8 @@ public class ActionDeleteUser extends HttpServlet {
 		int user_id = Integer.parseInt(request.getParameter("id"));
 		System.out.println(user_id);
 		try {
-			boolean status = new UserDAO().deleteUser(user_id);
-			if(status)
-				System.out.println("success");
+			new UserDAO().deleteUser(user_id);
+		
 			response.sendRedirect("listuser");
 		} catch (Exception e) {
 			e.printStackTrace();

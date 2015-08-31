@@ -57,10 +57,8 @@ public class ScraptTheBNews {
 		try {
 			//get category id
 			category_id = new CategoryDAO().getCategoryId(category_name);
-			System.out.println("TheBNews Category:"+category_id);
 			//get source id
 			source_id = new SourceDAO().getSourceId("THEBNEWS");
-			System.out.println("TheBNews Source:"+source_id);
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}

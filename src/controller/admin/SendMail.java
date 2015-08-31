@@ -38,9 +38,7 @@ public class SendMail extends HttpServlet {
 			String subject = request.getParameter("subject");
 			String content = request.getParameter("content");
 			
-			boolean status = new MailDAO().mySendMail(subject, content);
-			if(status)
-				System.out.println("success");
+			new MailDAO().mySendMail(subject, content);
 			
 		} catch (Exception e) {
 			
