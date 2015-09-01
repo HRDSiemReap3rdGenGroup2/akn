@@ -85,20 +85,20 @@
 										<div class="card-body floating-label">
 											<div>
 												<c:choose>
-													<c:when test="${userstatus.user_gender==1 }">
+													<c:when test="${userstatus.gender=='male' }">
 														<label class="radio-inline radio-styled">
-															<input name="gender" value="1" checked="true" type="radio"><span>Male</span>
+															<input name="gender" value="male" checked="true" type="radio"><span>Male</span>
 														</label>
 														<label class="radio-inline radio-styled">
-															<input name="gender" value="2" type="radio"><span>Female</span>
+															<input name="gender" value="female" type="radio"><span>Female</span>
 														</label>
 													</c:when>
 													<c:otherwise>
 														<label class="radio-inline radio-styled">
-															<input name="gender" value="1" type="radio"><span>Male</span>
+															<input name="gender" value="male" type="radio"><span>Male</span>
 														</label>
 														<label class="radio-inline radio-styled">
-															<input name="gender" value="2" checked="true" type="radio"><span>Female</span>
+															<input name="gender" value="female" checked="true" type="radio"><span>Female</span>
 														</label>
 													</c:otherwise>
 												</c:choose>
@@ -106,7 +106,7 @@
 											<div class="form-group">
 												<c:choose>
 													<c:when test="${userstatus.status==1 }">
-														<input class="form-control" id="username" name="username" type="text" value="${userstatus.user_name }">
+														<input class="form-control" id="username" name="username" type="text" value="${userstatus.username }">
 													</c:when>
 													<c:otherwise>
 														<input class="form-control" id="username" name="username" type="text">
@@ -117,7 +117,7 @@
 											<div class="form-group">
 												<c:choose>
 													<c:when test="${userstatus.status==1 }">
-														<input class="form-control" id="password" name="password" type="password" value="${userstatus.user_pass }">
+														<input class="form-control" id="password" name="password" type="password" value="${userstatus.password }">
 													</c:when>
 													<c:otherwise>
 														<input class="form-control" id="password" name="password" type="password">
@@ -128,7 +128,7 @@
 											<div class="form-group">
 												<c:choose>
 													<c:when test="${userstatus.status==1 }">
-														<input class="form-control" id="password1" type="password" value="${userstatus.user_pass }">
+														<input class="form-control" id="password1" type="password" value="${userstatus.password }">
 													</c:when>
 													<c:otherwise>
 														<input class="form-control" id="password1" type="password">
@@ -139,7 +139,7 @@
 											<div class="form-group">
 												<c:choose>
 													<c:when test="${userstatus.status==1 }">
-														<input class="form-control" id="email" name="email" type="email" value="${userstatus.user_email }">
+														<input class="form-control" id="email" name="email" type="email" value="${userstatus.email }">
 													</c:when>
 													<c:otherwise>
 														<input class="form-control" id="email" name="email" type="email">
@@ -150,17 +150,17 @@
                                             <div class="form-group floating-label">
 												<select id="usertype" name="usertype" class="form-control">
 													<c:choose>
-														<c:when test="${userstatus.user_type==1 }">
+														<c:when test="${userstatus.usertypeid==5 }">
 															<option value="1">Admin</option>
 															<option value="3">Visitor</option>
                                                    			<option value="2">Editor</option>
 														</c:when>
-														<c:when test="${userstatus.user_type==2 }">
+														<c:when test="${userstatus.usertypeid==3 }">
 															<option value="2">Editor</option>
 															<option value="3">Visitor</option>
 															<option value="1">Admin</option>
 														</c:when>
-														<c:when test="${userstatus.user_type==3 }">
+														<c:when test="${userstatus.usertypeid==1 }">
 															<option value="3">Visitor</option>
 		                                                    <option value="2">Editor</option>
 		                                                    <option value="1">Admin</option>
