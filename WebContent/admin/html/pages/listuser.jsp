@@ -81,35 +81,9 @@
 												<th>Email</th>
 												<th>Gender</th>
 												<th>Password</th>
-												<th class="sort-alpha">Action</th>
 											</tr>
 										</thead>
-										<tbody>
-											<c:set value="${requestScope.alluser }" var="user"></c:set>
-											<c:forEach items="${user }" var="item">
-												<tr class="gradeX">
-													<td>${item.user_id }</td>
-													<td>${item.user_name }</td>
-													<c:choose>
-													  <c:when test="${item.user_type==5 }"><td>Admin</td></c:when>
-													  <c:when test="${item.user_type==4 }"><td>Editor</td></c:when>
-													  <c:when test="${item.user_type==2 }"><td>Visitor</td></c:when>
-													</c:choose>
-													<td>${item.user_email }</td>
-													<c:choose>
-													  <c:when test="${item.user_gender=='male' }"><td>Male</td></c:when>
-													  <c:when test="${item.user_gender=='female' }"><td>Female</td></c:when>
-													</c:choose>
-													<td>${item.user_pass }</td>
-													<td class="text-right">
-														<a href="updateuser?id=${item.user_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Edit row"><i class="fa fa-pencil"></i></a>
-														<button onclick="deleteuser('${item.user_id }')" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></button>
-														<%-- <a href="actiondeleteuser?id=${item.user_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></a> --%>
-													</td>
-												</tr>
-											</c:forEach>
-											
-										</tbody>
+										
 									</table>
 								</div><!--end .table-responsive -->
 							</div><!--end .col -->
@@ -147,12 +121,32 @@
 		<script src="../../assets/js/core/source/AppForm.js"></script>
 		<script src="../../assets/js/core/source/AppNavSearch.js"></script>
 		<script src="../../assets/js/core/source/AppVendor.js"></script>
-		<script src="../../assets/js/core/demo/Demo.js"></script>
-		<script src="../../assets/js/core/demo/DemoTableDynamic.js"></script>
+		<script src="../../assets/js/core/demo/Demo.js"></script><!-- 
+		<script src="../../assets/js/core/demo/DemoTableDynamic.js"></script> -->
 		<!-- END JAVASCRIPT -->
 		<script>
 			$(document).ready(function(){
 				$('#usermenu').addClass('active');
+				
+				$('#datatable1').DataTable({
+					"ajax": "getjsonuser",
+			        "columns": [
+			            { "data": "user_id" },
+			            { "data": "user_name" },
+			            { "data": "user_email" },
+			            { "data": "user_type" },
+			            { "data": "user_gender" },
+			            { "data": "user_pass" }
+			        ],
+			        "order": [ 0, 'desc' ],
+			        "fnCreatedRow": function( nRow, data, iDataIndex ) {
+				           $('td:eq(4)', nRow).append(
+				        		"<a href='updateuser?id="+data.user_id+"' class='btn btn-icon-toggle' data-toggle='tooltip' data-placement='op' data-original-title='Edit Row'><i class='fa fa-pencil'></i></a>"+
+				        		"<button onclick=deleteuser('"+data.user_id+"') class='btn btn-icon-toggle' data-toggle='tooltip' data-placement='op' data-original-title='Delete Row'><i class='fa fa-trash-o'></i></button>"
+				           );
+				       }
+				});
+				
 			});
 			
 			function deleteuser(user_id){
