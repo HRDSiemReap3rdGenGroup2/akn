@@ -39,14 +39,8 @@
 </head>
 
 <body>
-<c:if test="${requestScope.signup_status!=null }">
-	<script type='text/javascript'>alert('Signup Error!');</script>
-</c:if>
-<c:if test="${requestScope.logstatus!=null }">
-	<script type="text/javascript">alert("Login Fail!");</script>
-</c:if>
 <c:set var="list" value="${requestScope.latestnews }"></c:set>
-<c:set var="user" value="${sessionScope.user }"></c:set>
+<c:set var="user" value="${sessionScope.ka_user }"></c:set>
 <c:if test="${list==null }">
 	<c:redirect url="home"></c:redirect>
 </c:if>

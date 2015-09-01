@@ -47,7 +47,7 @@
 <c:if test="${list==null }">
 	<c:redirect url="home"></c:redirect>
 </c:if>
-<c:set var="user" value="${sessionScope.user }"></c:set>
+<c:set var="user" value="${sessionScope.ka_user }"></c:set>
 <!-- Body Wrapper -->
 <div class="body-wrapper">
 	<div class="controller">

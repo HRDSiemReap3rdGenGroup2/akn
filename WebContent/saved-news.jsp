@@ -6,11 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
-	<c:set value="${sessionScope.user }" var="user"></c:set>
-	<h5 class="user-profile"><span>Your Saved News</span></h5>
-	<div class="main-content">
-		<div class="column-two-third" style='margin-left:0'>
-			<div class="wrap-news">
+<c:set value="${sessionScope.ka_user }" var="user"></c:set>
+<h5 class="user-profile"><span>Your Saved News</span></h5>
+<div class="main-content">
+<div class="column-three-fourth">
+<div class="wrap-news">
     
 			</div>
 		</div>

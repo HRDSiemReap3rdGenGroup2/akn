@@ -42,7 +42,7 @@
 </head>
 
 <body>
-<c:if test="${sessionScope.user!=null }">
+<c:if test="${sessionScope.ka_user!=null }">
 	<c:redirect url="home"></c:redirect>
 </c:if>
 <!-- Body Wrapper -->
@@ -114,8 +114,8 @@
 	                                      <div class="field-wrap">
 											    <select id="gender">
 											        <option selected value="" disabled> Select Gender </option>
-											        <option value="1">Male</option>
-											        <option value="2">Female</option>
+											        <option value="male">Male</option>
+											        <option value="female">Female</option>
 											    </select>
 	                                      </div>
 	                                      <button onclick="signup()" class="button button-block">Sign Up</button>

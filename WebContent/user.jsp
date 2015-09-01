@@ -58,7 +58,7 @@
 </head>
 
 <body>
-<c:set value="${sessionScope.user }" var="user"></c:set>
+<c:set value="${sessionScope.ka_user }" var="user"></c:set>
 <c:if test="${user==null }">
 	<c:redirect url="home"></c:redirect>
 </c:if>

@@ -12,14 +12,14 @@
                             <a href="#"><span>ខ្មែរ</span></a><span> | </span><a href="#">ENG</a>
                         </div> -->
 	                    <div class="languages" style="float:right;">
-	                        <c:set var="user" value="${sessionScope.user }"></c:set>
+	                        <c:set var="user" value="${sessionScope.ka_user }"></c:set>
 	                        <c:choose>
 	                        	<c:when test="${user==null || user=='' }">
 			                        <a href="login"><span>ចូល</span><span> | </span><span>ចុះឈ្មោះ</span></a>
 	                        	</c:when>
 	                        	<c:otherwise>
 	                        	<c:set value="${user.user_type }" var="e"></c:set>
-	                        		<c:if test="${e==1 || e==2}">
+	                        		<c:if test="${e==5 || e==4}">
 	                        			<a href="admin/html/pages/dashboard">Manage News</a><span> | </span>
 	                        		</c:if>
 									<a href="user"><span>${user.user_name }</span></a><span> | </span>

@@ -215,7 +215,7 @@ list_comment();
 		});
 	}
 	$("#btn-comment").click(function(){
-			if('${sessionScope.user}'!=''){
+			if('${sessionScope.ka_user}'!=''){
 				$.post("comment",{
 					news_id:'${param.id}',
 					comment_detail:$("#comment").val()
@@ -241,7 +241,7 @@ list_comment();
 		}
 	});
 	function save(news_id){
-		if('${sessionScope.user}'!=''){
+		if('${sessionScope.ka_user}'!=''){
 			$.post("savenews",{
 				news_id:news_id
 			},function(data){

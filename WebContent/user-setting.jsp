@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set value="${sessionScope.user }" var="user"></c:set>
+<c:set value="${sessionScope.ka_user }" var="user"></c:set>
 <h5 class="user-profile"><span>General User Setting</span>
 	<button style="float:right;margin-top:2px;background-color:#e8484c" id="update-user-info">Update Info</button>
 </h5>
@@ -25,7 +25,7 @@
         <td>Gender</td>
         <td id="user-gender">
         	<c:choose>
-        		<c:when test="${user.user_gender==1}">
+        		<c:when test="${user.user_gender=='male'}">
         			Male
         		</c:when>
         		<c:otherwise>

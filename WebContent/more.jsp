@@ -57,7 +57,7 @@
 </head>
 
 <body>
-<c:set var="user" value="${sessionScope.user }"></c:set>
+<c:set var="user" value="${sessionScope.ka_user }"></c:set>
 <c:set var="savedlist" value="${requestScope.user_savedlist}"></c:set>
 <!-- Body Wrapper -->
 <div class="body-wrapper">

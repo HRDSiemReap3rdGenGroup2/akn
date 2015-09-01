@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
-<c:set value="${sessionScope.user }" var="user"></c:set>
+<c:set value="${sessionScope.ka_user }" var="user"></c:set>
 <h5 class="user-profile"><span>Subscribed news</span></h5>
 <div class="main-content">
 <div class="column-three-fourth">

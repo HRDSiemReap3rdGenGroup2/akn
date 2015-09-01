@@ -43,6 +43,7 @@
 </head>
 
 <body>
+<c:set value="${sessionScope.ka_user }" var="user"></c:set>
 <!-- Body Wrapper -->
 <div class="body-wrapper">
 	<div class="controller">
@@ -237,7 +238,7 @@
 <script>
 	$("#${requestScope.current_page}").addClass("active");
 	function save(news_id){
-		if('${sessionScope.user_id}'==''){
+		if('${sessionScope.ka_user}'==''){
 			swal({   
 				title: "Login first!",   
 						text: "You need to login to save news to your list.",   
