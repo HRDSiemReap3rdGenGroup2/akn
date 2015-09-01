@@ -87,7 +87,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>more</servlet-name>
-	<servlet-class>controller.news.CallMorePage</servlet-class>
+    <servlet-class>controller.news.CallMorePage</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>more</servlet-name>
@@ -247,11 +247,19 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>listuser</servlet-name>
-    <servlet-class>controller.admin.user.ListUser</servlet-class>
+    <jsp-file>/admin/html/pages/listuser.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>listuser</servlet-name>
     <url-pattern>/admin/html/pages/listuser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>getjsonuser</servlet-name>
+   <servlet-class>controller.admin.user.GetJsonUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getjsonuser</servlet-name>
+    <url-pattern>/admin/html/pages/getjsonuser</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>updatemodule</servlet-name>
@@ -442,8 +450,8 @@
     <servlet-class>controller.source.GetAllSource</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>getallsource</servlet-name>
-  	<url-pattern>/getallsource</url-pattern>
+    <servlet-name>getallsource</servlet-name>
+    <url-pattern>/getallsource</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>updateuserinfo</servlet-name>
