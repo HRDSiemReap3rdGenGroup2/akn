@@ -37,7 +37,7 @@ public class AddUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String username=request.getParameter("username");
-		int gender = Integer.parseInt(request.getParameter("gender"));
+		String gender = request.getParameter("gender");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		int usertype = Integer.parseInt(request.getParameter("usertype"));

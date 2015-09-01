@@ -37,7 +37,7 @@ public class ActionUpdateUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int user_id = Integer.parseInt(request.getParameter("user_id"));
 		String username=request.getParameter("username");
-		int gender = Integer.parseInt(request.getParameter("gender"));
+		String gender = request.getParameter("gender");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		int usertype = Integer.parseInt(request.getParameter("usertype"));
