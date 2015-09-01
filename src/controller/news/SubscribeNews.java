@@ -39,8 +39,8 @@ public class SubscribeNews extends HttpServlet {
 			}
 			int category_id = Integer.parseInt(req.getParameter("category_id"));
 			int user_id;
-			if (req.getSession().getAttribute("user") != null) {
-				user_id = ((User) req.getSession().getAttribute("user")).getUser_id();
+			if (req.getSession().getAttribute("ka_user") != null) {
+				user_id = ((User) req.getSession().getAttribute("ka_user")).getUser_id();
 				new UserDAO().subScribe(category_id, user_id);
 				resp.getWriter().write("success");
 			}

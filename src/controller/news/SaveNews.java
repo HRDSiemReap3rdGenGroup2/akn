@@ -54,8 +54,8 @@ public class SaveNews extends HttpServlet {
 			}
 			int news_id = Integer.parseInt(req.getParameter("news_id"));
 			int user_id;
-			if (req.getSession().getAttribute("user") != null) {
-				user_id = ((User) req.getSession().getAttribute("user")).getUser_id();
+			if (req.getSession().getAttribute("ka_user") != null) {
+				user_id = ((User) req.getSession().getAttribute("ka_user")).getUser_id();
 				ArrayList<SaveList> list = new SaveListDAO()
 						.getAllSavedNews(user_id);
 				boolean help = true;

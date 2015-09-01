@@ -37,7 +37,7 @@ public class UpdateUser extends HttpServlet {
 
 	private void doPro(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		try{
-			int user_id=((User) req.getSession().getAttribute("user")).getUser_id();
+			int user_id=((User) req.getSession().getAttribute("ka_user")).getUser_id();
 			String username=req.getParameter("username");
 			String password=req.getParameter("password");
 			if(password.contains("*****")){

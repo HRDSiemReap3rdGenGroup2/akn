@@ -66,9 +66,9 @@ public class GetAllNews extends HttpServlet {
 			//menu
 			req.setAttribute("menu", new MenuDAO().getAllMenu());
 			// user
-			if (req.getSession().getAttribute("user") != null
-					&& (req.getSession().getAttribute("user") != "")) {
-				User user = (User) req.getSession().getAttribute("user");
+			if (req.getSession().getAttribute("ka_user") != null
+					&& (req.getSession().getAttribute("ka_user") != "")) {
+				User user = (User) req.getSession().getAttribute("ka_user");
 				ArrayList<SaveList> user_savedlist = new SaveListDAO()
 						.getAllSavedNews(user.getUser_id());
 				req.setAttribute("user_savedlist", user_savedlist);

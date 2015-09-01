@@ -41,7 +41,7 @@ public class InsertComment extends HttpServlet {
 		try{
 			int news_id=Integer.parseInt(req.getParameter("news_id"));
 			String comment_detail=req.getParameter("comment_detail");
-			int user_id = ((User)req.getSession().getAttribute("user")).getUser_id();
+			int user_id = ((User)req.getSession().getAttribute("ka_user")).getUser_id();
 			Comment c=new Comment();
 			c.setUser_id(user_id);
 			c.setNews_id(news_id);

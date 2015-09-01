@@ -37,7 +37,7 @@ public class UnSubscribe extends HttpServlet {
 	private void doPro(HttpServletRequest req, HttpServletResponse resp) {
 		try{
 			int category_id = Integer.parseInt(req.getParameter("category_id"));
-			int user_id = ((User)req.getSession().getAttribute("user")).getUser_id();
+			int user_id = ((User)req.getSession().getAttribute("ka_user")).getUser_id();
 			if(new NewsDAO().removeSubscribe(category_id,user_id)){
 				resp.getWriter().write("success");
 			}

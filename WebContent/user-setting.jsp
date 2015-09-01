@@ -73,32 +73,5 @@ $("#update-user-info").click(function(){
 	}
 });
 function deactivate(){
-	swal({  
-		title: "Are you sure?",  
-				text: "You're about to delete your account!", 
-				type: "warning", 
-				showCancelButton: true, 
-				confirmButtonColor: "#DD6B55", 
-				confirmButtonText: "Yes", 
-				cancelButtonText: "No",  
-				closeOnConfirm: false, 
-				closeOnCancel: false 
-		},
-				function(isConfirm){   
-					if (isConfirm) {
-							$.post("deleteaccount",function(data){
-								if(data=='success'){
-									swal({title:"Success!", text:"Your account has been deleted.", type:"success"},function(isConfirm){
-										window.location.href="home";
-									});
-								}else{
-									swal("Error!", "Cannot delete", "error");
-								}
-							});
-						} else {  
-							swal("Phew!");  
-						} 
-				}
-		);
 }
 </script>

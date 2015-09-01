@@ -55,9 +55,9 @@ public class ReadNews extends HttpServlet {
 		int id = Integer.parseInt(req.getParameter("id"));
 		try {
 			// user
-			if (req.getSession().getAttribute("user") != null
-					&& (req.getSession().getAttribute("user") != "")) {
-				int user_id = ((User) req.getSession().getAttribute("user")).getUser_id();
+			if (req.getSession().getAttribute("ka_user") != null
+					&& (req.getSession().getAttribute("ka_user") != "")) {
+				int user_id = ((User) req.getSession().getAttribute("ka_user")).getUser_id();
 				ArrayList<SaveList> user_savedlist = new SaveListDAO()
 						.getAllSavedNews(user_id);
 				req.setAttribute("user_savedlist", user_savedlist);

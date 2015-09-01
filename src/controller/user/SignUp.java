@@ -80,7 +80,7 @@ public class SignUp extends HttpServlet {
 			u.setUser_pass(password);
 			if (new UserDAO().addUser(u)) {
 				User u2 = new model.dao.UserDAO().login(email, password);
-				req.getSession().setAttribute("user", u2);
+				req.getSession().setAttribute("ka_user", u2);
 				resp.getWriter().write("success");
 			} else {
 				resp.getWriter().write("e2");
