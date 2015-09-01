@@ -16,7 +16,7 @@
 	</div>
 	<div class="menubar-scroll-panel">
 		
-		<c:set value="${ sessionScope.user.user_type}" var="usertype"></c:set>
+		<c:set value="${ sessionScope.ka_user}" var="user"></c:set>
 		
 		<!-- BEGIN MAIN MENU -->
 		<ul id="main-menu" class="gui-controls">
@@ -44,22 +44,37 @@
 			</li><!--end /menu-li -->
 			<!-- END NEWS -->
 			
-			<!-- BEGIN CATEGORY -->
-			<li class="gui-folder" id="categorymenu">
-				<a>
-					<div class="gui-icon"><i class="md md-apps"></i></div>
-					<span class="title">Category</span>
-				</a>
-				<!--start submenu -->
-				<ul>
-					<li><a href="formcategory" ><span class="title">Add Category</span></a></li>
-					<li><a href="listcategory" ><span class="title">List Category</span></a></li>
-				</ul><!--end /submenu -->
-			</li><!--end /menu-li -->
-			<!-- END CATEGORY -->
 			
+			<c:if test="${user.usertypeid==5 }">
 			
-			<c:if test="${usertype==1 }">
+				<!-- BEGIN CATEGORY -->
+				<li class="gui-folder" id="categorymenu">
+					<a>
+						<div class="gui-icon"><i class="md md-apps"></i></div>
+						<span class="title">Category</span>
+					</a>
+					<!--start submenu -->
+					<ul>
+						<li><a href="formcategory" ><span class="title">Add Category</span></a></li>
+						<li><a href="listcategory" ><span class="title">List Category</span></a></li>
+					</ul><!--end /submenu -->
+				</li><!--end /menu-li -->
+				<!-- END CATEGORY -->
+				
+				<!-- BEGIN Source -->
+				<li class="gui-folder" id=sourcemenu>
+					<a>
+						<div class="gui-icon"><i class="md md-share"></i></div>
+						<span class="title">Source</span>
+						<!--start submenu -->
+					</a>
+					<ul>
+						<li><a href="formsource" ><span class="title">Add Source</span></a></li>
+						<li><a href="listsource" ><span class="title">List Source</span></a></li>
+					</ul><!--end /submenu -->
+				</li><!--end /menu-li -->
+				<!-- END Source -->
+				
 				<!-- BEGIN USER -->
 				<li class="gui-folder" id="usermenu">
 					<a>
@@ -73,6 +88,7 @@
 					</ul><!--end /submenu -->
 				</li><!--end /menu-li -->
 				<!-- END USER -->
+				
 			</c:if>
 			
 			<!-- BEGIN MENU -->
@@ -100,20 +116,6 @@
 				</ul><!--end /submenu -->
 			</li><!--end /menu-li -->
 			<!-- END RECOMENDATION -->
-			
-			<!-- BEGIN Source -->
-			<li class="gui-folder" id=sourcemenu>
-				<a>
-					<div class="gui-icon"><i class="md md-share"></i></div>
-					<span class="title">Source</span>
-					<!--start submenu -->
-				</a>
-				<ul>
-					<li><a href="formsource" ><span class="title">Add Source</span></a></li>
-					<li><a href="listsource" ><span class="title">List Source</span></a></li>
-				</ul><!--end /submenu -->
-			</li><!--end /menu-li -->
-			<!-- END Source -->
 			
 			<!-- BEGIN SCAN NEWS -->
 			<li class="gui-folder" id=scannewsmenu>
