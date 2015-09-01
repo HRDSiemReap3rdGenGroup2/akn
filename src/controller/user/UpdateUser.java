@@ -44,7 +44,7 @@ public class UpdateUser extends HttpServlet {
 				User tmp=new UserDAO().getUser(user_id);
 				password=tmp.getUser_pass();
 			}
-			int gender=Integer.parseInt(req.getParameter("gender"));
+			String gender=req.getParameter("gender");
 			User u=new User();
 			u.setUser_id(user_id);
 			u.setUser_name(username);

@@ -68,8 +68,8 @@ public class SignUp extends HttpServlet {
 				resp.getWriter().write("e4");
 				return;
 			}
-			int gender = Integer.parseInt(req.getParameter("gender"));
-			if(gender>2){
+			String gender = req.getParameter("gender");
+			if(!gender.equalsIgnoreCase("male") || !gender.equalsIgnoreCase("female")){
 				resp.getWriter().write("e2");
 				return;
 			}
