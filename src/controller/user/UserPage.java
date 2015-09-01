@@ -41,7 +41,7 @@ public class UserPage extends HttpServlet {
 			//menu
 			req.setAttribute("menu", new MenuDAO().getAllMenu());
 			
-			if(req.getSession().getAttribute("user")!=null){
+			if(req.getSession().getAttribute("ka_user")!=null){
 			int user_id = ((User) req.getSession().getAttribute("ka_user")).getUser_id();
 			User u=new UserDAO().getUser(user_id);
 			req.getSession().setAttribute("user", u);
