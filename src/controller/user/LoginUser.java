@@ -39,7 +39,7 @@ public class LoginUser extends HttpServlet {
 				password = "";
 			User u;
 			if ((u = new model.dao.UserDAO().login(username, password)) != null) {
-				req.getSession().setAttribute("user", u);
+				req.getSession().setAttribute("ka_user", u);
 			} else {
 				resp.getWriter().write("failed");
 			}
