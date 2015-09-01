@@ -85,7 +85,7 @@
 										<div class="card-body floating-label">
 											<div>
 												<c:choose>
-													<c:when test="${userstatus.gender=='male' }">
+													<c:when test="${userstatus.user_gender=='male' }">
 														<label class="radio-inline radio-styled">
 															<input name="gender" value="male" checked="true" type="radio"><span>Male</span>
 														</label>
@@ -106,7 +106,7 @@
 											<div class="form-group">
 												<c:choose>
 													<c:when test="${userstatus.status==1 }">
-														<input class="form-control" id="username" name="username" type="text" value="${userstatus.username }">
+														<input class="form-control" id="username" name="username" type="text" value="${userstatus.user_name }">
 													</c:when>
 													<c:otherwise>
 														<input class="form-control" id="username" name="username" type="text">
@@ -117,7 +117,7 @@
 											<div class="form-group">
 												<c:choose>
 													<c:when test="${userstatus.status==1 }">
-														<input class="form-control" id="password" name="password" type="password" value="${userstatus.password }">
+														<input class="form-control" id="password" name="password" type="password" value="${userstatus.user_pass }">
 													</c:when>
 													<c:otherwise>
 														<input class="form-control" id="password" name="password" type="password">
@@ -128,7 +128,7 @@
 											<div class="form-group">
 												<c:choose>
 													<c:when test="${userstatus.status==1 }">
-														<input class="form-control" id="password1" type="password" value="${userstatus.password }">
+														<input class="form-control" id="password1" type="password" value="${userstatus.user_pass }">
 													</c:when>
 													<c:otherwise>
 														<input class="form-control" id="password1" type="password">
@@ -139,7 +139,7 @@
 											<div class="form-group">
 												<c:choose>
 													<c:when test="${userstatus.status==1 }">
-														<input class="form-control" id="email" name="email" type="email" value="${userstatus.email }">
+														<input class="form-control" id="email" name="email" type="email" value="${userstatus.user_email }">
 													</c:when>
 													<c:otherwise>
 														<input class="form-control" id="email" name="email" type="email">
@@ -150,17 +150,17 @@
                                             <div class="form-group floating-label">
 												<select id="usertype" name="usertype" class="form-control">
 													<c:choose>
-														<c:when test="${userstatus.usertypeid==5 }">
+														<c:when test="${userstatus.user_type==5 }">
 															<option value="1">Admin</option>
 															<option value="3">Visitor</option>
                                                    			<option value="2">Editor</option>
 														</c:when>
-														<c:when test="${userstatus.usertypeid==3 }">
+														<c:when test="${userstatus.user_type==4 }">
 															<option value="2">Editor</option>
 															<option value="3">Visitor</option>
 															<option value="1">Admin</option>
 														</c:when>
-														<c:when test="${userstatus.usertypeid==1 }">
+														<c:when test="${userstatus.user_type==2 }">
 															<option value="3">Visitor</option>
 		                                                    <option value="2">Editor</option>
 		                                                    <option value="1">Admin</option>

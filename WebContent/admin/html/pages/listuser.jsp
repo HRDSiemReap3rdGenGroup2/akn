@@ -91,19 +91,19 @@
 													<td>${item.userid }</td>
 													<td>${item.username }</td>
 													<c:choose>
-													  <c:when test="${item.usertypeid==5 }"><td>Admin</td></c:when>
-													  <c:when test="${item.usertypeid==3 }"><td>Editor</td></c:when>
-													  <c:when test="${item.usertypeid==1 }"><td>Visitor</td></c:when>
+													  <c:when test="${item.user_type==5 }"><td>Admin</td></c:when>
+													  <c:when test="${item.user_type==4 }"><td>Editor</td></c:when>
+													  <c:when test="${item.user_type==2 }"><td>Visitor</td></c:when>
 													</c:choose>
 													<td>${item.email }</td>
 													<c:choose>
-													  <c:when test="${item.gender=='male' }"><td>Male</td></c:when>
-													  <c:when test="${item.gender=='female' }"><td>Female</td></c:when>
+													  <c:when test="${item.user_gender=='male' }"><td>Male</td></c:when>
+													  <c:when test="${item.user_gender=='female' }"><td>Female</td></c:when>
 													</c:choose>
 													<td>${item.password }</td>
 													<td class="text-right">
-														<a href="updateuser?id=${item.userid }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Edit row"><i class="fa fa-pencil"></i></a>
-														<button onclick="deleteuser('${item.userid }')" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></button>
+														<a href="updateuser?id=${item.user_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Edit row"><i class="fa fa-pencil"></i></a>
+														<button onclick="deleteuser('${item.user_id }')" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></button>
 														<%-- <a href="actiondeleteuser?id=${item.user_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></a> --%>
 													</td>
 												</tr>
