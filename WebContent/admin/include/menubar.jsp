@@ -45,7 +45,7 @@
 			<!-- END NEWS -->
 			
 			
-			<c:if test="${user.usertypeid==5 }">
+			<c:if test="${user.user_type==5 }">
 			
 				<!-- BEGIN CATEGORY -->
 				<li class="gui-folder" id="categorymenu">

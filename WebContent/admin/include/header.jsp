@@ -120,12 +120,12 @@
 							<a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
 								<img src="../../assets/img/avatar1.jpg?1403934956" alt="" />
 								
-								<span class="profile-info">${user.username }
+								<span class="profile-info">${user.user_name }
 								<c:choose>
-									<c:when test="${user.usertypeid==5 }">
+									<c:when test="${user.user_type==5 }">
 										<small>Administrator</small>
 									</c:when>
-									<c:when test="${user.usertypeid==3 }">
+									<c:when test="${user.user_type==4 }">
 										<small>Editor</small>
 									</c:when>
 								</c:choose>
@@ -136,7 +136,7 @@
 				  				<input type="file" id="fileInput" name="fileInput" />
 							</div> -->
 							<ul class="dropdown-menu animation-dock">
-								<li><button style="background-color:transparent;border:none;padding-left:19px" onclick="changepassword('${user.userid }');"><i class="md md-local-see"></i> Change Password</button></li>
+								<li><button style="background-color:transparent;border:none;padding-left:19px" onclick="changepassword('${user.user_id }');"><i class="md md-local-see"></i> Change Password</button></li>
 								<li class="divider"></li>
 								<li><a href="../../../user/signout"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
 							</ul><!--end .dropdown-menu -->
