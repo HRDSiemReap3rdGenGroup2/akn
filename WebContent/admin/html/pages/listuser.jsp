@@ -88,22 +88,22 @@
 											<c:set value="${requestScope.alluser }" var="user"></c:set>
 											<c:forEach items="${user }" var="item">
 												<tr class="gradeX">
-													<td>${item.user_id }</td>
-													<td>${item.user_name }</td>
+													<td>${item.userid }</td>
+													<td>${item.username }</td>
 													<c:choose>
-													  <c:when test="${item.user_type==1 }"><td>Admin</td></c:when>
-													  <c:when test="${item.user_type==2 }"><td>Editor</td></c:when>
-													  <c:when test="${item.user_type==3 }"><td>Visitor</td></c:when>
+													  <c:when test="${item.usertypeid==5 }"><td>Admin</td></c:when>
+													  <c:when test="${item.usertypeid==3 }"><td>Editor</td></c:when>
+													  <c:when test="${item.usertypeid==1 }"><td>Visitor</td></c:when>
 													</c:choose>
-													<td>${item.user_email }</td>
+													<td>${item.email }</td>
 													<c:choose>
-													  <c:when test="${item.user_gender==1 }"><td>Male</td></c:when>
-													  <c:when test="${item.user_gender==2 }"><td>Female</td></c:when>
+													  <c:when test="${item.gender=='male' }"><td>Male</td></c:when>
+													  <c:when test="${item.gender=='female' }"><td>Female</td></c:when>
 													</c:choose>
-													<td>${item.user_pass }</td>
+													<td>${item.password }</td>
 													<td class="text-right">
-														<a href="updateuser?id=${item.user_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Edit row"><i class="fa fa-pencil"></i></a>
-														<button onclick="deleteuser('${item.user_id }')" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></button>
+														<a href="updateuser?id=${item.userid }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Edit row"><i class="fa fa-pencil"></i></a>
+														<button onclick="deleteuser('${item.userid }')" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></button>
 														<%-- <a href="actiondeleteuser?id=${item.user_id }" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Delete row"><i class="fa fa-trash-o"></i></a> --%>
 													</td>
 												</tr>
