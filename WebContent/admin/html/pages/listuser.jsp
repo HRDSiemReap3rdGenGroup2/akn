@@ -89,7 +89,7 @@
 											<c:forEach items="${user }" var="item">
 												<tr class="gradeX">
 													<td>${item.user_id }</td>
-													<td>${item.username }</td>
+													<td>${item.user_name }</td>
 													<c:choose>
 													  <c:when test="${item.user_type==5 }"><td>Admin</td></c:when>
 													  <c:when test="${item.user_type==4 }"><td>Editor</td></c:when>
