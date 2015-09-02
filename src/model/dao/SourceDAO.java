@@ -79,7 +79,7 @@ public class SourceDAO {
 
 	public boolean addSource(Source source) throws Exception {
 		try {
-			String sql = "INSERT INTO news.tbsource VALUES(nextval('news._source_id'),?,?);";
+			String sql = "INSERT INTO news.tbsource VALUES(nextval('news.seq_source_id'),?,?);";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setString(1, source.getSource_name());
 			p.setString(2, source.getSource_code());
