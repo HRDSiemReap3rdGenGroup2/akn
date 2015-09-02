@@ -58,7 +58,7 @@ public class ScraptSabayNews {
 		}
 		
 		try {
-			Document document = Jsoup.connect(NEWS_URL).get();
+			Document document = Jsoup.connect(NEWS_URL).timeout(10*1000).get();
 			ArrayList<NewsDTO> listSabayList = new ArrayList<NewsDTO>();
 
 			//get news category

@@ -55,7 +55,7 @@ public class ScraptKhmerNoteNews {
 		}
 		
 		try {
-			Document document = Jsoup.connect(NEWS_URL).get();
+			Document document = Jsoup.connect(NEWS_URL).timeout(10*1000).get();
 			ArrayList<NewsDTO> listKNNEWS = new ArrayList<NewsDTO>();
 
 			//get all the listed news by category

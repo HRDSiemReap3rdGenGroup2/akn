@@ -1,6 +1,5 @@
 package model.dao;
 import java.io.IOException;
-import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 
 import model.dto.NewsDTO;
@@ -8,7 +7,6 @@ import model.dto.NewsDTO;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 public class ScraptFRANews {
@@ -38,7 +36,7 @@ public class ScraptFRANews {
 		}
 		
 		try {
-			Document document = Jsoup.connect(NEWS_URL).get();
+			Document document = Jsoup.connect(NEWS_URL).timeout(10*1000).get();
 			ArrayList<NewsDTO> listFRA = new ArrayList<NewsDTO>();
 
 			//get all the listed news by category

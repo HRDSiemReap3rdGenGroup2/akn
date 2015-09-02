@@ -39,7 +39,7 @@ public class ScraptKohSontepheapNews {
 		
 		ArrayList<NewsDTO> listKohNews = new ArrayList<NewsDTO>();
 		try {
-			Document document = Jsoup.connect(NEWS_URL).get();
+			Document document = Jsoup.connect(NEWS_URL).timeout(10*1000).get();
 			Elements news_row = document.select(".articleItem");
 			for(Element news:news_row){
 				//get news thumbnail
