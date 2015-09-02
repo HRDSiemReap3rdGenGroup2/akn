@@ -7,6 +7,7 @@ public class User {
 	private int user_type;
 	private String user_email;
 	private String user_gender;
+	private String user_type_name;
 	private int status;
 
 	public int getStatus() {
@@ -63,6 +64,14 @@ public class User {
 
 	public void setUser_gender(String user_gender) {
 		this.user_gender = user_gender;
+	}
+
+	public String getUser_type_name() {
+		return user_type_name;
+	}
+
+	public void setUser_type_name(String user_type_name) {
+		this.user_type_name = user_type_name;
 	}
 
 }
