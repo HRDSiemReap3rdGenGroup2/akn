@@ -77,10 +77,10 @@
 											<tr>
 												<th>ID</th>
 												<th>Username</th>
-												<th>Type</th>
 												<th>Email</th>
-												<th>Gender</th>
+												<th>Type</th>
 												<th>Password</th>
+												<th>Gender</th>
 											</tr>
 										</thead>
 										
@@ -134,13 +134,13 @@
 			            { "data": "user_id" },
 			            { "data": "user_name" },
 			            { "data": "user_email" },
-			            { "data": "user_type" },
-			            { "data": "user_gender" },
-			            { "data": "user_pass" }
+			            { "data": "user_type_name" },
+			            { "data": "user_pass" },
+			            { "data": "user_gender" }
 			        ],
 			        "order": [ 0, 'desc' ],
 			        "fnCreatedRow": function( nRow, data, iDataIndex ) {
-				           $('td:eq(4)', nRow).append(
+				           $('td:eq(5)', nRow).append(
 				        		"<a href='updateuser?id="+data.user_id+"' class='btn btn-icon-toggle' data-toggle='tooltip' data-placement='op' data-original-title='Edit Row'><i class='fa fa-pencil'></i></a>"+
 				        		"<button onclick=deleteuser('"+data.user_id+"') class='btn btn-icon-toggle' data-toggle='tooltip' data-placement='op' data-original-title='Delete Row'><i class='fa fa-trash-o'></i></button>"
 				           );
