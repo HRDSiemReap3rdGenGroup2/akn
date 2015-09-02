@@ -4,22 +4,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
-import model.dao.NewsDAO;
 import model.dao.UserDAO;
-import model.dto.News;
 import model.dto.User;
+
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class GetJsonUser
  */
-@WebServlet("/GetJsonUser")
 public class GetJsonUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,7 +34,7 @@ public class GetJsonUser extends HttpServlet {
 		
 		try {
 			
-			ArrayList<User> list = new UserDAO().getAllUser1();
+			ArrayList<User> list = new UserDAO().getAllUser2();
 			
 			String gString = new Gson().toJson(list);
 			
