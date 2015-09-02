@@ -53,7 +53,6 @@ public class UserDAO {
 				u.setUser_id(rs.getInt("userid"));
 				u.setUser_name(rs.getString("username"));
 				u.setUser_type(rs.getInt("usertypeid"));
-
 				return u;
 			}
 		} catch (Exception e) {
@@ -111,6 +110,34 @@ public class UserDAO {
 		}
 		return list;
 	}
+	
+	public ArrayList<User> getAllUser2() throws SQLException {
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			String sql = "select userid, username, usertypename, email, gender, password From public.tbluser u INNER JOIN public.tblusertype t ON u.usertypeid=t.usertypeid";
+			PreparedStatement p = con.prepareStatement(sql);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				User user = new User();
+				user.setUser_id(rs.getInt("userid"));
+				user.setUser_name(rs.getString("username"));
+				user.setUser_pass(rs.getString("password"));
+				user.setUser_type_name(rs.getString("usertypename"));
+				user.setUser_gender(rs.getString("gender"));
+				user.setUser_email(rs.getString("email"));
+
+				list.add(user);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null)
+				con.close();
+		}
+		return list;
+	}
+
 
 	public User getUser(int user_id) throws Exception {
 
