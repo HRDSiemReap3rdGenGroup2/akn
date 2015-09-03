@@ -168,7 +168,7 @@ public class UserDAO {
 
 	public boolean addAdminUser(User u) throws Exception {
 		try {
-			String sql = "INSERT INTO public.tbluser(userid,usertypeid,username,password, email, gender) VALUES(nextval('news.seq_user'),?,?,?,?,?)";
+			String sql = "INSERT INTO public.tbluser(userid,usertypeid,username,password, email, gender) VALUES(nextval('public.seq_user'),?,?,?,?,?)";
 			PreparedStatement p = con.prepareStatement(sql);
 
 			p.setInt(1, u.getUser_type());
