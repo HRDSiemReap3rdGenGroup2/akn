@@ -35,6 +35,9 @@ public class ActionUpdateCategory extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("utf-8");
+		
 		int category_id = Integer.parseInt(request.getParameter("category_id"));
 		String category_name = request.getParameter("category_name");
 		String category_description = request.getParameter("category_description");

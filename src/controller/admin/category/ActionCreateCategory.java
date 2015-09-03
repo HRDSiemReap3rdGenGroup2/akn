@@ -36,6 +36,8 @@ public class ActionCreateCategory extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("utf-8");
 		String category_name = request.getParameter("category_name");
 		String category_description = request.getParameter("category_description");
 		Category category = new Category();
