@@ -151,25 +151,27 @@
 												<select id="usertype" name="usertype" class="form-control">
 													<c:choose>
 														<c:when test="${userstatus.user_type==5 }">
-															<option value="1">Admin</option>
-															<option value="3">Visitor</option>
-                                                   			<option value="2">Editor</option>
+															<option value="5">Admin</option>
+															<option value="2">Subscriber</option>
+                                                   			<option value="3">Editor</option>
+                                                   			
+                                                   			
 														</c:when>
-														<c:when test="${userstatus.user_type==4 }">
-															<option value="2">Editor</option>
-															<option value="3">Visitor</option>
-															<option value="1">Admin</option>
+														<c:when test="${userstatus.user_type==3 }">
+															<option value="3">Editor</option>
+															<option value="2">Subscriber</option>
+															<option value="5">Admin</option>
 														</c:when>
 														<c:when test="${userstatus.user_type==2 }">
-															<option value="3">Visitor</option>
-		                                                    <option value="2">Editor</option>
-		                                                    <option value="1">Admin</option>
+															<option value="2">Subscriber</option>
+		                                                    <option value="3">Editor</option>
+		                                                    <option value="5">Admin</option>
 														</c:when>
 														<c:otherwise>
 															<option value="">&nbsp;</option>
-															<option value="3">Visitor</option>
-		                                                    <option value="2">Editor</option>
-		                                                    <option value="1">Admin</option>
+															<option value="2">Subscriber</option>
+		                                                    <option value="3">Editor</option>
+		                                                    <option value="5">Admin</option>
 														</c:otherwise>
 													</c:choose>
 													
