@@ -7,7 +7,8 @@ public class Mail {
 	private String password;
 	private String subject;
 	private String content;
-
+	private int user_id;
+	
 	public String getToemail() {
 		return toemail;
 	}
@@ -46,6 +47,14 @@ public class Mail {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 }
