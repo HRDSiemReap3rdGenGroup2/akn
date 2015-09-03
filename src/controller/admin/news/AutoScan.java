@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.dao.ScannedNewsDAO;
+import model.dao.ScraptCamboReportNews;
+import model.dao.ScraptFRANews;
+import model.dao.ScraptKhmerNoteNews;
 import model.dao.ScraptKohSontepheapNews;
 import model.dao.ScraptSabayNews;
 import model.dao.ScraptTheBNews;
@@ -49,12 +52,14 @@ public class AutoScan extends HttpServlet {
 		while(true){
 			int i=(Integer)request.getSession().getServletContext().getAttribute("autoscan");
 			if(i==0){
+				System.out.println("Stop Auto Scan...");
 				break;
 			}
 			else{
 				try {
+					System.out.println("Start Auto Scan.....");
 					Thread.sleep(i*60*1000);
-					//Thread.sleep(10000);
+					
 					ArrayList<NewsDTO> allnewslist = new ArrayList<NewsDTO>();
 					ArrayList<NewsDTO> news = null;
 					
@@ -67,6 +72,15 @@ public class AutoScan extends HttpServlet {
 					news = new ScraptKohSontepheapNews().getAllCategory();
 					allnewslist.addAll(news);
 						
+					news = new ScraptFRANews().getAllCategory();
+					allnewslist.addAll(news);
+					
+					news = new ScraptCamboReportNews().getAllCategory();
+					allnewslist.addAll(news);
+					
+					news = new ScraptKhmerNoteNews().getAllCategory();
+					allnewslist.addAll(news);
+					
 					try {
 						new ScannedNewsDAO().insertNews(allnewslist);
 					} catch (Exception e) {
