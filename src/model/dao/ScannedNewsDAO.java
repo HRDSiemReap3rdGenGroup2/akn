@@ -34,10 +34,9 @@ public class ScannedNewsDAO {
 					p.setString(5, news.getNews_id()); //news code
 					p.setInt(6, news.getNews_category_id());
 					p.setInt(7, news.getNews_source_id());
-					
-					if(exist(news.getNews_id())==false)
+					if(exist(news.getNews_id())==false){
 						p.executeUpdate();
-						
+					}
 					p.close();
 				}
 				return true;
@@ -59,8 +58,9 @@ public class ScannedNewsDAO {
 				ResultSet rs = p.executeQuery();
 				
 				while(rs.next()){
-					if(rs.getString("news_code")!=null)
+					if(rs.getString("news_code")!=null){
 						return true;
+					}
 				}
 				
 			}catch(Exception ex){

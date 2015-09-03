@@ -94,7 +94,7 @@ public class CategoryDAO {
 	
 	public boolean addCategory(Category cate) throws SQLException {
 		try {
-			String sql = "INSERT INTO news.tbcategory VALUES(nextval('news._category_id'),?,?)";
+			String sql = "INSERT INTO news.tbcategory VALUES(nextval('news.seq_category_id'),?,?)";
 			PreparedStatement p = con.prepareStatement(sql);
 			p.setString(1, cate.getCategory_name());
 			p.setString(2, cate.getCategory_description());
