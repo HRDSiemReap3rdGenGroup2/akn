@@ -15,7 +15,6 @@ import model.dto.Source;
 /**
  * Servlet implementation class ListSource
  */
-@WebServlet("/ListSource")
 public class ListSource extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

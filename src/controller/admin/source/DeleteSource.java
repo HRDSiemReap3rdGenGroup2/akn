@@ -13,7 +13,6 @@ import model.dao.SourceDAO;
 /**
  * Servlet implementation class DeleteSource
  */
-@WebServlet("/DeleteSource")
 public class DeleteSource extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

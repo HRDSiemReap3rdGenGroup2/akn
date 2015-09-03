@@ -14,7 +14,6 @@ import model.dto.Source;
 /**
  * Servlet implementation class EditSource
  */
-@WebServlet("/EditSource")
 public class EditSource extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
