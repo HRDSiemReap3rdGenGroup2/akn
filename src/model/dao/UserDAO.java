@@ -293,10 +293,14 @@ public class UserDAO {
 
 	public boolean subScribe(int category_id, int user_id) throws SQLException {
 		try {
-			String sql = "insert into news.tbsubscribe(subscribe_id, category_id, user_id) values(nextval('news.seq_subscribe_id'),?,?)";
+			String user_email = getUserEmail(user_id);
+			
+			String sql = "insert into news.tbsubscribe(subscribe_id, category_id, user_id, user_email) values(nextval('news.seq_subscribe_id'),?,?,?)";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, category_id);
 			pstmt.setInt(2, user_id);
+			pstmt.setString(3, user_email);
+			
 			if (pstmt.executeUpdate() > 0)
 				return true;
 		} catch (Exception ex) {
@@ -329,5 +333,22 @@ public class UserDAO {
 		}
 		return false;
 	}
+	
+	private String getUserEmail(int user_id) throws Exception{
+		try{
+			String sql = "SELECT email FROM public.tbluser WHERE userid=?";
+			PreparedStatement p = con.prepareStatement(sql);
+			p.setInt(1, user_id);
+			ResultSet rs = p.executeQuery();
+			while(rs.next()){
+				return rs.getString("email");
+			}
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return null;
+	}
+	
 
 }
